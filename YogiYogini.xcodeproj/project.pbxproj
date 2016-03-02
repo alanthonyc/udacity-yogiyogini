@@ -196,6 +196,7 @@
 				TargetAttributes = {
 					6B4B16651C854C18007A3576 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 8GDU37NS3U;
 					};
 					6B4B167B1C854C18007A3576 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -401,6 +402,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = YogiYogini/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alonconsulting.YogiYogini;
@@ -412,6 +414,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = YogiYogini/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alonconsulting.YogiYogini;
