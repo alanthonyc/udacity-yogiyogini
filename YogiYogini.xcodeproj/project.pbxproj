@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		6B4B166A1C854C18007A3576 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B16691C854C18007A3576 /* AppDelegate.swift */; };
-		6B4B166C1C854C18007A3576 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B166B1C854C18007A3576 /* FirstViewController.swift */; };
-		6B4B166E1C854C18007A3576 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B166D1C854C18007A3576 /* SecondViewController.swift */; };
+		6B4B166C1C854C18007A3576 /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B166B1C854C18007A3576 /* SessionsViewController.swift */; };
+		6B4B166E1C854C18007A3576 /* ClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B166D1C854C18007A3576 /* ClassViewController.swift */; };
 		6B4B16711C854C18007A3576 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B4B166F1C854C18007A3576 /* Main.storyboard */; };
 		6B4B16731C854C18007A3576 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B4B16721C854C18007A3576 /* Assets.xcassets */; };
 		6B4B16761C854C18007A3576 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B4B16741C854C18007A3576 /* LaunchScreen.storyboard */; };
 		6B4B16811C854C18007A3576 /* YogiYoginiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B16801C854C18007A3576 /* YogiYoginiTests.swift */; };
 		6B4B168C1C854C18007A3576 /* YogiYoginiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B168B1C854C18007A3576 /* YogiYoginiUITests.swift */; };
+		6B5B0B161C88280F0037470C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5B0B151C88280F0037470C /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +38,8 @@
 /* Begin PBXFileReference section */
 		6B4B16661C854C18007A3576 /* YogiYogini.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YogiYogini.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B4B16691C854C18007A3576 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6B4B166B1C854C18007A3576 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		6B4B166D1C854C18007A3576 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		6B4B166B1C854C18007A3576 /* SessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsViewController.swift; sourceTree = "<group>"; };
+		6B4B166D1C854C18007A3576 /* ClassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassViewController.swift; sourceTree = "<group>"; };
 		6B4B16701C854C18007A3576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6B4B16721C854C18007A3576 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B4B16751C854C18007A3576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		6B4B16871C854C18007A3576 /* YogiYoginiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YogiYoginiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B4B168B1C854C18007A3576 /* YogiYoginiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogiYoginiUITests.swift; sourceTree = "<group>"; };
 		6B4B168D1C854C18007A3576 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B5B0B151C88280F0037470C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B5B0B161C88280F0037470C /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +82,7 @@
 		6B4B165D1C854C18007A3576 = {
 			isa = PBXGroup;
 			children = (
+				6B5B0B151C88280F0037470C /* MapKit.framework */,
 				6B4B16681C854C18007A3576 /* YogiYogini */,
 				6B4B167F1C854C18007A3576 /* YogiYoginiTests */,
 				6B4B168A1C854C18007A3576 /* YogiYoginiUITests */,
@@ -100,8 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				6B4B16691C854C18007A3576 /* AppDelegate.swift */,
-				6B4B166B1C854C18007A3576 /* FirstViewController.swift */,
-				6B4B166D1C854C18007A3576 /* SecondViewController.swift */,
+				6B4B166B1C854C18007A3576 /* SessionsViewController.swift */,
+				6B4B166D1C854C18007A3576 /* ClassViewController.swift */,
 				6B4B166F1C854C18007A3576 /* Main.storyboard */,
 				6B4B16721C854C18007A3576 /* Assets.xcassets */,
 				6B4B16741C854C18007A3576 /* LaunchScreen.storyboard */,
@@ -260,9 +264,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B4B166E1C854C18007A3576 /* SecondViewController.swift in Sources */,
+				6B4B166E1C854C18007A3576 /* ClassViewController.swift in Sources */,
 				6B4B166A1C854C18007A3576 /* AppDelegate.swift in Sources */,
-				6B4B166C1C854C18007A3576 /* FirstViewController.swift in Sources */,
+				6B4B166C1C854C18007A3576 /* SessionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +493,7 @@
 				6B4B16921C854C18007A3576 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6B4B16931C854C18007A3576 /* Build configuration list for PBXNativeTarget "YogiYoginiTests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +502,7 @@
 				6B4B16951C854C18007A3576 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6B4B16961C854C18007A3576 /* Build configuration list for PBXNativeTarget "YogiYoginiUITests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +511,7 @@
 				6B4B16981C854C18007A3576 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
