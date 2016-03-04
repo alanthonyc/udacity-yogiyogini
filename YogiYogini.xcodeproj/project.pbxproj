@@ -16,6 +16,7 @@
 		6B4B16811C854C18007A3576 /* YogiYoginiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B16801C854C18007A3576 /* YogiYoginiTests.swift */; };
 		6B4B168C1C854C18007A3576 /* YogiYoginiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B168B1C854C18007A3576 /* YogiYoginiUITests.swift */; };
 		6B5B0B161C88280F0037470C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5B0B151C88280F0037470C /* MapKit.framework */; };
+		6BE522D21C8940BE00C299F2 /* FoursquareAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		6B4B168B1C854C18007A3576 /* YogiYoginiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogiYoginiUITests.swift; sourceTree = "<group>"; };
 		6B4B168D1C854C18007A3576 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B5B0B151C88280F0037470C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursquareAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				6B4B16691C854C18007A3576 /* AppDelegate.swift */,
 				6B4B166B1C854C18007A3576 /* SessionsViewController.swift */,
 				6B4B166D1C854C18007A3576 /* ClassViewController.swift */,
+				6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */,
 				6B4B166F1C854C18007A3576 /* Main.storyboard */,
 				6B4B16721C854C18007A3576 /* Assets.xcassets */,
 				6B4B16741C854C18007A3576 /* LaunchScreen.storyboard */,
@@ -266,6 +269,7 @@
 			files = (
 				6B4B166E1C854C18007A3576 /* ClassViewController.swift in Sources */,
 				6B4B166A1C854C18007A3576 /* AppDelegate.swift in Sources */,
+				6BE522D21C8940BE00C299F2 /* FoursquareAPI.swift in Sources */,
 				6B4B166C1C854C18007A3576 /* SessionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
