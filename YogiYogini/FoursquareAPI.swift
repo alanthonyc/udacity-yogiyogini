@@ -20,22 +20,23 @@ let k4SQ_SEARCH_URL = "https://api.foursquare.com/v2/venues/search"
 class FoursquareRequestController: NSObject
 {
     typealias CompletionHander = (result: AnyObject!, error: NSError?) -> Void
-
-    func getYogaVenuesAroundLocation(lat: Double, lon: Double)
+    
+    func escapedParameters(parameters: [String : AnyObject]) -> String
     {
-        let coords = "\(lat),\(lon)"
-        let methodArguments = [
-            "client_id": kCLIENT_ID,
-            "client_secret": kCLIENT_SECRET,
-            "ll": coords,
-            "v": kAPI_VERSION,
-            "m": kAPI_TYPE,
-            "sortByDistance": "1",
-            "query": "Yoga",
-        ]
-        
+        var urlVars = [String]()
+        for (key, value) in parameters {
+            
+            let stringValue = "\(value)"
+            let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+            urlVars += [key + "=" + "\(escapedValue!)"]
+        }
+        return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
+    }
+    
+    func callAPIEndpoint(url: String, arguments: NSDictionary, completion: CompletionHander)
+    {
         let session = NSURLSession.sharedSession()
-        let urlString = k4SQ_VENUES_URL + escapedParameters(methodArguments)
+        let urlString = url + escapedParameters(arguments as! [String : AnyObject])
         let url = NSURL(string: urlString)!
         let request = NSURLRequest(URL: url)
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
@@ -47,11 +48,11 @@ class FoursquareRequestController: NSObject
             
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 if let response = response as? NSHTTPURLResponse {
-                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                    print("Your request returned an invalid response. Status code: \(response.statusCode)!")
                 } else if let response = response {
-                    print("Your request returned an invalid response! Response: \(response)!")
+                    print("Your request returned an invalid response. Response: \(response)!")
                 } else {
-                    print("Your request returned an invalid response!")
+                    print("Your request returned an invalid response.")
                 }
                 return
             }
@@ -61,23 +62,41 @@ class FoursquareRequestController: NSObject
                 return
             }
             
-            let parsedResult: AnyObject!
+            let json: AnyObject!
             do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+                json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+                completion(result: json, error: error)
             } catch {
-                parsedResult = nil
+                json = nil
                 print("Could not parse the data as JSON: '\(data)'")
                 return
             }
-            
-            guard let meta = parsedResult["meta"] as? NSDictionary else {
-                print("Cannot get meta info from root dictionary: \(parsedResult)")
+        }
+        task.resume()
+    }
+    
+    func exploreVenues(lat: Double, lon: Double, query: String)
+    {
+        let coords = "\(lat),\(lon)"
+        let methodArguments = [
+            "client_id": kCLIENT_ID,
+            "client_secret": kCLIENT_SECRET,
+            "ll": coords,
+            "v": kAPI_VERSION,
+            "m": kAPI_TYPE,
+            "sortByDistance": "1",
+            "query": query,
+        ]
+        
+        callAPIEndpoint(k4SQ_VENUES_URL, arguments: methodArguments, completion: { (json, error) in
+            guard let meta = json["meta"] as? NSDictionary else {
+                print("Cannot get meta info from root dictionary: \(json)")
                 return
             }
             print("Meta info: \(meta)")
             
-            guard let response = parsedResult["response"] as? NSDictionary else {
-                print("Cannot find response in root: \(parsedResult)")
+            guard let response = json["response"] as? NSDictionary else {
+                print("Cannot find response in root: \(json)")
                 return
             }
             
@@ -107,11 +126,10 @@ class FoursquareRequestController: NSObject
                 
                 print("Venue: \(name!)(\(id)) - \(lat) / \(lng) \n \(address), near \(crossStreet), in \(city)")
             }
-        }
-        task.resume()
+        })
     }
-
-    func searchForAYogaVenueNear(lat: Double, lon: Double, name: String)
+    
+    func searchYogaVenues(lat: Double, lon: Double, name: String)
     {
         let coords = "\(lat),\(lon)"
         let methodArguments = [
@@ -124,50 +142,15 @@ class FoursquareRequestController: NSObject
             "categoryId": kYOGA_SEARCH_CATEGORY_ID,
         ]
         
-        let session = NSURLSession.sharedSession()
-        let urlString = k4SQ_SEARCH_URL + escapedParameters(methodArguments)
-        let url = NSURL(string: urlString)!
-        let request = NSURLRequest(URL: url)
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
-            
-            guard (error == nil) else {
-                print("There was an error with the call to Foursquare: \(error)")
-                return
-            }
-            
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                if let response = response as? NSHTTPURLResponse {
-                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
-                } else if let response = response {
-                    print("Your request returned an invalid response! Response: \(response)!")
-                } else {
-                    print("Your request returned an invalid response!")
-                }
-                return
-            }
-            
-            guard let data = data else {
-                print("No data was returned by the request!")
-                return
-            }
-            
-            let parsedResult: AnyObject!
-            do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-            } catch {
-                parsedResult = nil
-                print("Could not parse the data as JSON: '\(data)'")
-                return
-            }
-            
-            guard let meta = parsedResult["meta"] as? NSDictionary else {
-                print("Cannot get meta info from root dictionary: \(parsedResult)")
+        callAPIEndpoint(k4SQ_SEARCH_URL, arguments: methodArguments, completion: { (json, error) in
+            guard let meta = json["meta"] as? NSDictionary else {
+                print("Cannot get meta info from root dictionary: \(json)")
                 return
             }
             print("Meta info: \(meta)")
             
-            guard let response = parsedResult["response"] as? NSDictionary else {
-                print("Cannot find response in root: \(parsedResult)")
+            guard let response = json["response"] as? NSDictionary else {
+                print("Cannot find response in root: \(json)")
                 return
             }
             
@@ -189,20 +172,6 @@ class FoursquareRequestController: NSObject
                 
                 print("Venue: \(name!)(\(id!)) - \(lat!) / \(lng!) \n \(address!), in \(city!)")
             }
-        }
-        task.resume()
-    }
-
-    
-    func escapedParameters(parameters: [String : AnyObject]) -> String
-    {
-        var urlVars = [String]()
-        for (key, value) in parameters {
-            
-            let stringValue = "\(value)"
-            let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-            urlVars += [key + "=" + "\(escapedValue!)"]
-        }
-        return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
+        })
     }
 }

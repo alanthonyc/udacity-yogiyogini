@@ -46,9 +46,9 @@ class ClassViewController: UIViewController
     {
 //        let coords = (self.mapView.userLocation.location?.coordinate)! as CLLocationCoordinate2D
         let coords = CLLocationCoordinate2DMake(37.840364268076, -122.25142211)
-        FoursquareRequestController().getYogaVenuesAroundLocation(coords.latitude, lon: coords.longitude)
+        FoursquareRequestController().exploreVenues(coords.latitude, lon: coords.longitude, query:"Yoga")
         print("\n\n==========\nSearch results:\n")
-        FoursquareRequestController().searchForAYogaVenueNear(coords.latitude, lon: coords.longitude, name: "Namaste")
+        FoursquareRequestController().searchYogaVenues(coords.latitude, lon: coords.longitude, name: "Namaste")
     }
 }
 
