@@ -6,6 +6,7 @@
 //  Copyright © 2016 Alon Consulting. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import MapKit
 
@@ -14,6 +15,7 @@ class ClassViewController: UIViewController
     @IBOutlet weak var countBaseView: UIView!
     @IBOutlet weak var checkinButtonBaseView: UIView!
     @IBOutlet weak var locationBaseView: UIView!
+    @IBOutlet weak var mapView: MKMapView!
     
     // MARK: - Housekeeping
     
@@ -35,6 +37,18 @@ class ClassViewController: UIViewController
     @IBAction func checkinButtonTapped()
     {
         self.locationBaseView.alpha = 0.8
+        self.findNearbyYogaStudios()
+    }
+    
+    // Get yoga studios
+    
+    func findNearbyYogaStudios()
+    {
+//        let coords = (self.mapView.userLocation.location?.coordinate)! as CLLocationCoordinate2D
+        let coords = CLLocationCoordinate2DMake(37.840364268076, -122.25142211)
+        FoursquareRequestController().getYogaVenuesAroundLocation(coords.latitude, lon: coords.longitude)
+        print("\n\n==========\nSearch results:\n")
+        FoursquareRequestController().searchForAYogaVenueNear(coords.latitude, lon: coords.longitude, name: "Namaste")
     }
 }
 
