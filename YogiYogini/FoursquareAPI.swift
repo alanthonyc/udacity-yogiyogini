@@ -180,18 +180,41 @@ class FoursquareRequestController: NSObject
                 return
             }
             
-            for v in venues
+            var results : [Dictionary<String, String>] = []
+            for V in venues
             {
-                guard let id = v["id"] else { break }
-                guard let name = v["name"] else { break }
+                var venue = [String: String]()
+                guard let id = V["id"] else { break }
+                if id != nil {
+                    venue["id"] = (id as! String)
+                }
                 
-                guard let location = v["location"] else { break }
+                guard let name = V["name"] else { break }
+                if name != nil {
+                    venue["name"] = (name as! String)
+                }
+                
+                guard let location = V["location"] else { break }
                 guard let address = location!["address"] else { break }
-                guard let lat = location!["lat"] else { break }
-                guard let lng = location!["lng"] else { break }
-                guard let city = location!["city"] else { break }
+                if address != nil {
+                    venue["address"] = (address as! String)
+                }
                 
-                print("Venue: \(name!)(\(id!)) - \(lat!) / \(lng!) \n \(address!), in \(city!)")
+                guard let lat = location!["lat"] else { break }
+                if lat != nil {
+                    venue["lat"] = "\(lat!)"
+                }
+                
+                guard let lng = location!["lng"] else { break }
+                if lng != nil {
+                    venue["lng"] = "\(lng!)"
+                }
+                
+                guard let city = location!["city"] else { break }
+                if city != nil {
+                    venue["city"] = "\(city)"
+                }
+                results.append(venue)
             }
             completion(result: venues, error: error)
         })

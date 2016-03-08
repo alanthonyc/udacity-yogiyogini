@@ -60,7 +60,18 @@ class ClassViewController: UIViewController
             }
         )
         print("\n\n==========\nSearch results:\n")
-        FoursquareRequestController().searchYogaVenues(coords.latitude, lon: coords.longitude, name: "Namaste")
+        FoursquareRequestController().searchYogaVenues(coords.latitude, lon: coords.longitude, name: "Namaste", completion:
+            { (results, error) in
+                print("Error message: \(error)")
+                for r in results as! NSArray
+                {
+                    let name = r["name"]
+                    let city = r["city"]
+                    print("Name: \(name)")
+                    print("City: \(city)")
+                }
+                print("Count: \((results as! NSArray).count)")
+        })
     }
 }
 

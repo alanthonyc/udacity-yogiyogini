@@ -24,14 +24,10 @@ class YogiYoginiTests: XCTestCase
         super.tearDown()
     }
     
-    func testExample()
-    {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
     func testExploreAPI()
     {
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
         let coords = CLLocationCoordinate2DMake(37.840364268076, -122.25142211)
         let receivedVenueExpectation = expectationWithDescription("Explored Venues")
         FoursquareRequestController().exploreVenues(coords.latitude, lon: coords.longitude, query:"Yoga", completion:
