@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import MapKit
 @testable import YogiYogini
 
 class YogiYoginiTests: XCTestCase
@@ -27,6 +28,36 @@ class YogiYoginiTests: XCTestCase
     {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testExploreAPI()
+    {
+        let coords = CLLocationCoordinate2DMake(37.840364268076, -122.25142211)
+        let receivedVenueExpectation = expectationWithDescription("Explored Venues")
+        FoursquareRequestController().exploreVenues(coords.latitude, lon: coords.longitude, query:"Yoga", completion:
+        { (result, error) in
+            if (error == nil) {
+                receivedVenueExpectation.fulfill()
+            }
+        })
+        waitForExpectationsWithTimeout(5) { (error) -> Void in
+            print("Explore API did not fulfill without error.")
+        }
+    }
+    
+    func testSearchAPI()
+    {
+        let coords = CLLocationCoordinate2DMake(37.840364268076, -122.25142211)
+        let receivedVenueExpectation = expectationWithDescription("Explored Venues")
+        FoursquareRequestController().searchYogaVenues(coords.latitude, lon: coords.longitude, name:"Namaste", completion:
+            { (result, error) in
+                if (error == nil) {
+                    receivedVenueExpectation.fulfill()
+                }
+        })
+        waitForExpectationsWithTimeout(5) { (error) -> Void in
+            print("Search API did not fulfill without error.")
+        }
     }
     
     func testPerformanceExample()

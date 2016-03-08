@@ -33,7 +33,7 @@ class FoursquareRequestController: NSObject
         return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
     }
     
-    func callAPIEndpoint(url: String, arguments: NSDictionary, completion: CompletionHander)
+    func callAPIEndpoint(url: String, arguments: NSDictionary, apiCompletion: CompletionHander)
     {
         let session = NSURLSession.sharedSession()
         let urlString = url + escapedParameters(arguments as! [String : AnyObject])
@@ -65,7 +65,7 @@ class FoursquareRequestController: NSObject
             let json: AnyObject!
             do {
                 json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-                completion(result: json, error: error)
+                apiCompletion(result: json, error: error)
             } catch {
                 json = nil
                 print("Could not parse the data as JSON: '\(data)'")
@@ -75,7 +75,7 @@ class FoursquareRequestController: NSObject
         task.resume()
     }
     
-    func exploreVenues(lat: Double, lon: Double, query: String)
+    func exploreVenues(lat: Double, lon: Double, query: String, completion: CompletionHander)
     {
         let coords = "\(lat),\(lon)"
         let methodArguments = [
@@ -88,7 +88,7 @@ class FoursquareRequestController: NSObject
             "query": query,
         ]
         
-        callAPIEndpoint(k4SQ_VENUES_URL, arguments: methodArguments, completion: { (json, error) in
+        callAPIEndpoint(k4SQ_VENUES_URL, arguments: methodArguments, apiCompletion: { (json, error) in
             guard let meta = json["meta"] as? NSDictionary else {
                 print("Cannot get meta info from root dictionary: \(json)")
                 return
@@ -110,26 +110,47 @@ class FoursquareRequestController: NSObject
                 return
             }
             
-            for v in venues
+            var results : [Dictionary<String, String>] = []
+            for V in venues
             {
-                guard let venue = v["venue"] else { break }
-                
+                var v = [String: String]()
+                guard let venue = V["venue"] else { break }
                 guard let id = venue!["id"] else { break }
+                if id != nil {
+                    v["id"] = (id as! String)
+                }
                 guard let name = venue!["name"] else { break }
-                
+                if name != nil {
+                    v["name"] = (name as! String)
+                }
                 guard let location = venue!["location"] else { break }
                 guard let address = location!["address"] else { break }
+                if address != nil {
+                    v["address"] = (address as! String)
+                }
                 guard let crossStreet = location!["crossStreet"] else { break }
+                if crossStreet != nil {
+                    v["crossStreet"] = (crossStreet as! String)
+                }
                 guard let lat = location!["lat"] else { break }
+                if lat != nil {
+                    v["lat"] = "\(lat!)"
+                }
                 guard let lng = location!["lng"] else { break }
+                if lng != nil {
+                    v["lng"] = "\(lng!)"
+                }
                 guard let city = location!["city"] else { break }
-                
-                print("Venue: \(name!)(\(id)) - \(lat) / \(lng) \n \(address), near \(crossStreet), in \(city)")
+                if city != nil {
+                    v["city"] = (city as! String)
+                }
+                results.append(v)
             }
+            completion(result: results, error: error)
         })
     }
     
-    func searchYogaVenues(lat: Double, lon: Double, name: String)
+    func searchYogaVenues(lat: Double, lon: Double, name: String, completion:CompletionHander)
     {
         let coords = "\(lat),\(lon)"
         let methodArguments = [
@@ -142,7 +163,7 @@ class FoursquareRequestController: NSObject
             "categoryId": kYOGA_SEARCH_CATEGORY_ID,
         ]
         
-        callAPIEndpoint(k4SQ_SEARCH_URL, arguments: methodArguments, completion: { (json, error) in
+        callAPIEndpoint(k4SQ_SEARCH_URL, arguments: methodArguments, apiCompletion: { (json, error) in
             guard let meta = json["meta"] as? NSDictionary else {
                 print("Cannot get meta info from root dictionary: \(json)")
                 return
@@ -172,6 +193,7 @@ class FoursquareRequestController: NSObject
                 
                 print("Venue: \(name!)(\(id!)) - \(lat!) / \(lng!) \n \(address!), in \(city!)")
             }
+            completion(result: venues, error: error)
         })
     }
 }
