@@ -197,6 +197,34 @@
             </objects>
             <point key="canvasLocation" x="720" y="-172"/>
         </scene>
+        <!--Venues View Controller-->
+        <scene sceneID="IzH-ah-0n2">
+            <objects>
+                <tableViewController storyboardIdentifier="venuesViewController" id="L5A-nf-kQv" customClass="VenuesViewController" customModule="YogiYogini" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1eB-CX-yDi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VenueCellIdentifier" id="K1C-cY-mgd">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K1C-cY-mgd" id="rLs-Wk-Rxz">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="L5A-nf-kQv" id="cl7-9D-zOL"/>
+                            <outlet property="delegate" destination="L5A-nf-kQv" id="R6K-HY-BJb"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vza-40-5oC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1418" y="-172"/>
+        </scene>
         <!--Student Roster-->
         <scene sceneID="5dL-nZ-fSz">
             <objects>

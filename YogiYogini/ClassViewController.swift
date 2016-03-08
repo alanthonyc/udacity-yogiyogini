@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import MapKit
 
+let kVENUES_VIEW_CONTROLLER_ID = "venuesViewController"
+
 class ClassViewController: UIViewController
 {
     @IBOutlet weak var countBaseView: UIView!
@@ -58,6 +60,8 @@ class ClassViewController: UIViewController
                 print("error in search api call")
             }
         })
+        let venuesViewController = self.storyboard?.instantiateViewControllerWithIdentifier(kVENUES_VIEW_CONTROLLER_ID) as! VenuesViewController?
+        self.presentViewController(venuesViewController!, animated: true, completion: nil)
     }
 }
 
