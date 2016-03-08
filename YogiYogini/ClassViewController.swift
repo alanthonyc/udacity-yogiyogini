@@ -47,30 +47,16 @@ class ClassViewController: UIViewController
 //        let coords = (self.mapView.userLocation.location?.coordinate)! as CLLocationCoordinate2D
         let coords = CLLocationCoordinate2DMake(37.840364268076, -122.25142211)
         FoursquareRequestController().exploreVenues(coords.latitude, lon: coords.longitude, query:"Yoga",  completion:
-            { (results, error) in
-                print("Error message: \(error)")
-                for r in results as! NSArray
-                {
-                    let name = r["name"]
-                    let city = r["city"]
-                    print("Name: \(name)")
-                    print("City: \(city)")
-                }
-                print("Count: \((results as! NSArray).count)")
+        { (results, error) in
+            if error != nil {
+                print("error in explore api call")
             }
-        )
-        print("\n\n==========\nSearch results:\n")
+        })
         FoursquareRequestController().searchYogaVenues(coords.latitude, lon: coords.longitude, name: "Namaste", completion:
-            { (results, error) in
-                print("Error message: \(error)")
-                for r in results as! NSArray
-                {
-                    let name = r["name"]
-                    let city = r["city"]
-                    print("Name: \(name)")
-                    print("City: \(city)")
-                }
-                print("Count: \((results as! NSArray).count)")
+        { (results, error) in
+            if error != nil {
+                print("error in search api call")
+            }
         })
     }
 }

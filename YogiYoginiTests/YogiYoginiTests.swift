@@ -31,8 +31,10 @@ class YogiYoginiTests: XCTestCase
         let coords = CLLocationCoordinate2DMake(37.840364268076, -122.25142211)
         let receivedVenueExpectation = expectationWithDescription("Explored Venues")
         FoursquareRequestController().exploreVenues(coords.latitude, lon: coords.longitude, query:"Yoga", completion:
-        { (result, error) in
+        { (results, error) in
             if (error == nil) {
+                print("\((results as! NSArray).count) results. First one is:")
+                print("\(results[0])")
                 receivedVenueExpectation.fulfill()
             }
         })
@@ -46,11 +48,13 @@ class YogiYoginiTests: XCTestCase
         let coords = CLLocationCoordinate2DMake(37.840364268076, -122.25142211)
         let receivedVenueExpectation = expectationWithDescription("Explored Venues")
         FoursquareRequestController().searchYogaVenues(coords.latitude, lon: coords.longitude, name:"Namaste", completion:
-            { (result, error) in
+            { (results, error) in
                 if (error == nil) {
+                    print("\((results as! NSArray).count) results. First one is:")
+                    print("\(results[0])")
                     receivedVenueExpectation.fulfill()
                 }
-        })
+            })
         waitForExpectationsWithTimeout(5) { (error) -> Void in
             print("Search API did not fulfill without error.")
         }
