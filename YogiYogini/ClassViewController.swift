@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import MapKit
+import CoreData
+//import CoreLocation
 
 let kVENUES_VIEW_CONTROLLER_ID = "venuesViewController"
 
@@ -34,6 +36,27 @@ class ClassViewController: UIViewController
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: --- Core Data Helpers
+    
+    lazy var moc =
+    {
+        CoreDataManager.sharedInstance().managedObjectContext
+    } ()
+    
+    func saveMoc()
+    {
+        dispatch_async(dispatch_get_main_queue())
+            {
+                () -> Void in
+                do {
+                    try self.moc.save()
+                    
+                } catch let error as NSError {
+                    print("error saving moc: \(error)")
+                }
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func checkinButtonTapped()
@@ -46,22 +69,34 @@ class ClassViewController: UIViewController
     
     func findNearbyYogaStudios()
     {
-//        let coords = (self.mapView.userLocation.location?.coordinate)! as CLLocationCoordinate2D
-        let coords = CLLocationCoordinate2DMake(37.840364268076, -122.25142211)
+        let coords = userLocation()
         FoursquareRequestController().exploreVenues(coords.latitude, lon: coords.longitude, query:"Yoga",  completion:
         { (results, error) in
             if error != nil {
                 print("error in explore api call")
-            }
-        })
-        FoursquareRequestController().searchYogaVenues(coords.latitude, lon: coords.longitude, name: "Namaste", completion:
-        { (results, error) in
-            if error != nil {
-                print("error in search api call")
+                // TODO: error condition
+            } else {
+                let meta = results["meta"]
+                let venues = results["venues"]
+                for v in venues as! NSArray
+                {
+                    guard let venue = v["venue"] else { break } // no venue, skip entry
+                    dispatch_async(dispatch_get_main_queue()) {
+                        VenueManager().saveVenueInfo(venue as! NSDictionary, meta: meta as! NSDictionary)
+                    }
+                }
+                self.saveMoc()
             }
         })
         let venuesViewController = self.storyboard?.instantiateViewControllerWithIdentifier(kVENUES_VIEW_CONTROLLER_ID) as! VenuesViewController?
+        venuesViewController?.requestId = "000"
         self.presentViewController(venuesViewController!, animated: true, completion: nil)
+    }
+    
+    func userLocation() -> CLLocationCoordinate2D
+    {
+//        let coords = (self.mapView.userLocation.location?.coordinate)! as CLLocationCoordinate2D
+        return CLLocationCoordinate2DMake(37.840364268076, -122.25142211)
     }
 }
 

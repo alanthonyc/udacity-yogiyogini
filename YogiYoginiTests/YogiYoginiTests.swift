@@ -33,8 +33,8 @@ class YogiYoginiTests: XCTestCase
         FoursquareRequestController().exploreVenues(coords.latitude, lon: coords.longitude, query:"Yoga", completion:
         { (results, error) in
             if (error == nil) {
-                print("\((results as! NSArray).count) results. First one is:")
-                print("\(results[0])")
+                let requestId = results!["meta"]!!["requestId"]
+                print("Request #\(requestId) received.")
                 receivedVenueExpectation.fulfill()
             }
         })
@@ -50,8 +50,8 @@ class YogiYoginiTests: XCTestCase
         FoursquareRequestController().searchYogaVenues(coords.latitude, lon: coords.longitude, name:"Namaste", completion:
             { (results, error) in
                 if (error == nil) {
-                    print("\((results as! NSArray).count) results. First one is:")
-                    print("\(results[0])")
+                    let requestId = results!["meta"]!!["requestId"]
+                    print("Request #\(requestId) received.")
                     receivedVenueExpectation.fulfill()
                 }
             })
