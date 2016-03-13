@@ -80,10 +80,21 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     
     // MARK: - NSFetchedResultsController
     
+    func reloadFrc()
+    {
+        do {
+            try frc.performFetch()
+        } catch {
+            print("Error performing fetch.")
+            // TODO: error condition
+        }
+        self.tableView.reloadData()
+    }
+    
     lazy var frc: NSFetchedResultsController =
     {
         let request = NSFetchRequest(entityName: kENTITY_NAME_VENUE)
-//        request.predicate = NSPredicate(format: "requestId == %@", self.requestId!)
+        request.predicate = NSPredicate(format: "selectedForSearch == true")
         // TODO: filter on request id
         request.sortDescriptors = []
         

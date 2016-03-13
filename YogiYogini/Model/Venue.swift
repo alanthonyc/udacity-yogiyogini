@@ -24,6 +24,7 @@ class Venue: NSManagedObject
         static let City = "city"
         static let LastRequestId = "lastRequestId"
         static let LastUpdateDate = "lastUpdateDate"
+        static let SelectedForSearch = "selectedForSearch"
     }
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?)
@@ -44,6 +45,7 @@ class Venue: NSManagedObject
         city = dictionary[Keys.City] as? String
         lastRequestId = dictionary[Keys.LastRequestId] as? String
         lastUpdateDate = dictionary[Keys.LastUpdateDate] as? NSDate
+        selectedForSearch = dictionary[Keys.SelectedForSearch] as? NSNumber
     }
 }
 
@@ -69,17 +71,20 @@ class VenueManager: NSObject
         }
         v!.setValue(today, forKey: Venue.Keys.LastUpdateDate)
         v!.setValue(requestId, forKey: Venue.Keys.LastRequestId)
+        v!.setValue(true, forKey: Venue.Keys.SelectedForSearch)
         
         let name = venue["name"]
         if name != nil { v!.setValue(venue["name"] as! String, forKey: Venue.Keys.Name) }
         
-        guard let location = venue["location"] else { return } // no location info, skip details
+        guard let location = venue["location"] else {
+            v!.setValue("Location Not Available", forKey: Venue.Keys.Address)
+            return // no location info, skip details
+        }
         let address = location["address"]
         let crossStreet = location["crossStreet"]
         let city = location["city"]
         let latitude = location["lat"]
         let longitude = location["lng"]
-        
         v!.setValue(address, forKey: Venue.Keys.Address)
         v!.setValue(crossStreet, forKey: Venue.Keys.CrossStreet)
         v!.setValue(city, forKey: Venue.Keys.City)
