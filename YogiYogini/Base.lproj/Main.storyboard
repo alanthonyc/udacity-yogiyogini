@@ -216,19 +216,34 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZ0-Jl-xr3">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venues" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3W7-UC-vSj">
-                                        <rect key="frame" x="270" y="35.5" width="60.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Venue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3W7-UC-vSj">
+                                        <rect key="frame" x="247" y="35" width="107" height="20.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmS-iT-mt5">
+                                        <rect key="frame" x="8" y="26" width="48" height="30"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelButtonTapped:" destination="fQ5-s3-t7y" eventType="touchUpInside" id="gLt-ny-FZ1"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="3W7-UC-vSj" secondAttribute="bottom" constant="8" id="0tD-1K-KoA"/>
+                                    <constraint firstItem="hmS-iT-mt5" firstAttribute="centerY" secondItem="HZ0-Jl-xr3" secondAttribute="centerY" id="7Oh-if-KOt"/>
                                     <constraint firstItem="3W7-UC-vSj" firstAttribute="centerX" secondItem="HZ0-Jl-xr3" secondAttribute="centerX" id="QZH-sg-YXN"/>
+                                    <constraint firstAttribute="bottom" secondItem="hmS-iT-mt5" secondAttribute="bottom" constant="8" id="VLT-D5-KE8"/>
+                                    <constraint firstItem="hmS-iT-mt5" firstAttribute="leading" secondItem="HZ0-Jl-xr3" secondAttribute="leading" constant="8" id="l0M-BM-LzM"/>
                                     <constraint firstAttribute="height" constant="64" id="wcZ-S3-weh"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7Oh-if-KOt"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="NRX-Ey-wqk">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>

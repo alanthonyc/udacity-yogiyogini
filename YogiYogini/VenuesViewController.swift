@@ -11,14 +11,20 @@ import CoreData
 
 private let kVENUE_CELL_ID = "VenueCellIdentifier"
 
+protocol VenuesControllerDelegate
+{
+    func closeVenuesController()
+}
+
 class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate
 {
-    // MARK: - Properties
+    // MARK: - Outlets
     
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
     
+    var delegate: VenuesControllerDelegate?
     var requestId: String!
     
     // MARK: - Housekeeping
@@ -42,14 +48,12 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         }
     }
     
-    override func viewWillAppear(animated: Bool)
+    override func viewWillDisappear(animated: Bool)
     {
-
-    }
-    
-    override func viewDidAppear(animated: Bool)
-    {
-
+        for venue in self.frc.fetchedObjects! as! [Venue!]
+        {
+            venue.selectedForSearch = false
+        }
     }
     
     override func didReceiveMemoryWarning()
@@ -121,5 +125,16 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         cell.textLabel?.text = venue.name
         cell.detailTextLabel?.text = venue.address
         return cell
+    }
+    
+    // MARK: - Actions
+    @IBAction func cancelButtonTapped(sender: AnyObject?)
+    {
+        self.close()
+    }
+    
+    func close()
+    {
+        self.delegate?.closeVenuesController()
     }
 }

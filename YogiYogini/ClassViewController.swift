@@ -15,7 +15,7 @@ import CoreData
 let kVENUES_VIEW_CONTROLLER_ID = "venuesViewController"
 let kEXPLORE_VENUES_DEFAULT_QUERY_PARAM = "Yoga"
 
-class ClassViewController: UIViewController
+class ClassViewController: UIViewController, VenuesControllerDelegate
 {
     // MARK: - Outlets
     
@@ -96,19 +96,29 @@ class ClassViewController: UIViewController
                         VenueManager().saveVenueInfo(venue as! NSDictionary, meta: meta)
                     }
                 }
-                self.saveMoc()
-                self.venuesViewController?.requestId! = meta["requestId"] as! String
-                self.venuesViewController?.reloadFrc()
+                dispatch_async(dispatch_get_main_queue())
+                {
+                    self.saveMoc()
+                    self.venuesViewController!.requestId! = meta["requestId"] as! String
+                    self.venuesViewController!.reloadFrc()
+                }
             }
         })
+        venuesViewController!.delegate = self
         self.presentViewController(venuesViewController!, animated: true, completion: nil)
+    }
+    
+    func closeVenuesController()
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func userLocation() -> CLLocationCoordinate2D
     {
 //        let coords = (self.mapView.userLocation.location?.coordinate)! as CLLocationCoordinate2D
-//        return CLLocationCoordinate2DMake(37.840364268076, -122.25142211)
-        return CLLocationCoordinate2DMake(37.8044444, -122.2697222)
+//        return CLLocationCoordinate2DMake(37.840364268076, -122.25142211) // Namaste
+//        return CLLocationCoordinate2DMake(37.8044444, -122.2697222) // Oakland City
+        return CLLocationCoordinate2DMake(33.8622400, -118.3995200) // Hermosa Beach
     }
 }
 
