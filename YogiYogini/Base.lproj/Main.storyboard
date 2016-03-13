@@ -213,7 +213,7 @@
                                 <rect key="frame" x="20" y="108" width="560" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZ0-Jl-xr3">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZ0-Jl-xr3" userLabel="HeaderBaseView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Venue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3W7-UC-vSj">
@@ -245,29 +245,46 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="NRX-Ey-wqk">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xtf-tu-e1K">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oVe-tK-fKI">
+                                        <rect key="frame" x="290" y="12" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="NRX-Ey-wqk">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="bZw-dr-SR8"/>
+                                    <constraint firstItem="oVe-tK-fKI" firstAttribute="centerY" secondItem="Xtf-tu-e1K" secondAttribute="centerY" id="3WD-Do-tx3"/>
+                                    <constraint firstItem="NRX-Ey-wqk" firstAttribute="top" secondItem="Xtf-tu-e1K" secondAttribute="top" id="LUg-kw-1tv"/>
+                                    <constraint firstItem="oVe-tK-fKI" firstAttribute="centerX" secondItem="Xtf-tu-e1K" secondAttribute="centerX" id="MSd-kp-8EV"/>
+                                    <constraint firstAttribute="trailing" secondItem="NRX-Ey-wqk" secondAttribute="trailing" id="TE9-7z-mYe"/>
+                                    <constraint firstAttribute="bottom" secondItem="NRX-Ey-wqk" secondAttribute="bottom" id="Zfb-Fo-AMi"/>
+                                    <constraint firstItem="NRX-Ey-wqk" firstAttribute="leading" secondItem="Xtf-tu-e1K" secondAttribute="leading" id="ojo-Ji-eH0"/>
+                                    <constraint firstAttribute="height" constant="44" id="ooP-Xw-xSL"/>
                                 </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NRX-Ey-wqk" firstAttribute="top" secondItem="HZ0-Jl-xr3" secondAttribute="bottom" id="7d1-nY-nlx"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="NRX-Ey-wqk" secondAttribute="trailing" constant="-20" id="9wL-zl-4H6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Xtf-tu-e1K" secondAttribute="trailing" constant="-20" id="1Fx-pH-D3s"/>
+                            <constraint firstItem="Xtf-tu-e1K" firstAttribute="top" secondItem="HZ0-Jl-xr3" secondAttribute="bottom" id="6Hk-Gc-Pic"/>
                             <constraint firstItem="0DE-mS-GtI" firstAttribute="leading" secondItem="ccM-1W-lhv" secondAttribute="leadingMargin" id="UIN-2b-pur"/>
-                            <constraint firstItem="NRX-Ey-wqk" firstAttribute="leading" secondItem="ccM-1W-lhv" secondAttribute="leadingMargin" constant="-20" id="Vl4-dy-fed"/>
+                            <constraint firstItem="0DE-mS-GtI" firstAttribute="top" secondItem="Xtf-tu-e1K" secondAttribute="bottom" id="Xes-hl-WPO"/>
                             <constraint firstItem="HZ0-Jl-xr3" firstAttribute="leading" secondItem="ccM-1W-lhv" secondAttribute="leadingMargin" constant="-20" id="Yaq-IG-8Oq"/>
                             <constraint firstItem="1ND-uZ-GKv" firstAttribute="top" secondItem="0DE-mS-GtI" secondAttribute="bottom" id="bOT-w9-Bsh"/>
-                            <constraint firstItem="0DE-mS-GtI" firstAttribute="top" secondItem="NRX-Ey-wqk" secondAttribute="bottom" id="cKx-mw-o8H"/>
+                            <constraint firstItem="Xtf-tu-e1K" firstAttribute="leading" secondItem="ccM-1W-lhv" secondAttribute="leadingMargin" constant="-20" id="cYC-Gh-PPJ"/>
                             <constraint firstItem="HZ0-Jl-xr3" firstAttribute="top" secondItem="ccM-1W-lhv" secondAttribute="topMargin" id="dm1-ed-7PG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HZ0-Jl-xr3" secondAttribute="trailing" constant="-20" id="dts-pa-5ot"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0DE-mS-GtI" secondAttribute="trailing" id="f27-dK-gCX"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="oVe-tK-fKI" id="hgl-GI-GN1"/>
+                        <outlet property="searchBar" destination="NRX-Ey-wqk" id="8Ie-AS-GX7"/>
                         <outlet property="tableView" destination="0DE-mS-GtI" id="74S-Jv-cAM"/>
                     </connections>
                 </viewController>

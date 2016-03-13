@@ -21,11 +21,12 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     // MARK: - Outlets
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Properties
     
     var delegate: VenuesControllerDelegate?
-    var requestId: String!
     
     // MARK: - Housekeeping
     
@@ -40,12 +41,10 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         self.tableView.dataSource = self
         self.tableView.registerNib(UINib(nibName: "VenueTableViewCell", bundle: nil), forCellReuseIdentifier: kVENUE_CELL_ID)
         frc.delegate = self
-        do {
-            try frc.performFetch()
-        } catch {
-            print("Error performing fetch.")
-            // TODO: error condition
-        }
+        self.reloadFrc()
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.startAnimating()
+        self.searchBar.alpha = 0.0
     }
     
     override func viewWillDisappear(animated: Bool)
@@ -136,5 +135,11 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     func close()
     {
         self.delegate?.closeVenuesController()
+    }
+    
+    func endSearchAnimation()
+    {
+        self.activityIndicator.stopAnimating()
+        self.searchBar.alpha = 1.0
     }
 }

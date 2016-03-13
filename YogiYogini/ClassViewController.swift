@@ -77,7 +77,6 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     func findNearbyYogaStudios()
     {
         self.venuesViewController = self.storyboard?.instantiateViewControllerWithIdentifier(kVENUES_VIEW_CONTROLLER_ID) as! VenuesViewController?
-        self.venuesViewController?.requestId = ""
         
         let coords = userLocation()
         let queryParam = kEXPLORE_VENUES_DEFAULT_QUERY_PARAM
@@ -99,8 +98,8 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
                 dispatch_async(dispatch_get_main_queue())
                 {
                     self.saveMoc()
-                    self.venuesViewController!.requestId! = meta["requestId"] as! String
                     self.venuesViewController!.reloadFrc()
+                    self.venuesViewController!.endSearchAnimation()
                 }
             }
         })
