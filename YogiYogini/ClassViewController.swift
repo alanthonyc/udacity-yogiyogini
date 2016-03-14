@@ -21,9 +21,11 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     
     @IBOutlet weak var countBaseView: UIView!
     @IBOutlet weak var checkinButtonBaseView: UIView!
-    @IBOutlet weak var locationBaseView: UIView!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var locationBaseView: UIView!
     @IBOutlet weak var studioNameLabel: UILabel!
+    @IBOutlet weak var addressBaseView: UIView!
+    @IBOutlet weak var addressLabel: UILabel!
     
     // MARK: - Properties
     
@@ -36,10 +38,10 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.venue = VenueInfo(name: "", city: "", latitude: 0.0, longitude: 0.0)
+        self.venue = VenueInfo(name: "", address: "", city: "", latitude: 0.0, longitude: 0.0)
         self.countBaseView.layer.cornerRadius = 12
-        self.checkinButtonBaseView.layer.cornerRadius = 16
         self.locationBaseView.alpha = 0
+        self.addressBaseView.alpha = 0
         self.studioNameLabel.text! = ""
     }
 
@@ -122,7 +124,14 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.dismissViewControllerAnimated(true, completion: {
             self.venue = venue
             self.studioNameLabel.text! = self.venue!.name
+            
+            var address = self.venue!.address
+            if address == "" { address = self.venue!.name }
+            if self.venue!.city != "" { address += ", \(self.venue!.city)" }
+            
+            self.addressLabel.text! = address
             self.locationBaseView.alpha = 0.8
+            self.addressBaseView.alpha = 0.8
             self.setMapLocation(CLLocationCoordinate2DMake(self.venue!.latitude, self.venue!.longitude))
         })
     }

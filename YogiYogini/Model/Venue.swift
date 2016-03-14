@@ -14,6 +14,7 @@ let kENTITY_NAME_VENUE = "Venue"
 struct VenueInfo
 {
     let name: String
+    let address: String
     let city: String
     let latitude: Double
     let longitude: Double
