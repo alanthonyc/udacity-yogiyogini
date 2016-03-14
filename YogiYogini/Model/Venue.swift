@@ -11,6 +11,14 @@ import CoreData
 
 let kENTITY_NAME_VENUE = "Venue"
 
+struct VenueInfo
+{
+    let name: String
+    let city: String
+    let latitude: Double
+    let longitude: Double
+}
+
 class Venue: NSManagedObject
 {
     struct Keys

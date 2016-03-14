@@ -23,19 +23,24 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     @IBOutlet weak var checkinButtonBaseView: UIView!
     @IBOutlet weak var locationBaseView: UIView!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var studioNameLabel: UILabel!
     
     // MARK: - Properties
     
     var venuesViewController: VenuesViewController?
+    var venue: VenueInfo?
+    var venuePin: MKPointAnnotation?
     
     // MARK: - Housekeeping
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.venue = VenueInfo(name: "", city: "", latitude: 0.0, longitude: 0.0)
         self.countBaseView.layer.cornerRadius = 12
         self.checkinButtonBaseView.layer.cornerRadius = 16
         self.locationBaseView.alpha = 0
+        self.studioNameLabel.text! = ""
     }
 
     override func didReceiveMemoryWarning()
@@ -68,7 +73,6 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     
     @IBAction func checkinButtonTapped()
     {
-        self.locationBaseView.alpha = 0.8
         self.findNearbyYogaStudios()
     }
     
@@ -112,12 +116,43 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func returnSelectedVenue(venue: VenueInfo)
+    {
+        print("selected venue: \(venue)")
+        self.dismissViewControllerAnimated(true, completion: {
+            self.venue = venue
+            self.studioNameLabel.text! = self.venue!.name
+            self.locationBaseView.alpha = 0.8
+            self.setMapLocation(CLLocationCoordinate2DMake(self.venue!.latitude, self.venue!.longitude))
+        })
+    }
+    
+    func setMapLocation(coordinates: CLLocationCoordinate2D)
+    {
+        let region = MKCoordinateRegionMakeWithDistance(coordinates, 1600, 1600);
+        mapView.setCenterCoordinate(coordinates, animated: true)
+        mapView.setRegion(region, animated: true)
+        
+        if self.venuePin != nil
+        {
+            self.mapView.removeAnnotation(self.venuePin!)
+        }
+        self.venuePin = MKPointAnnotation.init()
+        self.venuePin!.coordinate = coordinates
+        self.mapView.addAnnotation(self.venuePin!)
+    }
+    
+    func configureMapAnnotation()
+    {
+
+    }
+    
     func userLocation() -> CLLocationCoordinate2D
     {
 //        let coords = (self.mapView.userLocation.location?.coordinate)! as CLLocationCoordinate2D
-//        return CLLocationCoordinate2DMake(37.840364268076, -122.25142211) // Namaste
+        return CLLocationCoordinate2DMake(37.840364268076, -122.25142211) // Namaste
 //        return CLLocationCoordinate2DMake(37.8044444, -122.2697222) // Oakland City
-        return CLLocationCoordinate2DMake(33.8622400, -118.3995200) // Hermosa Beach
+//        return CLLocationCoordinate2DMake(33.8622400, -118.3995200) // Hermosa Beach
     }
 }
 

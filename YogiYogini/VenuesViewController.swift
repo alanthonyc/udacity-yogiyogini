@@ -14,6 +14,7 @@ private let kVENUE_CELL_ID = "VenueCellIdentifier"
 protocol VenuesControllerDelegate
 {
     func closeVenuesController()
+    func returnSelectedVenue(venue: VenueInfo)
 }
 
 class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate
@@ -53,6 +54,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         {
             venue.selectedForSearch = false
         }
+        self.saveMoc()
     }
     
     override func didReceiveMemoryWarning()
@@ -126,7 +128,18 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         return cell
     }
     
-    // MARK: - Actions
+    // MARK: - UITableViewDelegate
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let venue = self.frc.objectAtIndexPath(indexPath) as! Venue
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        print("Venue Tapped: \(venue)")
+        self.delegate?.returnSelectedVenue(VenueInfo(name:venue.name!, city:venue.city!, latitude: venue.latitude! as Double, longitude: venue.longitude! as Double))
+    }
+    
+    // MARK: - Controller Actions
+    
     @IBAction func cancelButtonTapped(sender: AnyObject?)
     {
         self.close()

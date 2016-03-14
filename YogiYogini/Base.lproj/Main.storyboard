@@ -122,10 +122,10 @@
                                 </variation>
                             </view>
                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kze-HU-bEU" userLabel="LocationBaseView">
-                                <rect key="frame" x="0.0" y="143" width="600" height="37"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="37"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Squirrel Studios, Mammoth Lakes, CA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xca-T9-HUK">
-                                        <rect key="frame" x="8" y="4" width="584" height="29"/>
+                                        <rect key="frame" x="12" y="4" width="576" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -135,8 +135,8 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="xca-T9-HUK" secondAttribute="bottom" constant="4" id="CJV-mR-aBb"/>
                                     <constraint firstItem="xca-T9-HUK" firstAttribute="top" secondItem="Kze-HU-bEU" secondAttribute="top" constant="4" id="NbZ-Fp-xdo"/>
-                                    <constraint firstAttribute="trailing" secondItem="xca-T9-HUK" secondAttribute="trailing" constant="8" id="cEx-wV-khN"/>
-                                    <constraint firstItem="xca-T9-HUK" firstAttribute="leading" secondItem="Kze-HU-bEU" secondAttribute="leading" constant="8" id="rIg-KD-jb5"/>
+                                    <constraint firstAttribute="trailing" secondItem="xca-T9-HUK" secondAttribute="trailing" constant="12" id="cEx-wV-khN"/>
+                                    <constraint firstItem="xca-T9-HUK" firstAttribute="leading" secondItem="Kze-HU-bEU" secondAttribute="leading" constant="12" id="rIg-KD-jb5"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFm-jv-Rso" userLabel="StudentCountBaseView">
@@ -182,7 +182,7 @@
                             <constraint firstItem="Kze-HU-bEU" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" constant="-20" id="k6z-OD-9ps"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="Z9w-16-5jC" secondAttribute="bottom" id="mGO-oE-WOd"/>
                             <constraint firstItem="YPh-gK-A3f" firstAttribute="top" secondItem="pz8-xS-ci1" secondAttribute="bottom" constant="4" id="pPj-mf-Al0"/>
-                            <constraint firstItem="YPh-gK-A3f" firstAttribute="top" secondItem="Kze-HU-bEU" secondAttribute="bottom" constant="4" id="stW-FI-SbJ"/>
+                            <constraint firstItem="YPh-gK-A3f" firstAttribute="top" secondItem="Kze-HU-bEU" secondAttribute="bottom" constant="127" id="stW-FI-SbJ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Class" image="second" id="cPa-gy-q4n"/>
@@ -191,6 +191,7 @@
                         <outlet property="countBaseView" destination="dFm-jv-Rso" id="V6G-te-3kq"/>
                         <outlet property="locationBaseView" destination="Kze-HU-bEU" id="aMR-cC-NKh"/>
                         <outlet property="mapView" destination="pz8-xS-ci1" id="KUe-wV-Mhv"/>
+                        <outlet property="studioNameLabel" destination="xca-T9-HUK" id="5YN-Go-2XS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -216,8 +217,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZ0-Jl-xr3" userLabel="HeaderBaseView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Venue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3W7-UC-vSj">
-                                        <rect key="frame" x="247" y="35" width="107" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nearby Yoga Venues" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3W7-UC-vSj">
+                                        <rect key="frame" x="216.5" y="35" width="168" height="20.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
