@@ -209,5 +209,6 @@ xcuserdata
 #*.xccheckout
 
 ####
-# Heartagram Ignores
+# My Ignores
 Pods/
+*.pyc
