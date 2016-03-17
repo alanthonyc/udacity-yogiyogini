@@ -53,6 +53,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         for venue in self.frc.fetchedObjects! as! [Venue!]
         {
             venue.selectedForSearch = false
+            venue.searchSortOrder = 0
         }
         self.saveMoc()
     }
@@ -100,8 +101,8 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     {
         let request = NSFetchRequest(entityName: kENTITY_NAME_VENUE)
         request.predicate = NSPredicate(format: "selectedForSearch == true")
-        // TODO: filter on request id
-        request.sortDescriptors = []
+        let sortDescriptor = NSSortDescriptor(key: "searchSortOrder", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
         
         let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
         return controller
@@ -134,7 +135,6 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     {
         let venue = self.frc.objectAtIndexPath(indexPath) as! Venue
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        print("Venue Tapped: \(venue)")
         
         let name = (venue.name ?? "")
         let address = (venue.address ?? "")

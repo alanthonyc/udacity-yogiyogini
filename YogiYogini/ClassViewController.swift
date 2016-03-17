@@ -26,6 +26,10 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     @IBOutlet weak var studioNameLabel: UILabel!
     @IBOutlet weak var addressBaseView: UIView!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var studentCountLabel: UILabel!
+    @IBOutlet weak var checkinButton: UIButton!
+    @IBOutlet weak var endSessionButton: UIButton!
+    @IBOutlet weak var sessionInfoBaseView: UIView!
     
     // MARK: - Properties
     
@@ -43,6 +47,9 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.locationBaseView.alpha = 0
         self.addressBaseView.alpha = 0
         self.studioNameLabel.text! = ""
+        self.studentCountLabel.text! = "0"
+        self.endSessionButton.alpha = 0
+        self.sessionInfoBaseView.alpha = 0
     }
 
     override func didReceiveMemoryWarning()
@@ -78,6 +85,19 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.findNearbyYogaStudios()
     }
     
+    @IBAction func endSessionButtonTapped()
+    {
+        self.endSession()
+    }
+    
+    func endSession()
+    {
+        self.endSessionButton.alpha = 0.0
+        self.checkinButton.alpha = 1.0
+        self.clearYogaStudio()
+        self.hideSessionInfo()
+    }
+    
     // Get yoga studios
     
     func findNearbyYogaStudios()
@@ -94,11 +114,11 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
             } else {
                 let meta = results["meta"] as! NSDictionary
                 let venues = results["venues"]
-                for v in venues as! NSArray
+                for (index, v) in (venues as! NSArray).enumerate()
                 {
                     guard let venue = v["venue"] else { break } // no venue, skip entry
                     dispatch_async(dispatch_get_main_queue()) {
-                        VenueManager().saveVenueInfo(venue as! NSDictionary, meta: meta)
+                        VenueManager().saveVenueInfo(index, venue:venue as! NSDictionary, meta: meta)
                     }
                 }
                 dispatch_async(dispatch_get_main_queue())
@@ -120,20 +140,44 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     
     func returnSelectedVenue(venue: VenueInfo)
     {
-        print("selected venue: \(venue)")
-        self.dismissViewControllerAnimated(true, completion: {
+        self.endSessionButton.alpha = 1.0
+        self.checkinButton.alpha = 0.0
+        self.dismissViewControllerAnimated(true, completion:
+        {
             self.venue = venue
-            self.studioNameLabel.text! = self.venue!.name
-            
-            var address = self.venue!.address
-            if address == "" { address = self.venue!.name }
-            if self.venue!.city != "" { address += ", \(self.venue!.city)" }
-            
-            self.addressLabel.text! = address
-            self.locationBaseView.alpha = 0.8
-            self.addressBaseView.alpha = 0.8
+            self.setYogaStudio()
+            self.displaySessionInfo()
             self.setMapLocation(CLLocationCoordinate2DMake(self.venue!.latitude, self.venue!.longitude))
         })
+    }
+    
+    func setYogaStudio()
+    {
+        self.studioNameLabel.text! = self.venue!.name
+        var address = self.venue!.address
+        if address == "" { address = self.venue!.name }
+        if self.venue!.city != "" { address += ", \(self.venue!.city)" }
+        self.addressLabel.text! = address
+        self.locationBaseView.alpha = 0.8
+        self.addressBaseView.alpha = 0.8
+    }
+    
+    func clearYogaStudio()
+    {
+        self.studioNameLabel.text! = ""
+        self.addressLabel.text! = ""
+        self.locationBaseView.alpha = 0.0
+        self.addressBaseView.alpha = 0.0
+    }
+    
+    func displaySessionInfo()
+    {
+        self.sessionInfoBaseView.alpha = 1.0
+    }
+    
+    func hideSessionInfo()
+    {
+        self.sessionInfoBaseView.alpha = 0.0
     }
     
     func setMapLocation(coordinates: CLLocationCoordinate2D)
@@ -150,12 +194,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.venuePin!.coordinate = coordinates
         self.mapView.addAnnotation(self.venuePin!)
     }
-    
-    func configureMapAnnotation()
-    {
 
-    }
-    
     func userLocation() -> CLLocationCoordinate2D
     {
 //        let coords = (self.mapView.userLocation.location?.coordinate)! as CLLocationCoordinate2D

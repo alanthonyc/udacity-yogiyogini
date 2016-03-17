@@ -24,4 +24,5 @@ extension Venue
     @NSManaged var lastRequestId: String?
     @NSManaged var lastUpdateDate: NSDate?
     @NSManaged var selectedForSearch: NSNumber?
+    @NSManaged var searchSortOrder: NSNumber?
 }

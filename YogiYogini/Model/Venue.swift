@@ -34,6 +34,7 @@ class Venue: NSManagedObject
         static let LastRequestId = "lastRequestId"
         static let LastUpdateDate = "lastUpdateDate"
         static let SelectedForSearch = "selectedForSearch"
+        static let SearchSortOrder = "searchSortOrder"
     }
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?)
@@ -55,12 +56,13 @@ class Venue: NSManagedObject
         lastRequestId = dictionary[Keys.LastRequestId] as? String
         lastUpdateDate = dictionary[Keys.LastUpdateDate] as? NSDate
         selectedForSearch = dictionary[Keys.SelectedForSearch] as? NSNumber
+        searchSortOrder = dictionary[Keys.SearchSortOrder] as? NSNumber
     }
 }
 
 class VenueManager: NSObject
 {
-    func saveVenueInfo(venue: NSDictionary, meta: NSDictionary)
+    func saveVenueInfo(index: NSInteger, venue: NSDictionary, meta: NSDictionary)
     {
         let id = venue["id"] as? String
         let requestId = meta["requestId"]
@@ -81,6 +83,7 @@ class VenueManager: NSObject
         v!.setValue(today, forKey: Venue.Keys.LastUpdateDate)
         v!.setValue(requestId, forKey: Venue.Keys.LastRequestId)
         v!.setValue(true, forKey: Venue.Keys.SelectedForSearch)
+        v!.setValue(index, forKey: Venue.Keys.SearchSortOrder)
         
         let name = venue["name"]
         if name != nil { v!.setValue(venue["name"] as! String, forKey: Venue.Keys.Name) }
