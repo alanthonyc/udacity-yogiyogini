@@ -18,18 +18,35 @@ let kEXPLORE_VENUES_DEFAULT_QUERY_PARAM = "Yoga"
 class ClassViewController: UIViewController, VenuesControllerDelegate
 {
     // MARK: - Outlets
-    
-    @IBOutlet weak var countBaseView: UIView!
+    // MARK: --- Session Control
     @IBOutlet weak var checkinButtonBaseView: UIView!
+    @IBOutlet weak var checkinButton: UIButton!
+    @IBOutlet weak var endSessionButton: UIButton!
+    
+    // MARK: --- Map View
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var locationBaseView: UIView!
     @IBOutlet weak var studioNameLabel: UILabel!
     @IBOutlet weak var addressBaseView: UIView!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var studentCountLabel: UILabel!
-    @IBOutlet weak var checkinButton: UIButton!
-    @IBOutlet weak var endSessionButton: UIButton!
+    
+    // MARK: --- Session Info
     @IBOutlet weak var sessionInfoBaseView: UIView!
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var startTimeBaseView: UIView!
+    @IBOutlet weak var startTimeLabel: UILabel!
+    @IBOutlet weak var startDateBaseView: UIView!
+    @IBOutlet weak var startMonthLabel: UILabel!
+    @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var endTimeBaseView: UIView!
+    @IBOutlet weak var endTimeLabel: UILabel!
+    @IBOutlet weak var endDateBaseView: UIView!
+    @IBOutlet weak var endMonthLabel: UILabel!
+    @IBOutlet weak var endDateLabel: UILabel!
+
+    // MARK: --- Student Info
+    @IBOutlet weak var countBaseView: UIView!
+    @IBOutlet weak var studentCountLabel: UILabel!
     
     // MARK: - Properties
     
@@ -50,6 +67,8 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.studentCountLabel.text! = "0"
         self.endSessionButton.alpha = 0
         self.sessionInfoBaseView.alpha = 0
+        self.startDateBaseView.alpha = 0
+        self.endDateBaseView.alpha = 0
     }
 
     override func didReceiveMemoryWarning()
