@@ -53,22 +53,17 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     var venuesViewController: VenuesViewController?
     var venue: VenueInfo?
     var venuePin: MKPointAnnotation?
+    var sessionStartTime: NSDate?
+    var sessionTimer: NSTimer?
+    var sessionDuration: Double?
     
     // MARK: - Housekeeping
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.venue = VenueInfo(name: "", address: "", city: "", latitude: 0.0, longitude: 0.0)
-        self.countBaseView.layer.cornerRadius = 12
-        self.locationBaseView.alpha = 0
-        self.addressBaseView.alpha = 0
-        self.studioNameLabel.text! = ""
-        self.studentCountLabel.text! = "0"
-        self.endSessionButton.alpha = 0
-        self.sessionInfoBaseView.alpha = 0
-        self.startDateBaseView.alpha = 0
-        self.endDateBaseView.alpha = 0
+        self.resetVenue()
+        self.configureViews()
     }
 
     override func didReceiveMemoryWarning()
@@ -76,8 +71,49 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         super.didReceiveMemoryWarning()
     }
     
-    // MARK: --- Core Data Helpers
+    func resetVenue()
+    {
+        self.venue = VenueInfo(name: "", address: "", city: "", latitude: 0.0, longitude: 0.0)
+    }
     
+    func configureViews()
+    {
+        self.resetViews()
+        self.countBaseView.layer.cornerRadius = 12
+    }
+    
+    func resetViews()
+    {
+        self.clearYogaStudio()
+        self.hideSessionInfo()
+        self.endSessionButton.alpha = 0
+        self.checkinButton.alpha = 1.0
+        self.startDateBaseView.alpha = 0
+        self.endDateBaseView.alpha = 0
+        
+        // TODO: this should automatically update with student count
+        self.studentCountLabel.text! = "0"
+    }
+    
+    func clearYogaStudio()
+    {
+        self.studioNameLabel.text! = ""
+        self.addressLabel.text! = ""
+        self.locationBaseView.alpha = 0.0
+        self.addressBaseView.alpha = 0.0
+    }
+    
+    func hideSessionInfo()
+    {
+        self.sessionInfoBaseView.alpha = 0.0
+    }
+    
+    func displaySessionInfo()
+    {
+        self.sessionInfoBaseView.alpha = 1.0
+    }
+    
+    // MARK: --- Core Data Helpers
     lazy var moc =
     {
         CoreDataManager.sharedInstance().managedObjectContext
@@ -86,14 +122,14 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     func saveMoc()
     {
         dispatch_async(dispatch_get_main_queue())
-            {
-                () -> Void in
-                do {
-                    try self.moc.save()
-                    
-                } catch let error as NSError {
-                    print("error saving moc: \(error)")
-                }
+        {
+            () -> Void in
+            do {
+                try self.moc.save()
+                
+            } catch let error as NSError {
+                print("error saving moc: \(error)")
+            }
         }
     }
     
@@ -109,15 +145,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.endSession()
     }
     
-    func endSession()
-    {
-        self.endSessionButton.alpha = 0.0
-        self.checkinButton.alpha = 1.0
-        self.clearYogaStudio()
-        self.hideSessionInfo()
-    }
-    
-    // Get yoga studios
+    // MARK: - Venues View Controller
     
     func findNearbyYogaStudios()
     {
@@ -164,11 +192,12 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.dismissViewControllerAnimated(true, completion:
         {
             self.venue = venue
-            self.setYogaStudio()
-            self.displaySessionInfo()
+            self.startSession()
             self.setMapLocation(CLLocationCoordinate2DMake(self.venue!.latitude, self.venue!.longitude))
         })
     }
+    
+    // MARK: - Start Session
     
     func setYogaStudio()
     {
@@ -181,22 +210,46 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.addressBaseView.alpha = 0.8
     }
     
-    func clearYogaStudio()
+    func startSession()
     {
-        self.studioNameLabel.text! = ""
-        self.addressLabel.text! = ""
-        self.locationBaseView.alpha = 0.0
-        self.addressBaseView.alpha = 0.0
+        self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
+        self.setYogaStudio()
+        self.startTimeLabel.text = self.startTime()
+        self.endTimeLabel.text = "---"
+        self.displaySessionInfo()
     }
     
-    func displaySessionInfo()
+    func updateTimer(timer: NSTimer!)
     {
-        self.sessionInfoBaseView.alpha = 1.0
+        self.sessionDuration = NSDate().timeIntervalSinceDate(self.sessionStartTime!)
+        let durationString = formattedDuration(Int(round(self.sessionDuration!)))
+        self.durationLabel.text = "\(durationString)"
     }
     
-    func hideSessionInfo()
+    func formattedDuration(seconds: Int) -> String
     {
-        self.sessionInfoBaseView.alpha = 0.0
+        var duration = ""
+        let (hrs, min, _) = self.durationSplits(seconds)
+        if hrs < 10 { duration = "0" }
+        duration.appendContentsOf("\(hrs)")
+        duration.appendContentsOf(":")
+        if min < 10 { duration.appendContentsOf("0") }
+        duration.appendContentsOf("\(min)")
+        return duration
+    }
+    
+    func durationSplits(seconds : Int) -> (Int, Int, Int)
+    {
+        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+    }
+    
+    func startTime() -> String
+    {
+        self.sessionStartTime = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .NoStyle
+        formatter.timeStyle = .ShortStyle
+        return formatter.stringFromDate(self.sessionStartTime!)
     }
     
     func setMapLocation(coordinates: CLLocationCoordinate2D)
@@ -213,13 +266,28 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.venuePin!.coordinate = coordinates
         self.mapView.addAnnotation(self.venuePin!)
     }
+    
+    // MARK: - End Session
+    
+    func endSession()
+    {
+        self.resetViews()
+        self.hideSessionInfo()
+        self.sessionTimer?.invalidate()
+        print("Ending Session")
+        print("Venue: \(self.venue!.name)")
+        let durationString = formattedDuration(Int(round(self.sessionDuration!)))
+        print("Duration: \(durationString)")
+        print("Students: tbd")
+        print("Info: \(self.venue)")
+    }
 
     func userLocation() -> CLLocationCoordinate2D
     {
 //        let coords = (self.mapView.userLocation.location?.coordinate)! as CLLocationCoordinate2D
-        return CLLocationCoordinate2DMake(37.840364268076, -122.25142211) // Namaste
+//        return CLLocationCoordinate2DMake(37.840364268076, -122.25142211) // Namaste
 //        return CLLocationCoordinate2DMake(37.8044444, -122.2697222) // Oakland City
-//        return CLLocationCoordinate2DMake(33.8622400, -118.3995200) // Hermosa Beach
+        return CLLocationCoordinate2DMake(33.8622400, -118.3995200) // Hermosa Beach
     }
 }
 
