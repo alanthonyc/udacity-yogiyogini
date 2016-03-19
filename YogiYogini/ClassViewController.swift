@@ -98,8 +98,10 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.checkinButton.alpha = 1.0
         self.startDateBaseView.alpha = 0
         self.endDateBaseView.alpha = 0
+        self.durationLabel.text = self.formattedDuration(0)
         
         // TODO: this should automatically update with student count
+        // - probably an frc object
         self.studentCountLabel.text! = "0"
     }
     
