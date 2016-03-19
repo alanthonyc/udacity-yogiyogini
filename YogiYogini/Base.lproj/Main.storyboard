@@ -119,13 +119,31 @@
                                             <action selector="checkinButtonTapped" destination="8rJ-Kc-sve" eventType="touchUpInside" id="3WW-VE-1AK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LY1-De-IwX">
-                                        <rect key="frame" x="258" y="4" width="84" height="30"/>
-                                        <state key="normal" title="End Session">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LY1-De-IwX" userLabel="Pause Session Button">
+                                        <rect key="frame" x="279" y="4" width="42" height="30"/>
+                                        <state key="normal" title="Pause">
                                             <color key="titleColor" red="0.98039215690000003" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="endSessionButtonTapped" destination="8rJ-Kc-sve" eventType="touchUpInside" id="RTC-JA-e65"/>
+                                            <action selector="pauseSessionButtonTapped" destination="8rJ-Kc-sve" eventType="touchUpInside" id="TB2-eB-GqZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pln-k3-Se7">
+                                        <rect key="frame" x="177" y="4" width="62" height="30"/>
+                                        <state key="normal" title="Continue">
+                                            <color key="titleColor" red="0.98039215690000003" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="continueSessionButtonTapped" destination="8rJ-Kc-sve" eventType="touchUpInside" id="q3p-tS-q3f"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c98-kS-Z1m">
+                                        <rect key="frame" x="361" y="4" width="91" height="30"/>
+                                        <state key="normal" title="Save Session">
+                                            <color key="titleColor" red="0.98039215690000003" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveSessionButtonTapped" destination="8rJ-Kc-sve" eventType="touchUpInside" id="w6q-dr-3IE"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -134,11 +152,15 @@
                                     <constraint firstItem="yP7-kS-Uin" firstAttribute="centerY" secondItem="YPh-gK-A3f" secondAttribute="centerY" id="7a1-zQ-Ta8"/>
                                     <constraint firstAttribute="bottom" secondItem="yP7-kS-Uin" secondAttribute="bottom" constant="4" id="DsM-TN-7zg"/>
                                     <constraint firstItem="yP7-kS-Uin" firstAttribute="centerX" secondItem="YPh-gK-A3f" secondAttribute="centerX" id="Ito-NQ-7sH"/>
+                                    <constraint firstItem="pln-k3-Se7" firstAttribute="centerY" secondItem="YPh-gK-A3f" secondAttribute="centerY" id="NXJ-6R-wMS"/>
                                     <constraint firstAttribute="trailing" secondItem="yP7-kS-Uin" secondAttribute="trailing" constant="12" id="P8G-55-kik"/>
                                     <constraint firstItem="yP7-kS-Uin" firstAttribute="top" secondItem="YPh-gK-A3f" secondAttribute="top" constant="4" id="R1F-Mm-9WL"/>
                                     <constraint firstItem="LY1-De-IwX" firstAttribute="centerX" secondItem="YPh-gK-A3f" secondAttribute="centerX" id="Uzb-0y-yX5"/>
                                     <constraint firstItem="yP7-kS-Uin" firstAttribute="leading" secondItem="YPh-gK-A3f" secondAttribute="leading" constant="12" id="XbX-zf-RzF"/>
                                     <constraint firstItem="LY1-De-IwX" firstAttribute="centerY" secondItem="YPh-gK-A3f" secondAttribute="centerY" id="rqU-c6-xeP"/>
+                                    <constraint firstItem="LY1-De-IwX" firstAttribute="leading" secondItem="pln-k3-Se7" secondAttribute="trailing" constant="40" id="tqs-dA-Bbt"/>
+                                    <constraint firstItem="c98-kS-Z1m" firstAttribute="leading" secondItem="LY1-De-IwX" secondAttribute="trailing" constant="40" id="vWP-W9-ffZ"/>
+                                    <constraint firstItem="c98-kS-Z1m" firstAttribute="centerY" secondItem="YPh-gK-A3f" secondAttribute="centerY" id="wBn-0c-G0b"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -265,7 +287,7 @@
                                         <rect key="frame" x="260" y="0.0" width="80" height="52"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efi-3m-mTp">
-                                                <rect key="frame" x="3" y="8.5" width="72.5" height="27.5"/>
+                                                <rect key="frame" x="3" y="8" width="72.5" height="27.5"/>
                                                 <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="24"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -277,7 +299,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hrs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJi-kg-LcS">
-                                                <rect key="frame" x="8.5" y="32" width="19.5" height="16"/>
+                                                <rect key="frame" x="8" y="32" width="19.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -408,6 +430,7 @@
                         <outlet property="addressLabel" destination="J7V-7r-AXs" id="S2V-xn-EuR"/>
                         <outlet property="checkinButton" destination="yP7-kS-Uin" id="OTP-Me-PBt"/>
                         <outlet property="checkinButtonBaseView" destination="YPh-gK-A3f" id="Txu-mT-gHw"/>
+                        <outlet property="continueSessionButton" destination="pln-k3-Se7" id="F48-w9-f0l"/>
                         <outlet property="countBaseView" destination="dFm-jv-Rso" id="V6G-te-3kq"/>
                         <outlet property="durationLabel" destination="efi-3m-mTp" id="aVv-pG-LV6"/>
                         <outlet property="endDateBaseView" destination="Vh1-ty-krh" id="oLB-v1-7aS"/>
@@ -418,6 +441,7 @@
                         <outlet property="endTimeLabel" destination="S6F-8l-HqR" id="K8c-Dd-OiW"/>
                         <outlet property="locationBaseView" destination="Kze-HU-bEU" id="aMR-cC-NKh"/>
                         <outlet property="mapView" destination="pz8-xS-ci1" id="KUe-wV-Mhv"/>
+                        <outlet property="saveSessionButton" destination="c98-kS-Z1m" id="Nbb-UW-yiq"/>
                         <outlet property="sessionInfoBaseView" destination="n9Y-cX-N9F" id="se9-T6-kqq"/>
                         <outlet property="startDateBaseView" destination="lUq-Q9-DOB" id="92g-oh-Vog"/>
                         <outlet property="startDateLabel" destination="fqk-YA-q9t" id="et3-hl-HnD"/>
@@ -467,7 +491,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="3W7-UC-vSj" secondAttribute="bottom" constant="8" id="0tD-1K-KoA"/>
                                     <constraint firstItem="hmS-iT-mt5" firstAttribute="centerY" secondItem="HZ0-Jl-xr3" secondAttribute="centerY" id="7Oh-if-KOt"/>
@@ -493,7 +517,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="oVe-tK-fKI" firstAttribute="centerY" secondItem="Xtf-tu-e1K" secondAttribute="centerY" id="3WD-Do-tx3"/>
                                     <constraint firstItem="NRX-Ey-wqk" firstAttribute="top" secondItem="Xtf-tu-e1K" secondAttribute="top" id="LUg-kw-1tv"/>

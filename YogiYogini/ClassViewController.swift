@@ -22,6 +22,8 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     @IBOutlet weak var checkinButtonBaseView: UIView!
     @IBOutlet weak var checkinButton: UIButton!
     @IBOutlet weak var endSessionButton: UIButton!
+    @IBOutlet weak var saveSessionButton: UIButton!
+    @IBOutlet weak var continueSessionButton: UIButton!
     
     // MARK: --- Map View
     @IBOutlet weak var mapView: MKMapView!
@@ -56,6 +58,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     var sessionStartTime: NSDate?
     var sessionTimer: NSTimer?
     var sessionDuration: Double?
+    var timeFormatter: NSDateFormatter?
     
     // MARK: - Housekeeping
     
@@ -64,6 +67,9 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         super.viewDidLoad()
         self.resetVenue()
         self.configureViews()
+        self.timeFormatter = NSDateFormatter()
+        self.timeFormatter!.dateStyle = .NoStyle
+        self.timeFormatter!.timeStyle = .ShortStyle
     }
 
     override func didReceiveMemoryWarning()
@@ -87,6 +93,8 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.clearYogaStudio()
         self.hideSessionInfo()
         self.endSessionButton.alpha = 0
+        self.saveSessionButton.alpha = 0
+        self.continueSessionButton.alpha = 0
         self.checkinButton.alpha = 1.0
         self.startDateBaseView.alpha = 0
         self.endDateBaseView.alpha = 0
@@ -140,9 +148,19 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.findNearbyYogaStudios()
     }
     
-    @IBAction func endSessionButtonTapped()
+    @IBAction func pauseSessionButtonTapped()
     {
-        self.endSession()
+        self.pauseSession()
+    }
+    
+    @IBAction func continueSessionButtonTapped()
+    {
+        self.continueSession()
+    }
+    
+    @IBAction func saveSessionButtonTapped()
+    {
+        self.saveSession()
     }
     
     // MARK: - Venues View Controller
@@ -212,14 +230,20 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     
     func startSession()
     {
-        self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
+        self.startTimer()
         self.setYogaStudio()
-        self.startTimeLabel.text = self.startTime()
+        self.sessionStartTime = NSDate()
+        self.startTimeLabel.text = self.timeFormatter!.stringFromDate(self.sessionStartTime!)
         self.endTimeLabel.text = "---"
         self.displaySessionInfo()
     }
     
-    func updateTimer(timer: NSTimer!)
+    func startTimer()
+    {
+        self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateDuration:", userInfo: nil, repeats: true)
+    }
+    
+    func updateDuration(timer: NSTimer!)
     {
         self.sessionDuration = NSDate().timeIntervalSinceDate(self.sessionStartTime!)
         let durationString = formattedDuration(Int(round(self.sessionDuration!)))
@@ -229,10 +253,10 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     func formattedDuration(seconds: Int) -> String
     {
         var duration = ""
-        let (hrs, min, _) = self.durationSplits(seconds)
+        let (hrs, min, sec) = self.durationSplits(seconds)
         if hrs < 10 { duration = "0" }
         duration.appendContentsOf("\(hrs)")
-        duration.appendContentsOf(":")
+        if (sec % 2) == 0 { duration.appendContentsOf(":") } else { duration.appendContentsOf(" ")}
         if min < 10 { duration.appendContentsOf("0") }
         duration.appendContentsOf("\(min)")
         return duration
@@ -243,14 +267,14 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
     
-    func startTime() -> String
-    {
-        self.sessionStartTime = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .NoStyle
-        formatter.timeStyle = .ShortStyle
-        return formatter.stringFromDate(self.sessionStartTime!)
-    }
+//    func startTime() -> String
+//    {
+//        self.sessionStartTime = NSDate()
+//        let formatter = NSDateFormatter()
+//        formatter.dateStyle = .NoStyle
+//        formatter.timeStyle = .ShortStyle
+//        return formatter.stringFromDate(self.sessionStartTime!)
+//    }
     
     func setMapLocation(coordinates: CLLocationCoordinate2D)
     {
@@ -269,19 +293,37 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     
     // MARK: - End Session
     
-    func endSession()
+    func pauseSession()
+    {
+        self.sessionTimer?.invalidate()
+        self.saveSessionButton.alpha = 1.0
+        self.continueSessionButton.alpha = 1.0
+        self.endSessionButton.alpha = 0.0
+        self.endTimeLabel.text = self.timeFormatter!.stringFromDate(NSDate())
+    }
+    
+    func saveSession()
+    {
+        self.resetSession()
+    }
+    
+    func continueSession()
+    {
+        self.startTimer()
+        self.continueSessionButton.alpha = 0.0
+        self.saveSessionButton.alpha = 0.0
+        self.endSessionButton.alpha = 1.0
+        self.endTimeLabel.text = "---"
+    }
+    
+    func resetSession()
     {
         self.resetViews()
         self.hideSessionInfo()
-        self.sessionTimer?.invalidate()
-        print("Ending Session")
-        print("Venue: \(self.venue!.name)")
-        let durationString = formattedDuration(Int(round(self.sessionDuration!)))
-        print("Duration: \(durationString)")
-        print("Students: tbd")
-        print("Info: \(self.venue)")
     }
 
+    // TODO: - Incomplete Functions
+    
     func userLocation() -> CLLocationCoordinate2D
     {
 //        let coords = (self.mapView.userLocation.location?.coordinate)! as CLLocationCoordinate2D
