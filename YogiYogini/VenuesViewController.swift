@@ -160,6 +160,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     func endSearchAnimation()
     {
         self.activityIndicator.stopAnimating()
-        self.searchBar.alpha = 1.0
+        // TODO: implement a search by venue name
+//        self.searchBar.alpha = 1.0
     }
 }

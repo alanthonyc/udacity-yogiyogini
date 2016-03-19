@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 import MapKit
 import CoreData
-//import CoreLocation
+import CoreLocation
 
 let kVENUES_VIEW_CONTROLLER_ID = "venuesViewController"
 let kEXPLORE_VENUES_DEFAULT_QUERY_PARAM = "Yoga"
 
-class ClassViewController: UIViewController, VenuesControllerDelegate
+class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocationManagerDelegate
 {
     // MARK: - Outlets
     // MARK: --- Session Control
@@ -24,6 +24,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     @IBOutlet weak var endSessionButton: UIButton!
     @IBOutlet weak var saveSessionButton: UIButton!
     @IBOutlet weak var continueSessionButton: UIButton!
+    @IBOutlet weak var deleteSessionButton: UIButton!
     
     // MARK: --- Map View
     @IBOutlet weak var mapView: MKMapView!
@@ -59,6 +60,8 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     var sessionTimer: NSTimer?
     var sessionDuration: Double?
     var timeFormatter: NSDateFormatter?
+    let locationManager = CLLocationManager()
+    var currentCoords: CLLocationCoordinate2D?
     
     // MARK: - Housekeeping
     
@@ -70,6 +73,13 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.timeFormatter = NSDateFormatter()
         self.timeFormatter!.dateStyle = .NoStyle
         self.timeFormatter!.timeStyle = .ShortStyle
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
     }
 
     override func didReceiveMemoryWarning()
@@ -95,6 +105,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.endSessionButton.alpha = 0
         self.saveSessionButton.alpha = 0
         self.continueSessionButton.alpha = 0
+        self.deleteSessionButton.alpha = 0
         self.checkinButton.alpha = 1.0
         self.startDateBaseView.alpha = 0
         self.endDateBaseView.alpha = 0
@@ -143,7 +154,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         }
     }
     
-    // MARK: - Actions
+    // MARK: - View Actions
     
     @IBAction func checkinButtonTapped()
     {
@@ -163,6 +174,11 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     @IBAction func saveSessionButtonTapped()
     {
         self.saveSession()
+    }
+    
+    @IBAction func deleteSessionButtonTapped()
+    {
+        self.deleteSession()
     }
     
     // MARK: - Venues View Controller
@@ -230,6 +246,30 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.addressBaseView.alpha = 0.8
     }
     
+    func updateDurationLabel(timer: NSTimer!)
+    {
+        self.sessionDuration = NSDate().timeIntervalSinceDate(self.sessionStartTime!)
+        let durationString = formattedDuration(Int(round(self.sessionDuration!)))
+        self.durationLabel.text = "\(durationString)"
+    }
+    
+    func setMapLocation(coordinates: CLLocationCoordinate2D)
+    {
+        let region = MKCoordinateRegionMakeWithDistance(coordinates, 1600, 1600);
+        mapView.setCenterCoordinate(coordinates, animated: true)
+        mapView.setRegion(region, animated: true)
+        
+        if self.venuePin != nil
+        {
+            self.mapView.removeAnnotation(self.venuePin!)
+        }
+        self.venuePin = MKPointAnnotation.init()
+        self.venuePin!.coordinate = coordinates
+        self.mapView.addAnnotation(self.venuePin!)
+    }
+    
+    // MARK: - Session Control
+    
     func startSession()
     {
         self.startTimer()
@@ -240,16 +280,53 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
         self.displaySessionInfo()
     }
     
-    func startTimer()
+    func pauseSession()
     {
-        self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateDuration:", userInfo: nil, repeats: true)
+        self.sessionTimer?.invalidate()
+        self.saveSessionButton.alpha = 1.0
+        self.continueSessionButton.alpha = 1.0
+        self.deleteSessionButton.alpha = 1.0
+        self.endSessionButton.alpha = 0.0
+        self.endTimeLabel.text = self.timeFormatter!.stringFromDate(NSDate())
     }
     
-    func updateDuration(timer: NSTimer!)
+    func saveSession()
     {
-        self.sessionDuration = NSDate().timeIntervalSinceDate(self.sessionStartTime!)
-        let durationString = formattedDuration(Int(round(self.sessionDuration!)))
-        self.durationLabel.text = "\(durationString)"
+        // TODO: save session to model
+        self.resetSession()
+    }
+    
+    func continueSession()
+    {
+        self.startTimer()
+        self.continueSessionButton.alpha = 0.0
+        self.saveSessionButton.alpha = 0.0
+        self.endSessionButton.alpha = 1.0
+        self.deleteSessionButton.alpha = 0.0
+        self.endTimeLabel.text = "---"
+    }
+    
+    func deleteSession()
+    {
+        let alert = UIAlertController.init(title:"Delete Current Session?", message:"This will delete your current session. It will not be saved.", preferredStyle: UIAlertControllerStyle.Alert)
+        let deleteAction = UIAlertAction.init(title: "Delete Session", style: UIAlertActionStyle.Destructive, handler: { (alert: UIAlertAction!) in self.resetSession() })
+        alert.addAction(deleteAction)
+        let continueAction = UIAlertAction.init(title: "Return to Session", style: UIAlertActionStyle.Cancel, handler: { (alert: UIAlertAction!) in self.continueSession() })
+        alert.addAction(continueAction)
+        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func resetSession()
+    {
+        self.resetViews()
+        self.hideSessionInfo()
+    }
+    
+    // MARK: - Utilities
+    
+    func startTimer()
+    {
+        self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateDurationLabel:", userInfo: nil, repeats: true)
     }
     
     func formattedDuration(seconds: Int) -> String
@@ -268,70 +345,19 @@ class ClassViewController: UIViewController, VenuesControllerDelegate
     {
         return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
-    
-//    func startTime() -> String
-//    {
-//        self.sessionStartTime = NSDate()
-//        let formatter = NSDateFormatter()
-//        formatter.dateStyle = .NoStyle
-//        formatter.timeStyle = .ShortStyle
-//        return formatter.stringFromDate(self.sessionStartTime!)
-//    }
-    
-    func setMapLocation(coordinates: CLLocationCoordinate2D)
-    {
-        let region = MKCoordinateRegionMakeWithDistance(coordinates, 1600, 1600);
-        mapView.setCenterCoordinate(coordinates, animated: true)
-        mapView.setRegion(region, animated: true)
-        
-        if self.venuePin != nil
-        {
-            self.mapView.removeAnnotation(self.venuePin!)
-        }
-        self.venuePin = MKPointAnnotation.init()
-        self.venuePin!.coordinate = coordinates
-        self.mapView.addAnnotation(self.venuePin!)
-    }
-    
-    // MARK: - End Session
-    
-    func pauseSession()
-    {
-        self.sessionTimer?.invalidate()
-        self.saveSessionButton.alpha = 1.0
-        self.continueSessionButton.alpha = 1.0
-        self.endSessionButton.alpha = 0.0
-        self.endTimeLabel.text = self.timeFormatter!.stringFromDate(NSDate())
-    }
-    
-    func saveSession()
-    {
-        self.resetSession()
-    }
-    
-    func continueSession()
-    {
-        self.startTimer()
-        self.continueSessionButton.alpha = 0.0
-        self.saveSessionButton.alpha = 0.0
-        self.endSessionButton.alpha = 1.0
-        self.endTimeLabel.text = "---"
-    }
-    
-    func resetSession()
-    {
-        self.resetViews()
-        self.hideSessionInfo()
-    }
 
-    // TODO: - Incomplete Functions
+    // MARK: - Location Manager
+
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation)
+    {
+        self.currentCoords = newLocation.coordinate
+    }
     
     func userLocation() -> CLLocationCoordinate2D
     {
-//        let coords = (self.mapView.userLocation.location?.coordinate)! as CLLocationCoordinate2D
-//        return CLLocationCoordinate2DMake(37.840364268076, -122.25142211) // Namaste
-//        return CLLocationCoordinate2DMake(37.8044444, -122.2697222) // Oakland City
-        return CLLocationCoordinate2DMake(33.8622400, -118.3995200) // Hermosa Beach
+        let location = self.locationManager.location
+        let coords = location?.coordinate
+        return coords!
     }
 }
 

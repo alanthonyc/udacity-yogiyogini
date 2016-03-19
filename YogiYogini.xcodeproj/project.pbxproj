@@ -18,6 +18,7 @@
 		6B4B168C1C854C18007A3576 /* YogiYoginiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B168B1C854C18007A3576 /* YogiYoginiUITests.swift */; };
 		6B5B0B161C88280F0037470C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5B0B151C88280F0037470C /* MapKit.framework */; };
 		6B7A1BFF1C8EB58E00C9C8C7 /* VenuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */; };
+		6B7FF8E41C9D1757004C1880 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B7FF8E31C9D1757004C1880 /* CoreLocation.framework */; };
 		6B822F0E1C8F928E0051285A /* YogiYogini.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B822F0C1C8F928E0051285A /* YogiYogini.xcdatamodeld */; };
 		6B822F121C8F935A0051285A /* Venue+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B822F101C8F935A0051285A /* Venue+CoreDataProperties.swift */; };
 		6B822F131C8F935A0051285A /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B822F111C8F935A0051285A /* Venue.swift */; };
@@ -62,6 +63,7 @@
 		6B4B168D1C854C18007A3576 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B5B0B151C88280F0037470C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesViewController.swift; sourceTree = "<group>"; };
+		6B7FF8E31C9D1757004C1880 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6B822F0D1C8F928E0051285A /* YogiYogini.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YogiYogini.xcdatamodel; sourceTree = "<group>"; };
 		6B822F101C8F935A0051285A /* Venue+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Venue+CoreDataProperties.swift"; path = "Model/Venue+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6B822F111C8F935A0051285A /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Venue.swift; path = Model/Venue.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B7FF8E41C9D1757004C1880 /* CoreLocation.framework in Frameworks */,
 				6B5B0B161C88280F0037470C /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +103,7 @@
 		6B4B165D1C854C18007A3576 = {
 			isa = PBXGroup;
 			children = (
+				6B7FF8E31C9D1757004C1880 /* CoreLocation.framework */,
 				6B5B0B151C88280F0037470C /* MapKit.framework */,
 				6B4B16681C854C18007A3576 /* YogiYogini */,
 				6B4B167F1C854C18007A3576 /* YogiYoginiTests */,
