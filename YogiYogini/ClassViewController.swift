@@ -109,7 +109,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.checkinButton.alpha = 1.0
         self.startDateBaseView.alpha = 0
         self.endDateBaseView.alpha = 0
-        self.durationLabel.text = self.formattedDuration(0)
+        self.durationLabel.text = "00:00"
         
         // TODO: this should automatically update with student count
         // - probably an frc object
@@ -246,13 +246,6 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.addressBaseView.alpha = 0.8
     }
     
-    func updateDurationLabel(timer: NSTimer!)
-    {
-        self.sessionDuration = NSDate().timeIntervalSinceDate(self.sessionStartTime!)
-        let durationString = formattedDuration(Int(round(self.sessionDuration!)))
-        self.durationLabel.text = "\(durationString)"
-    }
-    
     func setMapLocation(coordinates: CLLocationCoordinate2D)
     {
         let region = MKCoordinateRegionMakeWithDistance(coordinates, 1600, 1600);
@@ -329,21 +322,14 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateDurationLabel:", userInfo: nil, repeats: true)
     }
     
-    func formattedDuration(seconds: Int) -> String
+    func updateDurationLabel(timer: NSTimer!)
     {
-        var duration = ""
-        let (hrs, min, sec) = self.durationSplits(seconds)
-        if hrs < 10 { duration = "0" }
-        duration.appendContentsOf("\(hrs)")
-        if (sec % 2) == 0 { duration.appendContentsOf(":") } else { duration.appendContentsOf(" ")}
-        if min < 10 { duration.appendContentsOf("0") }
-        duration.appendContentsOf("\(min)")
-        return duration
-    }
-    
-    func durationSplits(seconds : Int) -> (Int, Int, Int)
-    {
-        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+        self.sessionDuration = NSDate().timeIntervalSinceDate(self.sessionStartTime!)
+        let duration = Seconds(value: self.sessionDuration!)
+        var colon = ":"
+        if round(self.sessionDuration! % 2) == 0 { colon = " " }
+        let (h, m, _) = duration.components()
+        self.durationLabel.text = "\(h.paddedString)\(colon)\(m.paddedString)"
     }
 
     // MARK: - Location Manager
