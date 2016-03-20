@@ -440,11 +440,11 @@
                         <outlet property="endDateBaseView" destination="Vh1-ty-krh" id="oLB-v1-7aS"/>
                         <outlet property="endDateLabel" destination="CPd-L9-XO1" id="BtT-Dw-RFE"/>
                         <outlet property="endMonthLabel" destination="lUD-yP-INN" id="PUz-E1-Q9c"/>
-                        <outlet property="endSessionButton" destination="LY1-De-IwX" id="l7Q-Pl-GIr"/>
                         <outlet property="endTimeBaseView" destination="qhp-5c-U86" id="V0f-ZA-yFv"/>
                         <outlet property="endTimeLabel" destination="S6F-8l-HqR" id="K8c-Dd-OiW"/>
                         <outlet property="locationBaseView" destination="Kze-HU-bEU" id="aMR-cC-NKh"/>
                         <outlet property="mapView" destination="pz8-xS-ci1" id="KUe-wV-Mhv"/>
+                        <outlet property="pauseSessionButton" destination="LY1-De-IwX" id="Z7h-JF-Xfp"/>
                         <outlet property="saveSessionButton" destination="c98-kS-Z1m" id="Nbb-UW-yiq"/>
                         <outlet property="sessionInfoBaseView" destination="n9Y-cX-N9F" id="se9-T6-kqq"/>
                         <outlet property="startDateBaseView" destination="lUq-Q9-DOB" id="92g-oh-Vog"/>

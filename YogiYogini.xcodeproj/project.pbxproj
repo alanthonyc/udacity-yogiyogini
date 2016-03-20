@@ -69,7 +69,7 @@
 		6B822F101C8F935A0051285A /* Venue+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Venue+CoreDataProperties.swift"; path = "Model/Venue+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6B822F111C8F935A0051285A /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Venue.swift; path = Model/Venue.swift; sourceTree = "<group>"; };
 		6B822F141C8F939A0051285A /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataManager.swift; path = Model/CoreDataManager.swift; sourceTree = "<group>"; };
-		6B9B20B71C9DF8C800B314C4 /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Time.swift; path = YogiYogini/Time.swift; sourceTree = "<group>"; };
+		6B9B20B71C9DF8C800B314C4 /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		6BD14FBA1C8FE56700C76F06 /* VenueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueTableViewCell.swift; sourceTree = "<group>"; };
 		6BD14FBB1C8FE56700C76F06 /* VenueTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueTableViewCell.xib; sourceTree = "<group>"; };
 		6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursquareAPI.swift; sourceTree = "<group>"; };
@@ -105,7 +105,6 @@
 		6B4B165D1C854C18007A3576 = {
 			isa = PBXGroup;
 			children = (
-				6B9B20B71C9DF8C800B314C4 /* Time.swift */,
 				6B7FF8E31C9D1757004C1880 /* CoreLocation.framework */,
 				6B5B0B151C88280F0037470C /* MapKit.framework */,
 				6B4B16681C854C18007A3576 /* YogiYogini */,
@@ -139,6 +138,7 @@
 				6B4B166F1C854C18007A3576 /* Main.storyboard */,
 				6B4B16721C854C18007A3576 /* Assets.xcassets */,
 				6B4B16741C854C18007A3576 /* LaunchScreen.storyboard */,
+				6B9B20B71C9DF8C800B314C4 /* Time.swift */,
 				6B822F0F1C8F92930051285A /* Model */,
 				6B4B16771C854C18007A3576 /* Info.plist */,
 			);

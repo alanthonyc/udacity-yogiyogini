@@ -21,7 +21,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     // MARK: --- Session Control
     @IBOutlet weak var checkinButtonBaseView: UIView!
     @IBOutlet weak var checkinButton: UIButton!
-    @IBOutlet weak var endSessionButton: UIButton!
+    @IBOutlet weak var pauseSessionButton: UIButton!
     @IBOutlet weak var saveSessionButton: UIButton!
     @IBOutlet weak var continueSessionButton: UIButton!
     @IBOutlet weak var deleteSessionButton: UIButton!
@@ -102,7 +102,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     {
         self.clearYogaStudio()
         self.hideSessionInfo()
-        self.endSessionButton.alpha = 0
+        self.pauseSessionButton.alpha = 0
         self.saveSessionButton.alpha = 0
         self.continueSessionButton.alpha = 0
         self.deleteSessionButton.alpha = 0
@@ -223,7 +223,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     
     func returnSelectedVenue(venue: VenueInfo)
     {
-        self.endSessionButton.alpha = 1.0
+        self.pauseSessionButton.alpha = 1.0
         self.checkinButton.alpha = 0.0
         self.dismissViewControllerAnimated(true, completion:
         {
@@ -265,12 +265,21 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     
     func startSession()
     {
-        self.startTimer()
         self.setYogaStudio()
         self.sessionStartTime = NSDate()
-        self.startTimeLabel.text = self.timeFormatter!.stringFromDate(self.sessionStartTime!)
-        self.endTimeLabel.text = "---"
         self.displaySessionInfo()
+        self.startTimeLabel.text = self.timeFormatter!.stringFromDate(self.sessionStartTime!)
+        self.continueSession()
+    }
+    
+    func continueSession()
+    {
+        self.startTimer()
+        self.continueSessionButton.alpha = 0.0
+        self.saveSessionButton.alpha = 0.0
+        self.pauseSessionButton.alpha = 1.0
+        self.deleteSessionButton.alpha = 0.0
+        self.endTimeLabel.text = "---"
     }
     
     func pauseSession()
@@ -279,7 +288,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.saveSessionButton.alpha = 1.0
         self.continueSessionButton.alpha = 1.0
         self.deleteSessionButton.alpha = 1.0
-        self.endSessionButton.alpha = 0.0
+        self.pauseSessionButton.alpha = 0.0
         self.endTimeLabel.text = self.timeFormatter!.stringFromDate(NSDate())
     }
     
@@ -287,16 +296,6 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     {
         // TODO: save session to model
         self.resetSession()
-    }
-    
-    func continueSession()
-    {
-        self.startTimer()
-        self.continueSessionButton.alpha = 0.0
-        self.saveSessionButton.alpha = 0.0
-        self.endSessionButton.alpha = 1.0
-        self.deleteSessionButton.alpha = 0.0
-        self.endTimeLabel.text = "---"
     }
     
     func deleteSession()
@@ -326,10 +325,10 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     {
         self.sessionDuration = NSDate().timeIntervalSinceDate(self.sessionStartTime!)
         let duration = Seconds(value: self.sessionDuration!)
-        var colon = ":"
-        if round(self.sessionDuration! % 2) == 0 { colon = " " }
+        var flasher = ":"
+        if round(self.sessionDuration! % 2) == 0 { flasher = " " }
         let (h, m, _) = duration.components()
-        self.durationLabel.text = "\(h.paddedString)\(colon)\(m.paddedString)"
+        self.durationLabel.text = "\(h.paddedString)\(flasher)\(m.paddedString)"
     }
 
     // MARK: - Location Manager
