@@ -80,7 +80,8 @@ class SessionsViewController: UITableViewController, NSFetchedResultsControllerD
     {
         let request = NSFetchRequest(entityName: kENTITY_NAME_SESSION)
         request.predicate = NSPredicate(format: "id != ''")
-        request.sortDescriptors = []
+        let dateSortDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
+        request.sortDescriptors = [dateSortDescriptor,]
         request.fetchBatchSize = 0
         
         let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)

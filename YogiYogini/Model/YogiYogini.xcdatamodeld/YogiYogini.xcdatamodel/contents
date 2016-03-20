@@ -18,10 +18,10 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="searchSortOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="selectedForSearch" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="sessions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="venue" inverseEntity="Session" syncable="YES"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="venue" inverseEntity="Session" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Venue" positionX="-63" positionY="-18" width="128" height="225"/>
         <element name="Session" positionX="-63" positionY="63" width="128" height="105"/>
+        <element name="Venue" positionX="-63" positionY="-18" width="128" height="225"/>
     </elements>
 </model>

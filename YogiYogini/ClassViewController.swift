@@ -341,8 +341,8 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.sessionDuration = NSDate().timeIntervalSinceDate(self.sessionStartTime!)
         let duration = Seconds(value: self.sessionDuration!)
         var flasher = ":"
-        if round(self.sessionDuration! % 2) == 0 { flasher = " " }
-        let (h, m, _) = duration.components()
+        let (h, m, s) = duration.components()
+        if round(s.asDouble % 2) != 0 { flasher = " " }
         self.durationLabel.text = "\(h.paddedString)\(flasher)\(m.paddedString)"
     }
 

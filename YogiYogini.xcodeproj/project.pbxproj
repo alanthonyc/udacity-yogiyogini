@@ -17,6 +17,8 @@
 		6B4B16811C854C18007A3576 /* YogiYoginiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B16801C854C18007A3576 /* YogiYoginiTests.swift */; };
 		6B4B168C1C854C18007A3576 /* YogiYoginiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B168B1C854C18007A3576 /* YogiYoginiUITests.swift */; };
 		6B5B0B161C88280F0037470C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5B0B151C88280F0037470C /* MapKit.framework */; };
+		6B71AA3B1C9F5709000B0C1C /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B71AA391C9F5709000B0C1C /* SessionTableViewCell.swift */; };
+		6B71AA3C1C9F5709000B0C1C /* SessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B71AA3A1C9F5709000B0C1C /* SessionTableViewCell.xib */; };
 		6B7A1BFF1C8EB58E00C9C8C7 /* VenuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */; };
 		6B7FF8E41C9D1757004C1880 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B7FF8E31C9D1757004C1880 /* CoreLocation.framework */; };
 		6B822F0E1C8F928E0051285A /* YogiYogini.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B822F0C1C8F928E0051285A /* YogiYogini.xcdatamodeld */; };
@@ -65,6 +67,8 @@
 		6B4B168B1C854C18007A3576 /* YogiYoginiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogiYoginiUITests.swift; sourceTree = "<group>"; };
 		6B4B168D1C854C18007A3576 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B5B0B151C88280F0037470C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6B71AA391C9F5709000B0C1C /* SessionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
+		6B71AA3A1C9F5709000B0C1C /* SessionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionTableViewCell.xib; sourceTree = "<group>"; };
 		6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesViewController.swift; sourceTree = "<group>"; };
 		6B7FF8E31C9D1757004C1880 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6B822F0D1C8F928E0051285A /* YogiYogini.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YogiYogini.xcdatamodel; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 				6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */,
 				6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */,
 				6BD14FBA1C8FE56700C76F06 /* VenueTableViewCell.swift */,
+				6B71AA391C9F5709000B0C1C /* SessionTableViewCell.swift */,
+				6B71AA3A1C9F5709000B0C1C /* SessionTableViewCell.xib */,
 				6BD14FBB1C8FE56700C76F06 /* VenueTableViewCell.xib */,
 				6B4B166F1C854C18007A3576 /* Main.storyboard */,
 				6B4B16721C854C18007A3576 /* Assets.xcassets */,
@@ -285,6 +291,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B71AA3C1C9F5709000B0C1C /* SessionTableViewCell.xib in Resources */,
 				6B4B16761C854C18007A3576 /* LaunchScreen.storyboard in Resources */,
 				6BD14FBD1C8FE56700C76F06 /* VenueTableViewCell.xib in Resources */,
 				6B4B16731C854C18007A3576 /* Assets.xcassets in Resources */,
@@ -325,6 +332,7 @@
 				6BE522D21C8940BE00C299F2 /* FoursquareAPI.swift in Sources */,
 				6B7A1BFF1C8EB58E00C9C8C7 /* VenuesViewController.swift in Sources */,
 				6B822F151C8F939A0051285A /* CoreDataManager.swift in Sources */,
+				6B71AA3B1C9F5709000B0C1C /* SessionTableViewCell.swift in Sources */,
 				6B822F0E1C8F928E0051285A /* YogiYogini.xcdatamodeld in Sources */,
 				6B4B166C1C854C18007A3576 /* SessionsViewController.swift in Sources */,
 			);
