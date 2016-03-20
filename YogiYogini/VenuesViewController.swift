@@ -14,7 +14,7 @@ private let kVENUE_CELL_ID = "VenueCellIdentifier"
 protocol VenuesControllerDelegate
 {
     func closeVenuesController()
-    func returnSelectedVenue(venue: VenueInfo)
+    func returnSelectedVenue(venue: VenueInfo, v: Venue)
 }
 
 class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate
@@ -143,7 +143,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         let latitude = (venue.latitude ?? 0.0) as Double
         let longitude = (venue.longitude ?? 0.0) as Double
         let v = VenueInfo(id: id, name: name, address: address, city: city, latitude: latitude, longitude: longitude)
-        self.delegate?.returnSelectedVenue(v)
+        self.delegate?.returnSelectedVenue(v, v: venue)
     }
     
     // MARK: - Controller Actions

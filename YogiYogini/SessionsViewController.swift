@@ -7,17 +7,103 @@
 //
 
 import UIKit
+import CoreData
 
-class SessionsViewController: UIViewController
+class SessionsViewController: UITableViewController, NSFetchedResultsControllerDelegate
 {
+    // MARK: - Properties
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        frc.delegate = self
+        do {
+            try frc.performFetch()
+        } catch {
+            print("Error performing fetch.")
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        do {
+            try frc.performFetch()
+        } catch {
+            print("Error performing fetch.")
+        }
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        let itemCount = self.frc.fetchedObjects!.count
+        if itemCount > 0 {
+            return itemCount
+        }
+        return 0
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCellWithIdentifier("SessionCell", forIndexPath: indexPath)
+        let session = self.frc.objectAtIndexPath(indexPath) as! Session
+        let venue = session.venue
+        cell.textLabel?.text = (venue?.name ?? "")
+        cell.detailTextLabel?.text = (venue?.address ?? "")
+        return cell;
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    // MARK: - NSFetchedResultsController
+    
+    lazy var frc: NSFetchedResultsController =
+    {
+        let request = NSFetchRequest(entityName: kENTITY_NAME_SESSION)
+        request.predicate = NSPredicate(format: "id != ''")
+        request.sortDescriptors = []
+        request.fetchBatchSize = 0
+        
+        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
+        return controller
+    } ()
+    
+    lazy var moc =
+    {
+        CoreDataManager.sharedInstance().managedObjectContext
+    } ()
+    
+    func saveMoc()
+    {
+        dispatch_async(dispatch_get_main_queue())
+        {
+            () -> Void in
+            do {
+                try self.moc.save()
+                
+            } catch let error as NSError {
+                print("error saving moc: \(error)")
+            }
+        }
     }
 }
 

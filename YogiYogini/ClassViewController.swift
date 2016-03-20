@@ -55,6 +55,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     
     var venuesViewController: VenuesViewController?
     var venue: VenueInfo?
+    var vObject: Venue?
     var venuePin: MKPointAnnotation?
     var sessionStartTime: NSDate?
     var sessionTimer: NSTimer?
@@ -90,6 +91,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     func resetVenue()
     {
         self.venue = VenueInfo(id: "", name: "", address: "", city: "", latitude: 0.0, longitude: 0.0)
+        self.vObject = nil
     }
     
     func configureViews()
@@ -221,8 +223,9 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func returnSelectedVenue(venue: VenueInfo)
+    func returnSelectedVenue(venue: VenueInfo, v: Venue)
     {
+        self.vObject = v
         self.pauseSessionButton.alpha = 1.0
         self.checkinButton.alpha = 0.0
         self.dismissViewControllerAnimated(true, completion:
@@ -301,10 +304,12 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     func createSessionEntity()
     {
         let sessionEntity = NSEntityDescription.entityForName(kENTITY_NAME_SESSION, inManagedObjectContext: self.moc)
-        let s = (NSManagedObject(entity: sessionEntity!, insertIntoManagedObjectContext: self.moc) as! Session)
-        s.setValue(self.venue!.id, forKey: Session.Keys.Id)
+        let s =     (NSManagedObject(entity: sessionEntity!, insertIntoManagedObjectContext: self.moc) as! Session)
+        let uuid = NSUUID().UUIDString
+        s.setValue(uuid, forKey: Session.Keys.Id)
         s.setValue(self.sessionStartTime!, forKey: Session.Keys.StartDate)
         s.setValue(NSDate(), forKey: Session.Keys.EndDate)
+        s.setValue(self.vObject, forKey: Session.Keys.Venue)
         self.saveMoc()
     }
     
