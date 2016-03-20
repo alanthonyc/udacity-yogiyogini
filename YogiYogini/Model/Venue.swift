@@ -13,6 +13,7 @@ let kENTITY_NAME_VENUE = "Venue"
 
 struct VenueInfo
 {
+    let id: String
     let name: String
     let address: String
     let city: String

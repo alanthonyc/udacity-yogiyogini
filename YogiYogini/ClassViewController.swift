@@ -89,7 +89,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     
     func resetVenue()
     {
-        self.venue = VenueInfo(name: "", address: "", city: "", latitude: 0.0, longitude: 0.0)
+        self.venue = VenueInfo(id: "", name: "", address: "", city: "", latitude: 0.0, longitude: 0.0)
     }
     
     func configureViews()
@@ -294,8 +294,18 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     
     func saveSession()
     {
-        // TODO: save session to model
+        createSessionEntity()
         self.resetSession()
+    }
+    
+    func createSessionEntity()
+    {
+        let sessionEntity = NSEntityDescription.entityForName(kENTITY_NAME_SESSION, inManagedObjectContext: self.moc)
+        let s = (NSManagedObject(entity: sessionEntity!, insertIntoManagedObjectContext: self.moc) as! Session)
+        s.setValue(self.venue!.id, forKey: Session.Keys.Id)
+        s.setValue(self.sessionStartTime!, forKey: Session.Keys.StartDate)
+        s.setValue(NSDate(), forKey: Session.Keys.EndDate)
+        self.saveMoc()
     }
     
     func deleteSession()

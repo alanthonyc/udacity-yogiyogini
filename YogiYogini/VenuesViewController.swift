@@ -135,13 +135,14 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     {
         let venue = self.frc.objectAtIndexPath(indexPath) as! Venue
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
+
+        let id = (venue.id ?? "")
         let name = (venue.name ?? "")
         let address = (venue.address ?? "")
         let city = (venue.city ?? "")
         let latitude = (venue.latitude ?? 0.0) as Double
         let longitude = (venue.longitude ?? 0.0) as Double
-        let v = VenueInfo(name: name, address: address, city: city, latitude: latitude, longitude: longitude)
+        let v = VenueInfo(id: id, name: name, address: address, city: city, latitude: latitude, longitude: longitude)
         self.delegate?.returnSelectedVenue(v)
     }
     
