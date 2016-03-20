@@ -15,8 +15,8 @@ protocol Time
 {
     var asDouble: Double { get }
     var inSeconds: Double { get }
-    var inMinutes: Minutes { get }
-    var inHours: Hours { get }
+    var inMinutes: Double { get }
+    var inHours: Double { get }
     var string: String { get }
     var paddedString: String { get }
     
@@ -42,19 +42,19 @@ struct Hours: Time
         return value
     }
     
-    var inMinutes: Minutes
+    var inMinutes: Double
     {
-        return Minutes(value: floor(value / 60))
+        return floor(value / 60)
     }
     
-    var inHours: Hours
+    var inHours: Double
     {
-        return Hours(value: floor(value / 3600))
+        return floor(value / 3600)
     }
     
     var string: String
     {
-        return "\(Int(inHours.asDouble))"
+        return "\(Int(inHours))"
     }
     
     var paddedString: String
@@ -88,19 +88,19 @@ struct Minutes: Time
         return value
     }
     
-    var inMinutes: Minutes
+    var inMinutes: Double
     {
-        return Minutes(value: floor(value / 60))
+        return floor(value / 60)
     }
     
-    var inHours: Hours
+    var inHours: Double
     {
-        return Hours(value: floor(value / 3600))
+        return floor(value / 3600)
     }
     
     var string: String
     {
-        return "\(Int(inMinutes.asDouble))"
+        return "\(Int(inMinutes))"
     }
     
     var paddedString: String
@@ -129,14 +129,14 @@ struct Seconds: Time
         return value
     }
     
-    var inMinutes: Minutes
+    var inMinutes: Double
     {
-        return Minutes(value: floor(value / 60))
+        return floor(value / 60)
     }
     
-    var inHours: Hours
+    var inHours: Double
     {
-        return Hours(value: floor(value / 3600))
+        return floor(value / 3600)
     }
     
     var string: String
@@ -182,11 +182,11 @@ extension Int
 {
     var hours: Time
     {
-        return Seconds(value: Double(self)).inHours
+        return Hours(value: Double(self))
     }
     
     var minutes: Time
     {
-        return Seconds(value: Double(self)).inMinutes
+        return Minutes(value: Double(self))
     }
 }
