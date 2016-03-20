@@ -60,19 +60,6 @@ class YogiYoginiTests: XCTestCase
         }
     }
     
-    func testDurationFormatter()
-    {
-        let testSubMinute = 46 // 00:00
-        let testMinute = 73 // 01:00
-        let testHour = 4440 // 1:14
-        let formattedSubMinute = ClassViewController().formattedDuration(testSubMinute)
-        let formattedMinute = ClassViewController().formattedDuration(testMinute)
-        let formattedHour = ClassViewController().formattedDuration(testHour)
-        XCTAssertEqual(formattedSubMinute, "00:00", "Sub minute formatting incorrect: \(formattedSubMinute)")
-        XCTAssertEqual(formattedMinute, "00 01", "One minute formatting incorrect: \(formattedMinute)")
-        XCTAssertEqual(formattedHour, "01:14", "One hour formatting incorrect: \(formattedHour)")
-    }
-    
     func testTimeModuleSeconds()
     {
         let sevenSecs = Seconds(value: 7)
