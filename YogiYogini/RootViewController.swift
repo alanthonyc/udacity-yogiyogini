@@ -14,6 +14,7 @@ class RootViewController: UITabBarController
     {
         super.viewDidLoad()
         self.tabBar.tintColor = UIColorFromRGB(0xfa006f)
+        self.selectedIndex = 1
     }
 
     override func didReceiveMemoryWarning()

@@ -356,7 +356,16 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     func userLocation() -> CLLocationCoordinate2D
     {
         let location = self.locationManager.location
-        let coords = location?.coordinate
+        var coords = location?.coordinate
+        if coords == nil
+        {
+            let alert = UIAlertController.init(title:"Could Not Retrieve Location", message:"Using default location instead.", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let okayAction = UIAlertAction.init(title: "Okay", style: UIAlertActionStyle.Default, handler:nil)
+            alert.addAction(okayAction)
+            UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            coords = CLLocationCoordinate2DMake(37.840364, -122.251422)
+        }
         return coords!
     }
 }

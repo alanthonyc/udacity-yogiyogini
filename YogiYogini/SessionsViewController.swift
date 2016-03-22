@@ -22,6 +22,7 @@ class SessionsViewController: UITableViewController, NSFetchedResultsControllerD
         } catch {
             print("Error performing fetch.")
         }
+        self.tableView.registerNib(UINib(nibName: "SessionTableViewCell", bundle: nil), forCellReuseIdentifier: "SessionCell")
     }
     
     override func viewWillAppear(animated: Bool)
@@ -57,12 +58,22 @@ class SessionsViewController: UITableViewController, NSFetchedResultsControllerD
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SessionCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("SessionCell", forIndexPath: indexPath) as! SessionTableViewCell
         let session = self.frc.objectAtIndexPath(indexPath) as! Session
-        let venue = session.venue
-        cell.textLabel?.text = (venue?.name ?? "")
-        cell.detailTextLabel?.text = (venue?.address ?? "")
+        self.configureCell(cell, session: session)
         return cell;
+    }
+    
+    func configureCell(cell: SessionTableViewCell, session: Session)
+    {
+        let venue = session.venue
+        cell.studioNameLabel.text = (venue!.name ?? "")
+        cell.secondaryInfoLabel.text = (venue!.address ?? "")
+        
+        let timeFormatter = NSDateFormatter()
+        timeFormatter.dateStyle = .MediumStyle
+        timeFormatter.timeStyle = .ShortStyle
+        cell.secondaryInfoLabel.text = timeFormatter.stringFromDate(session.startDate!)
     }
     
     // MARK: - UITableViewDelegate
