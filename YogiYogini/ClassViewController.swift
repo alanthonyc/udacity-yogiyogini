@@ -190,32 +190,35 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.venuesViewController = self.storyboard?.instantiateViewControllerWithIdentifier(kVENUES_VIEW_CONTROLLER_ID) as! VenuesViewController?
         
         let coords = userLocation()
-        let queryParam = kEXPLORE_VENUES_DEFAULT_QUERY_PARAM
-        FoursquareRequestController().exploreVenues(coords.latitude, lon: coords.longitude, query:queryParam,  completion:
-        { (results, error) in
-            if error != nil {
-                print("error in explore api call")
-                // TODO: error condition
-            } else {
-                let meta = results["meta"] as! NSDictionary
-                let venues = results["venues"]
-                for (index, v) in (venues as! NSArray).enumerate()
-                {
-                    guard let venue = v["venue"] else { break } // no venue, skip entry
-                    dispatch_async(dispatch_get_main_queue()) {
-                        VenueManager().saveVenueInfo(index, venue:venue as! NSDictionary, meta: meta)
+        if coords != nil
+        {
+            let queryParam = kEXPLORE_VENUES_DEFAULT_QUERY_PARAM
+            FoursquareRequestController().exploreVenues(coords!.latitude, lon: coords!.longitude, query:queryParam,  completion:
+            { (results, error) in
+                if error != nil {
+                    print("error in explore api call")
+                    // TODO: error condition
+                } else {
+                    let meta = results["meta"] as! NSDictionary
+                    let venues = results["venues"]
+                    for (index, v) in (venues as! NSArray).enumerate()
+                    {
+                        guard let venue = v["venue"] else { break } // no venue, skip entry
+                        dispatch_async(dispatch_get_main_queue()) {
+                            VenueManager().saveVenueInfo(index, venue:venue as! NSDictionary, meta: meta)
+                        }
+                    }
+                    dispatch_async(dispatch_get_main_queue())
+                    {
+                        self.saveMoc()
+                        self.venuesViewController!.reloadFrc()
+                        self.venuesViewController!.endSearchAnimation()
                     }
                 }
-                dispatch_async(dispatch_get_main_queue())
-                {
-                    self.saveMoc()
-                    self.venuesViewController!.reloadFrc()
-                    self.venuesViewController!.endSearchAnimation()
-                }
-            }
-        })
-        venuesViewController!.delegate = self
-        self.presentViewController(venuesViewController!, animated: true, completion: nil)
+            })
+            venuesViewController!.delegate = self
+            self.presentViewController(venuesViewController!, animated: true, completion: nil)
+        }
     }
     
     func closeVenuesController()
@@ -353,20 +356,21 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.currentCoords = newLocation.coordinate
     }
     
-    func userLocation() -> CLLocationCoordinate2D
+    func userLocation() -> CLLocationCoordinate2D?
     {
         let location = self.locationManager.location
-        var coords = location?.coordinate
+        let coords = location?.coordinate
         if coords == nil
         {
-            let alert = UIAlertController.init(title:"Could Not Retrieve Location", message:"Using default location instead.", preferredStyle: UIAlertControllerStyle.Alert)
-            
+            let alert = UIAlertController.init(title:"Location Unavailable", message:"Sorry! I couldn't get your current location. Please check your settings.", preferredStyle: UIAlertControllerStyle.Alert)
             let okayAction = UIAlertAction.init(title: "Okay", style: UIAlertActionStyle.Default, handler:nil)
             alert.addAction(okayAction)
-            UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-            coords = CLLocationCoordinate2DMake(37.840364, -122.251422)
+            self.presentViewController(alert, animated: true, completion: nil)
+            return nil
+            
+        } else {
+            return coords!
         }
-        return coords!
     }
 }
 
