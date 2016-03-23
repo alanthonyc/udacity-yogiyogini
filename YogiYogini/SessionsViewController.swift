@@ -9,9 +9,13 @@
 import UIKit
 import CoreData
 
-class SessionsViewController: UITableViewController, NSFetchedResultsControllerDelegate
-{
+class SessionsViewController: UITableViewController, NSFetchedResultsControllerDelegate, SessionDetailViewDelegateProtocol
+{    
     // MARK: - Properties
+
+    var sessionDetailViewController: SessionDetailViewController!
+    
+    // MARK: - Housekeeping
     
     override func viewDidLoad()
     {
@@ -80,12 +84,19 @@ class SessionsViewController: UITableViewController, NSFetchedResultsControllerD
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
+        self.sessionDetailViewController = self.storyboard?.instantiateViewControllerWithIdentifier(kSESSION_DETAIL_VIEW_CONTROLLER_ID) as! SessionDetailViewController?
+        self.sessionDetailViewController.delegate = self
+        self.sessionDetailViewController.session = self.frc.objectAtIndexPath(indexPath) as! Session
+        self.presentViewController(self.sessionDetailViewController, animated: true, completion: nil)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    // MARK: - NSFetchedResultsControllerDelegate
+    func closeSessionDetailView()
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
-    // MARK: - NSFetchedResultsController
+    // MARK: - NSFetchedResultsControllerDelegate
     
     lazy var frc: NSFetchedResultsController =
     {

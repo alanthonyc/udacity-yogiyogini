@@ -374,3 +374,4 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     }
 }
 
+// 37.840364, -122.251422

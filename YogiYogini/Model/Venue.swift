@@ -32,6 +32,8 @@ class Venue: NSManagedObject
         static let Latitude = "latitude"
         static let Longitude = "longitude"
         static let City = "city"
+        static let State = "state"
+        static let Country = "country"
         static let LastRequestId = "lastRequestId"
         static let LastUpdateDate = "lastUpdateDate"
         static let SelectedForSearch = "selectedForSearch"
@@ -54,6 +56,8 @@ class Venue: NSManagedObject
         address = dictionary[Keys.Address] as? String
         crossStreet = dictionary[Keys.CrossStreet] as? String
         city = dictionary[Keys.City] as? String
+        state = dictionary[Keys.State] as? String
+        country = dictionary[Keys.Country] as? String
         lastRequestId = dictionary[Keys.LastRequestId] as? String
         lastUpdateDate = dictionary[Keys.LastUpdateDate] as? NSDate
         selectedForSearch = dictionary[Keys.SelectedForSearch] as? NSNumber
@@ -80,6 +84,8 @@ class VenueManager: NSObject
             v!.setValue("<no value>", forKey: Venue.Keys.Address)
             v!.setValue("<no value>", forKey: Venue.Keys.CrossStreet)
             v!.setValue("<no value>", forKey: Venue.Keys.City)
+            v!.setValue("<no value>", forKey: Venue.Keys.State)
+            v!.setValue("<no value>", forKey: Venue.Keys.Country)
         }
         v!.setValue(today, forKey: Venue.Keys.LastUpdateDate)
         v!.setValue(requestId, forKey: Venue.Keys.LastRequestId)
@@ -96,11 +102,15 @@ class VenueManager: NSObject
         let address = location["address"]
         let crossStreet = location["crossStreet"]
         let city = location["city"]
+        let state = location["state"]
+        let country = location["country"]
         let latitude = location["lat"]
         let longitude = location["lng"]
         v!.setValue(address, forKey: Venue.Keys.Address)
         v!.setValue(crossStreet, forKey: Venue.Keys.CrossStreet)
         v!.setValue(city, forKey: Venue.Keys.City)
+        v!.setValue(state, forKey: Venue.Keys.State)
+        v!.setValue(country, forKey: Venue.Keys.Country)
         v!.setValue(latitude, forKey: Venue.Keys.Latitude)
         v!.setValue(longitude, forKey: Venue.Keys.Longitude)
     }

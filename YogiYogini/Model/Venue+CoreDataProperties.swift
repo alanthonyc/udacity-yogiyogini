@@ -21,6 +21,8 @@ extension Venue
     @NSManaged var longitude: NSNumber?
     @NSManaged var latitude: NSNumber?
     @NSManaged var city: String?
+    @NSManaged var state: String?
+    @NSManaged var country: String?
     @NSManaged var lastRequestId: String?
     @NSManaged var lastUpdateDate: NSDate?
     @NSManaged var selectedForSearch: NSNumber?
