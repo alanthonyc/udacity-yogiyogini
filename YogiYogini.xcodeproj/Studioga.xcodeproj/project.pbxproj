@@ -1,0 +1,607 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6B150B411C96956500D2DDEB /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B150B401C96956500D2DDEB /* RootViewController.swift */; };
+		6B4B166A1C854C18007A3576 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B16691C854C18007A3576 /* AppDelegate.swift */; };
+		6B4B166C1C854C18007A3576 /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B166B1C854C18007A3576 /* SessionsViewController.swift */; };
+		6B4B166E1C854C18007A3576 /* ClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B166D1C854C18007A3576 /* ClassViewController.swift */; };
+		6B4B16711C854C18007A3576 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B4B166F1C854C18007A3576 /* Main.storyboard */; };
+		6B4B16731C854C18007A3576 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B4B16721C854C18007A3576 /* Assets.xcassets */; };
+		6B4B16761C854C18007A3576 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B4B16741C854C18007A3576 /* LaunchScreen.storyboard */; };
+		6B4B16811C854C18007A3576 /* YogiYoginiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B16801C854C18007A3576 /* YogiYoginiTests.swift */; };
+		6B4B168C1C854C18007A3576 /* YogiYoginiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B168B1C854C18007A3576 /* YogiYoginiUITests.swift */; };
+		6B5B0B161C88280F0037470C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5B0B151C88280F0037470C /* MapKit.framework */; };
+		6B71AA3B1C9F5709000B0C1C /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B71AA391C9F5709000B0C1C /* SessionTableViewCell.swift */; };
+		6B71AA3C1C9F5709000B0C1C /* SessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B71AA3A1C9F5709000B0C1C /* SessionTableViewCell.xib */; };
+		6B7A1BFF1C8EB58E00C9C8C7 /* VenuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */; };
+		6B7FF8E41C9D1757004C1880 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B7FF8E31C9D1757004C1880 /* CoreLocation.framework */; };
+		6B822F0E1C8F928E0051285A /* YogiYogini.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B822F0C1C8F928E0051285A /* YogiYogini.xcdatamodeld */; };
+		6B822F121C8F935A0051285A /* Venue+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B822F101C8F935A0051285A /* Venue+CoreDataProperties.swift */; };
+		6B822F131C8F935A0051285A /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B822F111C8F935A0051285A /* Venue.swift */; };
+		6B822F151C8F939A0051285A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B822F141C8F939A0051285A /* CoreDataManager.swift */; };
+		6B9B20B81C9DF8C800B314C4 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B20B71C9DF8C800B314C4 /* Time.swift */; };
+		6BB203D61C9E953B007CD0D2 /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB203D41C9E953B007CD0D2 /* Session+CoreDataProperties.swift */; };
+		6BB203D71C9E953B007CD0D2 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB203D51C9E953B007CD0D2 /* Session.swift */; };
+		6BD14FBC1C8FE56700C76F06 /* VenueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD14FBA1C8FE56700C76F06 /* VenueTableViewCell.swift */; };
+		6BD14FBD1C8FE56700C76F06 /* VenueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BD14FBB1C8FE56700C76F06 /* VenueTableViewCell.xib */; };
+		6BE522D21C8940BE00C299F2 /* FoursquareAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */; };
+		6BEED32C1CA1F1B000EADC61 /* SessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEED32B1CA1F1B000EADC61 /* SessionDetailViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6B4B167D1C854C18007A3576 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B4B165E1C854C18007A3576 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6B4B16651C854C18007A3576;
+			remoteInfo = YogiYogini;
+		};
+		6B4B16881C854C18007A3576 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B4B165E1C854C18007A3576 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6B4B16651C854C18007A3576;
+			remoteInfo = YogiYogini;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6B150B401C96956500D2DDEB /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		6B4B16661C854C18007A3576 /* Studioga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studioga.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B4B16691C854C18007A3576 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6B4B166B1C854C18007A3576 /* SessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsViewController.swift; sourceTree = "<group>"; };
+		6B4B166D1C854C18007A3576 /* ClassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassViewController.swift; sourceTree = "<group>"; };
+		6B4B16701C854C18007A3576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6B4B16721C854C18007A3576 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6B4B16751C854C18007A3576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6B4B16771C854C18007A3576 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B4B167C1C854C18007A3576 /* Studioga.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Studioga.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B4B16801C854C18007A3576 /* YogiYoginiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogiYoginiTests.swift; sourceTree = "<group>"; };
+		6B4B16821C854C18007A3576 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B4B16871C854C18007A3576 /* Studioga.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Studioga.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B4B168B1C854C18007A3576 /* YogiYoginiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogiYoginiUITests.swift; sourceTree = "<group>"; };
+		6B4B168D1C854C18007A3576 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B5B0B151C88280F0037470C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6B71AA391C9F5709000B0C1C /* SessionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
+		6B71AA3A1C9F5709000B0C1C /* SessionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionTableViewCell.xib; sourceTree = "<group>"; };
+		6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesViewController.swift; sourceTree = "<group>"; };
+		6B7FF8E31C9D1757004C1880 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6B822F0D1C8F928E0051285A /* YogiYogini.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YogiYogini.xcdatamodel; sourceTree = "<group>"; };
+		6B822F101C8F935A0051285A /* Venue+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Venue+CoreDataProperties.swift"; path = "Model/Venue+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6B822F111C8F935A0051285A /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Venue.swift; path = Model/Venue.swift; sourceTree = "<group>"; };
+		6B822F141C8F939A0051285A /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataManager.swift; path = Model/CoreDataManager.swift; sourceTree = "<group>"; };
+		6B9B20B71C9DF8C800B314C4 /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		6BB203D41C9E953B007CD0D2 /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Session+CoreDataProperties.swift"; path = "Model/Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6BB203D51C9E953B007CD0D2 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Session.swift; path = Model/Session.swift; sourceTree = "<group>"; };
+		6BD14FBA1C8FE56700C76F06 /* VenueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueTableViewCell.swift; sourceTree = "<group>"; };
+		6BD14FBB1C8FE56700C76F06 /* VenueTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueTableViewCell.xib; sourceTree = "<group>"; };
+		6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursquareAPI.swift; sourceTree = "<group>"; };
+		6BEED32B1CA1F1B000EADC61 /* SessionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDetailViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6B4B16631C854C18007A3576 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B7FF8E41C9D1757004C1880 /* CoreLocation.framework in Frameworks */,
+				6B5B0B161C88280F0037470C /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B4B16791C854C18007A3576 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B4B16841C854C18007A3576 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6B4B165D1C854C18007A3576 = {
+			isa = PBXGroup;
+			children = (
+				6B7FF8E31C9D1757004C1880 /* CoreLocation.framework */,
+				6B5B0B151C88280F0037470C /* MapKit.framework */,
+				6B4B16681C854C18007A3576 /* YogiYogini */,
+				6B4B167F1C854C18007A3576 /* YogiYoginiTests */,
+				6B4B168A1C854C18007A3576 /* YogiYoginiUITests */,
+				6B4B16671C854C18007A3576 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6B4B16671C854C18007A3576 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6B4B16661C854C18007A3576 /* Studioga.app */,
+				6B4B167C1C854C18007A3576 /* Studioga.xctest */,
+				6B4B16871C854C18007A3576 /* Studioga.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6B4B16681C854C18007A3576 /* YogiYogini */ = {
+			isa = PBXGroup;
+			children = (
+				6B4B16691C854C18007A3576 /* AppDelegate.swift */,
+				6B150B401C96956500D2DDEB /* RootViewController.swift */,
+				6B4B166B1C854C18007A3576 /* SessionsViewController.swift */,
+				6BEED32B1CA1F1B000EADC61 /* SessionDetailViewController.swift */,
+				6B4B166D1C854C18007A3576 /* ClassViewController.swift */,
+				6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */,
+				6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */,
+				6BD14FBA1C8FE56700C76F06 /* VenueTableViewCell.swift */,
+				6B71AA391C9F5709000B0C1C /* SessionTableViewCell.swift */,
+				6B71AA3A1C9F5709000B0C1C /* SessionTableViewCell.xib */,
+				6BD14FBB1C8FE56700C76F06 /* VenueTableViewCell.xib */,
+				6B4B166F1C854C18007A3576 /* Main.storyboard */,
+				6B4B16721C854C18007A3576 /* Assets.xcassets */,
+				6B4B16741C854C18007A3576 /* LaunchScreen.storyboard */,
+				6B9B20B71C9DF8C800B314C4 /* Time.swift */,
+				6B822F0F1C8F92930051285A /* Model */,
+				6B4B16771C854C18007A3576 /* Info.plist */,
+			);
+			path = YogiYogini;
+			sourceTree = "<group>";
+		};
+		6B4B167F1C854C18007A3576 /* YogiYoginiTests */ = {
+			isa = PBXGroup;
+			children = (
+				6B4B16801C854C18007A3576 /* YogiYoginiTests.swift */,
+				6B4B16821C854C18007A3576 /* Info.plist */,
+			);
+			path = YogiYoginiTests;
+			sourceTree = "<group>";
+		};
+		6B4B168A1C854C18007A3576 /* YogiYoginiUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6B4B168B1C854C18007A3576 /* YogiYoginiUITests.swift */,
+				6B4B168D1C854C18007A3576 /* Info.plist */,
+			);
+			path = YogiYoginiUITests;
+			sourceTree = "<group>";
+		};
+		6B822F0F1C8F92930051285A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6B822F141C8F939A0051285A /* CoreDataManager.swift */,
+				6B822F0C1C8F928E0051285A /* YogiYogini.xcdatamodeld */,
+				6B822F101C8F935A0051285A /* Venue+CoreDataProperties.swift */,
+				6B822F111C8F935A0051285A /* Venue.swift */,
+				6BB203D41C9E953B007CD0D2 /* Session+CoreDataProperties.swift */,
+				6BB203D51C9E953B007CD0D2 /* Session.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6B4B16651C854C18007A3576 /* Studioga */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B4B16901C854C18007A3576 /* Build configuration list for PBXNativeTarget "Studioga" */;
+			buildPhases = (
+				6B4B16621C854C18007A3576 /* Sources */,
+				6B4B16631C854C18007A3576 /* Frameworks */,
+				6B4B16641C854C18007A3576 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Studioga;
+			productName = YogiYogini;
+			productReference = 6B4B16661C854C18007A3576 /* Studioga.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6B4B167B1C854C18007A3576 /* StudiogaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B4B16931C854C18007A3576 /* Build configuration list for PBXNativeTarget "StudiogaTests" */;
+			buildPhases = (
+				6B4B16781C854C18007A3576 /* Sources */,
+				6B4B16791C854C18007A3576 /* Frameworks */,
+				6B4B167A1C854C18007A3576 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6B4B167E1C854C18007A3576 /* PBXTargetDependency */,
+			);
+			name = StudiogaTests;
+			productName = YogiYoginiTests;
+			productReference = 6B4B167C1C854C18007A3576 /* Studioga.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6B4B16861C854C18007A3576 /* StudiogaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B4B16961C854C18007A3576 /* Build configuration list for PBXNativeTarget "StudiogaUITests" */;
+			buildPhases = (
+				6B4B16831C854C18007A3576 /* Sources */,
+				6B4B16841C854C18007A3576 /* Frameworks */,
+				6B4B16851C854C18007A3576 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6B4B16891C854C18007A3576 /* PBXTargetDependency */,
+			);
+			name = StudiogaUITests;
+			productName = YogiYoginiUITests;
+			productReference = 6B4B16871C854C18007A3576 /* Studioga.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6B4B165E1C854C18007A3576 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Alon Consulting";
+				TargetAttributes = {
+					6B4B16651C854C18007A3576 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 8GDU37NS3U;
+					};
+					6B4B167B1C854C18007A3576 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 6B4B16651C854C18007A3576;
+					};
+					6B4B16861C854C18007A3576 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 6B4B16651C854C18007A3576;
+					};
+				};
+			};
+			buildConfigurationList = 6B4B16611C854C18007A3576 /* Build configuration list for PBXProject "Studioga" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6B4B165D1C854C18007A3576;
+			productRefGroup = 6B4B16671C854C18007A3576 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6B4B16651C854C18007A3576 /* Studioga */,
+				6B4B167B1C854C18007A3576 /* StudiogaTests */,
+				6B4B16861C854C18007A3576 /* StudiogaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6B4B16641C854C18007A3576 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B71AA3C1C9F5709000B0C1C /* SessionTableViewCell.xib in Resources */,
+				6B4B16761C854C18007A3576 /* LaunchScreen.storyboard in Resources */,
+				6BD14FBD1C8FE56700C76F06 /* VenueTableViewCell.xib in Resources */,
+				6B4B16731C854C18007A3576 /* Assets.xcassets in Resources */,
+				6B4B16711C854C18007A3576 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B4B167A1C854C18007A3576 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B4B16851C854C18007A3576 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6B4B16621C854C18007A3576 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BB203D71C9E953B007CD0D2 /* Session.swift in Sources */,
+				6B9B20B81C9DF8C800B314C4 /* Time.swift in Sources */,
+				6B4B166E1C854C18007A3576 /* ClassViewController.swift in Sources */,
+				6B822F131C8F935A0051285A /* Venue.swift in Sources */,
+				6B822F121C8F935A0051285A /* Venue+CoreDataProperties.swift in Sources */,
+				6B150B411C96956500D2DDEB /* RootViewController.swift in Sources */,
+				6BEED32C1CA1F1B000EADC61 /* SessionDetailViewController.swift in Sources */,
+				6BD14FBC1C8FE56700C76F06 /* VenueTableViewCell.swift in Sources */,
+				6B4B166A1C854C18007A3576 /* AppDelegate.swift in Sources */,
+				6BB203D61C9E953B007CD0D2 /* Session+CoreDataProperties.swift in Sources */,
+				6BE522D21C8940BE00C299F2 /* FoursquareAPI.swift in Sources */,
+				6B7A1BFF1C8EB58E00C9C8C7 /* VenuesViewController.swift in Sources */,
+				6B822F151C8F939A0051285A /* CoreDataManager.swift in Sources */,
+				6B71AA3B1C9F5709000B0C1C /* SessionTableViewCell.swift in Sources */,
+				6B822F0E1C8F928E0051285A /* YogiYogini.xcdatamodeld in Sources */,
+				6B4B166C1C854C18007A3576 /* SessionsViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B4B16781C854C18007A3576 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B4B16811C854C18007A3576 /* YogiYoginiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B4B16831C854C18007A3576 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B4B168C1C854C18007A3576 /* YogiYoginiUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6B4B167E1C854C18007A3576 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6B4B16651C854C18007A3576 /* Studioga */;
+			targetProxy = 6B4B167D1C854C18007A3576 /* PBXContainerItemProxy */;
+		};
+		6B4B16891C854C18007A3576 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6B4B16651C854C18007A3576 /* Studioga */;
+			targetProxy = 6B4B16881C854C18007A3576 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6B4B166F1C854C18007A3576 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B4B16701C854C18007A3576 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6B4B16741C854C18007A3576 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B4B16751C854C18007A3576 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6B4B168E1C854C18007A3576 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_CODE_COVERAGE = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6B4B168F1C854C18007A3576 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_CODE_COVERAGE = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6B4B16911C854C18007A3576 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = YogiYogini/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alonconsulting.YogiYogini;
+				PRODUCT_NAME = Studioga;
+			};
+			name = Debug;
+		};
+		6B4B16921C854C18007A3576 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = YogiYogini/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alonconsulting.YogiYogini;
+				PRODUCT_NAME = Studioga;
+			};
+			name = Release;
+		};
+		6B4B16941C854C18007A3576 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = YogiYoginiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alonconsulting.YogiYoginiTests;
+				PRODUCT_NAME = Studioga;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Studioga.app/Studioga";
+			};
+			name = Debug;
+		};
+		6B4B16951C854C18007A3576 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = YogiYoginiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alonconsulting.YogiYoginiTests;
+				PRODUCT_NAME = Studioga;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Studioga.app/Studioga";
+			};
+			name = Release;
+		};
+		6B4B16971C854C18007A3576 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = YogiYoginiUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alonconsulting.YogiYoginiUITests;
+				PRODUCT_NAME = Studioga;
+				TEST_TARGET_NAME = YogiYogini;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		6B4B16981C854C18007A3576 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = YogiYoginiUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alonconsulting.YogiYoginiUITests;
+				PRODUCT_NAME = Studioga;
+				TEST_TARGET_NAME = YogiYogini;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6B4B16611C854C18007A3576 /* Build configuration list for PBXProject "Studioga" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B4B168E1C854C18007A3576 /* Debug */,
+				6B4B168F1C854C18007A3576 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6B4B16901C854C18007A3576 /* Build configuration list for PBXNativeTarget "Studioga" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B4B16911C854C18007A3576 /* Debug */,
+				6B4B16921C854C18007A3576 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6B4B16931C854C18007A3576 /* Build configuration list for PBXNativeTarget "StudiogaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B4B16941C854C18007A3576 /* Debug */,
+				6B4B16951C854C18007A3576 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6B4B16961C854C18007A3576 /* Build configuration list for PBXNativeTarget "StudiogaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B4B16971C854C18007A3576 /* Debug */,
+				6B4B16981C854C18007A3576 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6B822F0C1C8F928E0051285A /* YogiYogini.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6B822F0D1C8F928E0051285A /* YogiYogini.xcdatamodel */,
+			);
+			currentVersion = 6B822F0D1C8F928E0051285A /* YogiYogini.xcdatamodel */;
+			name = YogiYogini.xcdatamodeld;
+			path = Model/YogiYogini.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6B4B165E1C854C18007A3576 /* Project object */;
+}
