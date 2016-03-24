@@ -135,7 +135,7 @@ class FoursquareRequestController: NSObject
             "v": kAPI_VERSION,
             "m": kAPI_TYPE,
             "query": name,
-            "categoryId": kYOGA_SEARCH_CATEGORY_ID,
+//            "categoryId": kYOGA_SEARCH_CATEGORY_ID,
         ]
         
         callAPIEndpoint(k4SQ_SEARCH_URL, arguments: methodArguments, apiCompletion: { (json, error) in

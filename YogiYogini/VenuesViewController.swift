@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 private let kVENUE_CELL_ID = "VenueCellIdentifier"
 
@@ -17,7 +18,7 @@ protocol VenuesControllerDelegate
     func returnSelectedVenue(venue: VenueInfo, v: Venue)
 }
 
-class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate
+class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate
 {
     // MARK: - Outlets
     
@@ -28,6 +29,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     // MARK: - Properties
     
     var delegate: VenuesControllerDelegate?
+    var currentLocation: CLLocationCoordinate2D?
     
     // MARK: - Housekeeping
     
@@ -44,18 +46,12 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         frc.delegate = self
         self.reloadFrc()
         self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.startAnimating()
-        self.searchBar.alpha = 0.0
+        self.beginSearchAnimation()
     }
     
     override func viewWillDisappear(animated: Bool)
     {
-        for venue in self.frc.fetchedObjects! as! [Venue!]
-        {
-            venue.selectedForSearch = false
-            venue.searchSortOrder = 0
-        }
-        self.saveMoc()
+        self.deselectAllVenues()
     }
     
     override func didReceiveMemoryWarning()
@@ -108,6 +104,16 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         return controller
     } ()
     
+    func deselectAllVenues()
+    {
+        for venue in self.frc.fetchedObjects! as! [Venue!]
+        {
+            venue.selectedForSearch = false
+            venue.searchSortOrder = 0
+        }
+        self.saveMoc()
+    }
+    
     // MARK: - UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
@@ -158,10 +164,50 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         self.delegate?.closeVenuesController()
     }
     
+    func beginSearchAnimation()
+    {
+        self.activityIndicator.startAnimating()
+        self.searchBar.alpha = 0.0
+    }
+    
     func endSearchAnimation()
     {
         self.activityIndicator.stopAnimating()
-        // TODO: implement a search by venue name
-//        self.searchBar.alpha = 1.0
+        self.searchBar.alpha = 1.0
+    }
+    
+    // MARK: - Search Bar
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar)
+    {
+        self.beginSearchAnimation()
+        self.deselectAllVenues()
+        let searchText = (searchBar.text! ?? "")
+        print("Search term: \(searchText)")
+        
+        FoursquareRequestController().searchYogaVenues((self.currentLocation?.latitude)!, lon: (self.currentLocation?.longitude)!, name: searchText, completion:
+            { (results, error) in
+                if error != nil {
+                    print("error in search api call")
+                    // TODO: error condition
+                } else {
+                    print("ready to parse returned data: \n \(results)")
+//                    let meta = results["meta"] as! NSDictionary
+//                    let venues = results["venues"]
+//                    for (index, v) in (venues as! NSArray).enumerate()
+//                    {
+//                        guard let venue = v["venue"] else { break } // no venue, skip entry
+//                        dispatch_async(dispatch_get_main_queue()) {
+//                            VenueManager().saveVenueInfo(index, venue:venue as! NSDictionary, meta: meta)
+//                        }
+//                    }
+                    dispatch_async(dispatch_get_main_queue())
+                    {
+                        self.saveMoc()
+                        self.reloadFrc()
+                        self.endSearchAnimation()
+                    }
+                }
+            })
     }
 }

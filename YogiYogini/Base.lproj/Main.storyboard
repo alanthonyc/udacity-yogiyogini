@@ -70,7 +70,7 @@
                                 <rect key="frame" x="20" y="143" width="560" height="51.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="coX-39-PPu" userLabel="EndDateBaseView">
-                                        <rect key="frame" x="201" y="0.0" width="62" height="25"/>
+                                        <rect key="frame" x="193" y="0.0" width="62" height="25"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MMM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6B-sU-8uc">
                                                 <rect key="frame" x="0.0" y="4" width="36.5" height="17"/>
@@ -96,7 +96,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S0e-Pq-oxt" userLabel="EndTimeBaseView">
-                                        <rect key="frame" x="192" y="4" width="80" height="39.5"/>
+                                        <rect key="frame" x="184" y="4" width="80" height="39.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="end" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sp7-X6-hBO">
                                                 <rect key="frame" x="28" y="0.0" width="24.5" height="17"/>
@@ -196,7 +196,7 @@
                                     <constraint firstItem="ApW-mD-Fgh" firstAttribute="top" secondItem="oqt-24-z8t" secondAttribute="top" constant="4" id="7Zh-23-Suo"/>
                                     <constraint firstItem="uxB-vw-UGA" firstAttribute="leading" secondItem="oqt-24-z8t" secondAttribute="leading" id="99b-kZ-8Of"/>
                                     <constraint firstItem="uxB-vw-UGA" firstAttribute="top" secondItem="oqt-24-z8t" secondAttribute="top" constant="4" id="IQO-Qu-6Z2"/>
-                                    <constraint firstItem="S0e-Pq-oxt" firstAttribute="leading" secondItem="ApW-mD-Fgh" secondAttribute="trailing" constant="16" id="ITg-DC-TXc"/>
+                                    <constraint firstItem="S0e-Pq-oxt" firstAttribute="leading" secondItem="ApW-mD-Fgh" secondAttribute="trailing" constant="8" id="ITg-DC-TXc"/>
                                     <constraint firstItem="coX-39-PPu" firstAttribute="top" secondItem="oqt-24-z8t" secondAttribute="top" id="If5-Te-M27"/>
                                     <constraint firstItem="coX-39-PPu" firstAttribute="centerX" secondItem="S0e-Pq-oxt" secondAttribute="centerX" id="Jci-zN-5uq"/>
                                     <constraint firstAttribute="bottom" secondItem="uxB-vw-UGA" secondAttribute="bottom" constant="4" id="KIq-kG-6LZ"/>
@@ -803,9 +803,12 @@
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oVe-tK-fKI">
                                         <rect key="frame" x="290" y="12" width="20" height="20"/>
                                     </activityIndicatorView>
-                                    <searchBar contentMode="redraw" placeholder="venue by name" translatesAutoresizingMaskIntoConstraints="NO" id="NRX-Ey-wqk">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                    <searchBar contentMode="redraw" placeholder="search by name" translatesAutoresizingMaskIntoConstraints="NO" id="NRX-Ey-wqk">
+                                        <rect key="frame" x="1" y="0.0" width="598" height="44"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="fQ5-s3-t7y" id="gZK-oc-TWd"/>
+                                        </connections>
                                     </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -813,9 +816,9 @@
                                     <constraint firstItem="oVe-tK-fKI" firstAttribute="centerY" secondItem="Xtf-tu-e1K" secondAttribute="centerY" id="3WD-Do-tx3"/>
                                     <constraint firstItem="NRX-Ey-wqk" firstAttribute="top" secondItem="Xtf-tu-e1K" secondAttribute="top" id="LUg-kw-1tv"/>
                                     <constraint firstItem="oVe-tK-fKI" firstAttribute="centerX" secondItem="Xtf-tu-e1K" secondAttribute="centerX" id="MSd-kp-8EV"/>
-                                    <constraint firstAttribute="trailing" secondItem="NRX-Ey-wqk" secondAttribute="trailing" id="TE9-7z-mYe"/>
+                                    <constraint firstAttribute="trailing" secondItem="NRX-Ey-wqk" secondAttribute="trailing" constant="1" id="TE9-7z-mYe"/>
                                     <constraint firstAttribute="bottom" secondItem="NRX-Ey-wqk" secondAttribute="bottom" id="Zfb-Fo-AMi"/>
-                                    <constraint firstItem="NRX-Ey-wqk" firstAttribute="leading" secondItem="Xtf-tu-e1K" secondAttribute="leading" id="ojo-Ji-eH0"/>
+                                    <constraint firstItem="NRX-Ey-wqk" firstAttribute="leading" secondItem="Xtf-tu-e1K" secondAttribute="leading" constant="1" id="ojo-Ji-eH0"/>
                                     <constraint firstAttribute="height" constant="44" id="ooP-Xw-xSL"/>
                                 </constraints>
                             </view>

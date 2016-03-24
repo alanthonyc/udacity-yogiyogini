@@ -192,6 +192,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         let coords = userLocation()
         if coords != nil
         {
+            self.venuesViewController?.currentLocation = coords!
             let queryParam = kEXPLORE_VENUES_DEFAULT_QUERY_PARAM
             FoursquareRequestController().exploreVenues(coords!.latitude, lon: coords!.longitude, query:queryParam,  completion:
             { (results, error) in
