@@ -336,7 +336,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     
     func startTimer()
     {
-        self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateDurationLabel:", userInfo: nil, repeats: true)
+        self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector:  #selector(self.updateDurationLabel(_:)), userInfo: nil, repeats: true)
     }
     
     func updateDurationLabel(timer: NSTimer!)
