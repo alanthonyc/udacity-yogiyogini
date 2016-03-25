@@ -193,30 +193,6 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         if coords != nil
         {
             self.venuesViewController?.currentLocation = coords!
-            let queryParam = kEXPLORE_VENUES_DEFAULT_QUERY_PARAM
-            FoursquareRequestController().exploreVenues(coords!.latitude, lon: coords!.longitude, query:queryParam,  completion:
-            { (results, error) in
-                if error != nil {
-                    print("error in explore api call")
-                    // TODO: error condition
-                } else {
-                    let meta = results["meta"] as! NSDictionary
-                    let venues = results["venues"]
-                    for (index, v) in (venues as! NSArray).enumerate()
-                    {
-                        guard let venue = v["venue"] else { break } // no venue, skip entry
-                        dispatch_async(dispatch_get_main_queue()) {
-                            VenueManager().saveVenueInfo(index, venue:venue as! NSDictionary, meta: meta)
-                        }
-                    }
-                    dispatch_async(dispatch_get_main_queue())
-                    {
-                        self.saveMoc()
-                        self.venuesViewController!.reloadFrc()
-                        self.venuesViewController!.endSearchAnimation()
-                    }
-                }
-            })
             venuesViewController!.delegate = self
             self.presentViewController(venuesViewController!, animated: true, completion: nil)
         }

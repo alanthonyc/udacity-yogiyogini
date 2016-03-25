@@ -46,7 +46,11 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         frc.delegate = self
         self.reloadFrc()
         self.activityIndicator.hidesWhenStopped = true
-        self.beginSearchAnimation()
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        self.searchNearbyYogaStudios()
     }
     
     override func viewWillDisappear(animated: Bool)
@@ -152,7 +156,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         self.delegate?.returnSelectedVenue(v, v: venue)
     }
     
-    // MARK: - Controller Actions
+    // MARK: - View Controller Actions
     
     @IBAction func cancelButtonTapped(sender: AnyObject?)
     {
@@ -176,33 +180,70 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         self.searchBar.alpha = 1.0
     }
     
-    // MARK: - Search Bar
+    // MARK: - UISearchBarDelegate
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        if searchBar.text! == ""
+        {
+            self.searchNearbyYogaStudios()
+        }
+    }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
+        let searchText = (searchBar.text! ?? "")
+        self.searchYogaVenuesByName(searchText)
+    }
+    
+    // MARK: - Foursquare API Calls
+    
+    func searchNearbyYogaStudios()
+    {
         self.beginSearchAnimation()
         self.deselectAllVenues()
-        let searchText = (searchBar.text! ?? "")
-        print("Search term: \(searchText)")
-        
+        let queryParam = kEXPLORE_VENUES_DEFAULT_QUERY_PARAM
+        FoursquareRequestController().exploreVenues(self.currentLocation!.latitude, lon: self.currentLocation!.longitude, query:queryParam,  completion:
+            { (results, error) in
+                if error != nil {
+                    print("error in explore api call")
+                    // TODO: error condition
+                } else {
+                    dispatch_async(dispatch_get_main_queue())
+                    {
+                        let meta = results["meta"] as! NSDictionary
+                        let venues = results["venues"]
+                        for (index, v) in (venues as! NSArray).enumerate()
+                        {
+                            guard let venue = v["venue"] else { break } // no venue, skip entry
+                            VenueManager().saveVenueInfo(index, venue:venue as! NSDictionary, meta: meta)
+                        }
+                        self.saveMoc()
+                        self.reloadFrc()
+                        self.endSearchAnimation()
+                    }
+                }
+        })
+    }
+    
+    func searchYogaVenuesByName(searchText: String!)
+    {
+        self.beginSearchAnimation()
+        self.deselectAllVenues()
         FoursquareRequestController().searchYogaVenues((self.currentLocation?.latitude)!, lon: (self.currentLocation?.longitude)!, name: searchText, completion:
             { (results, error) in
                 if error != nil {
-                    print("error in search api call")
-                    // TODO: error condition
+                    print("error in search api call") // TODO: error condition
+                    
                 } else {
-                    print("ready to parse returned data: \n \(results)")
-//                    let meta = results["meta"] as! NSDictionary
-//                    let venues = results["venues"]
-//                    for (index, v) in (venues as! NSArray).enumerate()
-//                    {
-//                        guard let venue = v["venue"] else { break } // no venue, skip entry
-//                        dispatch_async(dispatch_get_main_queue()) {
-//                            VenueManager().saveVenueInfo(index, venue:venue as! NSDictionary, meta: meta)
-//                        }
-//                    }
+                    let meta = results["meta"] as! NSDictionary?
+                    let venues = results["venues"] as! NSArray?
                     dispatch_async(dispatch_get_main_queue())
                     {
+                        for (index, v) in venues!.enumerate()
+                        {
+                            VenueManager().saveVenueInfo(index, venue:v as! NSDictionary, meta: meta!)
+                        }
                         self.saveMoc()
                         self.reloadFrc()
                         self.endSearchAnimation()
