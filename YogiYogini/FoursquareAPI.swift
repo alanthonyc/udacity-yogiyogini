@@ -24,7 +24,7 @@ class FoursquareRequestController: NSObject
 {
     typealias CompletionHander = (result: AnyObject!, error: NSError?) -> Void
     
-    func escapedParameters(parameters: [String : AnyObject]) -> String
+    private func escapedParameters(parameters: [String : AnyObject]) -> String
     {
         var urlVars = [String]()
         for (key, value) in parameters {
@@ -36,7 +36,7 @@ class FoursquareRequestController: NSObject
         return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
     }
     
-    func callAPIEndpoint(url: String, arguments: NSDictionary, apiCompletion: CompletionHander)
+    private func callAPIEndpoint(url: String, arguments: NSDictionary, apiCompletion: CompletionHander)
     {
         let session = NSURLSession.sharedSession()
         let urlString = url + escapedParameters(arguments as! [String : AnyObject])
@@ -45,29 +45,33 @@ class FoursquareRequestController: NSObject
         let task = session.dataTaskWithRequest(request)
         { (data, response, error) in
             
-            guard (error == nil) else {
-                print("There was an error with the call to Foursquare: \(error)")
-                // TODO: error condition
+            guard (error == nil) else
+            {
+                let errorJSON = ["error": "There was an error with the call to Foursquare."]
+                apiCompletion(result: errorJSON, error: error)
                 return
             }
             
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else
+            {
+                var errorJSON = [String: String]()
                 if let response = response as? NSHTTPURLResponse {
-                    print("Your request returned an invalid response. Status code: \(response.statusCode)!")
-                    // TODO: error condition
+                    errorJSON = ["error": "Your request returned an invalid response. Status code: \(response.statusCode)!"]
+                    
                 } else if let response = response {
-                    print("Your request returned an invalid response. Response: \(response)!")
-                    // TODO: error condition
+                    errorJSON = ["error": "Your request returned an invalid response. Response: \(response)!"]
+                    
                 } else {
-                    print("Your request returned an invalid response.")
-                    // TODO: error condition
+                    errorJSON = ["error": "Your request returned an invalid response."]
                 }
+                apiCompletion(result: errorJSON, error: error)
                 return
             }
             
-            guard let data = data else {
-                print("No data was returned by the request!")
-                // TODO: error condition
+            guard let data = data else
+            {
+                let errorJSON = ["error": "No data was returned by the request!"]
+                apiCompletion(result: errorJSON, error: error)
                 return
             }
             
@@ -75,10 +79,10 @@ class FoursquareRequestController: NSObject
             do {
                 json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
                 apiCompletion(result: json, error: error)
+                
             } catch {
-                json = nil
-                print("Could not parse the data as JSON: '\(data)'")
-                // TODO: error condition
+                let errorJSON = ["error": "Could not parse the data as JSON: \n'\(data)'"]
+                apiCompletion(result: errorJSON, error: nil)
                 return
             }
         }
@@ -100,6 +104,13 @@ class FoursquareRequestController: NSObject
         
         callAPIEndpoint(FourSquareURL.Venues, arguments: methodArguments, apiCompletion:
         { (json, error) in
+            
+            guard error == nil else
+            {
+                completion(result: json, error: error)
+                return
+            }
+            
             guard let meta = json["meta"] as? NSDictionary else {
                 print("Cannot get meta info from root dictionary: \(json)")
                 // TODO: error condition
@@ -141,6 +152,13 @@ class FoursquareRequestController: NSObject
         ]
         
         callAPIEndpoint(FourSquareURL.Search, arguments: methodArguments, apiCompletion: { (json, error) in
+            
+            guard error == nil else
+            {
+                completion(result: json, error: error)
+                return
+            }
+            
             guard let meta = json["meta"] as? NSDictionary else {
                 print("Cannot get meta info from root dictionary: \(json)")
                 // TODO: error condition

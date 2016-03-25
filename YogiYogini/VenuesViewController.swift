@@ -198,6 +198,15 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     
     // MARK: - Foursquare API Calls
     
+    func apiError(json: [String: String]?, error: NSError?)
+    {
+        print("= = = = = FourSquare Error = = = = =")
+        print("JSON:\n\(json)")
+        print("= = = = = = = = = =")
+        print("Error:\n\(error)")
+        print("= = = = = = = = = =\n\n")
+    }
+    
     func searchNearbyYogaStudios()
     {
         self.beginSearchAnimation()
@@ -205,9 +214,13 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         let queryParam = kEXPLORE_VENUES_DEFAULT_QUERY_PARAM
         FoursquareRequestController().exploreVenues(self.currentLocation!.latitude, lon: self.currentLocation!.longitude, query:queryParam,  completion:
             { (results, error) in
-                if error != nil {
-                    print("error in explore api call")
-                    // TODO: error condition
+                if error != nil
+                {
+                    dispatch_async(dispatch_get_main_queue())
+                    {
+                        self.apiError(results as! [String: String]?, error: error)
+                    }
+
                 } else {
                     dispatch_async(dispatch_get_main_queue())
                     {
@@ -232,8 +245,12 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         self.deselectAllVenues()
         FoursquareRequestController().searchYogaVenues((self.currentLocation?.latitude)!, lon: (self.currentLocation?.longitude)!, name: searchText, completion:
             { (results, error) in
-                if error != nil {
-                    print("error in search api call") // TODO: error condition
+                if error != nil
+                {
+                    dispatch_async(dispatch_get_main_queue())
+                    {
+                        self.apiError(results as! [String: String]?, error: error)
+                    }
                     
                 } else {
                     let meta = results["meta"] as! NSDictionary?
