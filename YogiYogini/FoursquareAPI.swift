@@ -8,14 +8,17 @@
 
 import Foundation
 
-let kCLIENT_ID = "JVA4E2YMEKOMFDOQSC05U12U225EJHHQHIHY41TPRNQQWYXW"
-let kCLIENT_SECRET = "J223UY0ECDXCGI0MYXVJIUGYVFSULGLNQOEZMH42KMEGEIHT"
-let kAPI_VERSION = "20151201"
-let kAPI_TYPE = "foursquare"
-let kYOGA_SEARCH_CATEGORY_ID = "4bf58dd8d48988d102941735"
+private let kCLIENT_ID = "JVA4E2YMEKOMFDOQSC05U12U225EJHHQHIHY41TPRNQQWYXW"
+private let kCLIENT_SECRET = "J223UY0ECDXCGI0MYXVJIUGYVFSULGLNQOEZMH42KMEGEIHT"
+private let kAPI_VERSION = "20151201"
+private let kAPI_TYPE = "foursquare"
+private let kYOGA_SEARCH_CATEGORY_ID = "4bf58dd8d48988d102941735"
 
-let k4SQ_VENUES_URL = "https://api.foursquare.com/v2/venues/explore"
-let k4SQ_SEARCH_URL = "https://api.foursquare.com/v2/venues/search"
+private struct FourSquareURL
+{
+    static let Venues = "https://api.foursquare.com/v2/venues/explore"
+    static let Search = "https://api.foursquare.com/v2/venues/search"
+}
 
 class FoursquareRequestController: NSObject
 {
@@ -95,7 +98,7 @@ class FoursquareRequestController: NSObject
             "query": query,
         ]
         
-        callAPIEndpoint(k4SQ_VENUES_URL, arguments: methodArguments, apiCompletion:
+        callAPIEndpoint(FourSquareURL.Venues, arguments: methodArguments, apiCompletion:
         { (json, error) in
             guard let meta = json["meta"] as? NSDictionary else {
                 print("Cannot get meta info from root dictionary: \(json)")
@@ -135,10 +138,9 @@ class FoursquareRequestController: NSObject
             "v": kAPI_VERSION,
             "m": kAPI_TYPE,
             "query": name,
-//            "categoryId": kYOGA_SEARCH_CATEGORY_ID,
         ]
         
-        callAPIEndpoint(k4SQ_SEARCH_URL, arguments: methodArguments, apiCompletion: { (json, error) in
+        callAPIEndpoint(FourSquareURL.Search, arguments: methodArguments, apiCompletion: { (json, error) in
             guard let meta = json["meta"] as? NSDictionary else {
                 print("Cannot get meta info from root dictionary: \(json)")
                 // TODO: error condition
