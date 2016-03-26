@@ -22,7 +22,7 @@ private struct FourSquareURL
 
 class FoursquareRequestController: NSObject
 {
-    typealias CompletionHander = (result: AnyObject!, error: NSError?) -> Void
+    typealias CompletionHandler = (result: AnyObject?, error: NSError?) -> Void
     
     private func escapedParameters(parameters: [String : AnyObject]) -> String
     {
@@ -36,7 +36,7 @@ class FoursquareRequestController: NSObject
         return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
     }
     
-    private func callAPIEndpoint(url: String, arguments: NSDictionary, apiCompletion: CompletionHander)
+    private func callAPIEndpoint(url: String, arguments: NSDictionary, apiCompletion: CompletionHandler)
     {
         let session = NSURLSession.sharedSession()
         let urlString = url + escapedParameters(arguments as! [String : AnyObject])
@@ -47,30 +47,27 @@ class FoursquareRequestController: NSObject
             
             guard (error == nil) else
             {
-                let errorJSON = ["error": "There was an error with the call to Foursquare."]
-                apiCompletion(result: errorJSON, error: error)
+                apiCompletion(result: nil, error: error)
                 return
             }
             
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else
             {
-                var errorJSON = [String: String]()
+                var errorString = "The call to FourSquare returned an error."
                 if let response = response as? NSHTTPURLResponse {
-                    errorJSON = ["error": "Your request returned an invalid response. Status code: \(response.statusCode)!"]
+                    errorString.appendContentsOf(" Error code: \(response.statusCode)")
                     
                 } else if let response = response {
-                    errorJSON = ["error": "Your request returned an invalid response. Response: \(response)!"]
-                    
-                } else {
-                    errorJSON = ["error": "Your request returned an invalid response."]
+                    errorString.appendContentsOf(" Error code: \(response)")
                 }
+                let errorJSON = ["error":errorString]
                 apiCompletion(result: errorJSON, error: error)
                 return
             }
             
             guard let data = data else
             {
-                let errorJSON = ["error": "No data was returned by the request!"]
+                let errorJSON = ["error": "No data was returned by the request."]
                 apiCompletion(result: errorJSON, error: error)
                 return
             }
@@ -81,7 +78,7 @@ class FoursquareRequestController: NSObject
                 apiCompletion(result: json, error: error)
                 
             } catch {
-                let errorJSON = ["error": "Could not parse the data as JSON: \n'\(data)'"]
+                let errorJSON = ["error": "The data could not be parsed as JSON.", "data":"\(data)"]
                 apiCompletion(result: errorJSON, error: nil)
                 return
             }
@@ -89,7 +86,7 @@ class FoursquareRequestController: NSObject
         task.resume()
     }
     
-    func exploreVenues(lat: Double, lon: Double, query: String, completion: CompletionHander)
+    func exploreVenues(lat: Double, lon: Double, query: String, completion: CompletionHandler)
     {
         let coords = "\(lat),\(lon)"
         let methodArguments = [
@@ -105,41 +102,62 @@ class FoursquareRequestController: NSObject
         callAPIEndpoint(FourSquareURL.Venues, arguments: methodArguments, apiCompletion:
         { (json, error) in
             
-            guard error == nil else
+            guard error == nil && json != nil else
             {
                 completion(result: json, error: error)
                 return
             }
             
-            guard let meta = json["meta"] as? NSDictionary else {
+            var meta = json!["meta"] as? NSDictionary
+            if meta == nil  {
                 print("Cannot get meta info from root dictionary: \(json)")
-                // TODO: error condition
+                meta = ["requestId":"none"]
+            }
+            
+            guard let response = json!["response"] as? NSDictionary else
+            {
+                let userInfo = [
+                    NSLocalizedDescriptionKey: NSLocalizedString(YogiErrorDescriptionParsingFailureError, comment: ""),
+                    NSLocalizedFailureReasonErrorKey: NSLocalizedString("'response' from root", comment: ""),
+                    NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("", comment: "")
+                ]
+                let parsingError = NSError(domain: YogiErrorDomain, code: YogiErrorCodeParseFailure, userInfo: userInfo)
+                completion(result: nil, error: parsingError)
                 return
             }
             
-            guard let response = json["response"] as? NSDictionary else {
-                print("Cannot find response in root: \(json)")
-                // TODO: error condition
+            guard let group = response["groups"]![0] as? NSDictionary else
+            {
+                let userInfo = [
+                    NSLocalizedDescriptionKey: NSLocalizedString(YogiErrorDescriptionParsingFailureError, comment: ""),
+                    NSLocalizedFailureReasonErrorKey: NSLocalizedString("'group' from response", comment: ""),
+                    NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("", comment: ""),
+                    "additionalInfo": response,
+                ]
+                let parsingError = NSError(domain: YogiErrorDomain, code: YogiErrorCodeParseFailure, userInfo: userInfo)
+                completion(result: nil, error: parsingError)
                 return
             }
             
-            guard let group = response["groups"]![0] as? NSDictionary else {
-                print("Could not get group from response: \(response)")
-                // TODO: error condition
+            guard let venues = group["items"] as? NSArray else
+            {
+                let userInfo = [
+                    NSLocalizedDescriptionKey: NSLocalizedString(YogiErrorDescriptionParsingFailureError, comment: ""),
+                    NSLocalizedFailureReasonErrorKey: NSLocalizedString("'venues' from group", comment: ""),
+                    NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("", comment: ""),
+                    "additionalInfo": response,
+                ]
+                let parsingError = NSError(domain: YogiErrorDomain, code: YogiErrorCodeParseFailure, userInfo: userInfo)
+                completion(result: nil, error: parsingError)
                 return
             }
             
-            guard let venues = group["items"] as? NSArray else {
-                print("Could not get venues from group: \(group)")
-                // TODO: error condition
-                return
-            }
-            let result = NSDictionary(objects: [meta, venues], forKeys: ["meta", "venues"])
+            let result = NSDictionary(objects: [meta!, venues], forKeys: ["meta", "venues"])
             completion(result: result, error: error)
         })
     }
     
-    func searchYogaVenues(lat: Double, lon: Double, name: String, completion:CompletionHander)
+    func searchYogaVenues(lat: Double, lon: Double, name: String, completion:CompletionHandler)
     {
         let coords = "\(lat),\(lon)"
         let methodArguments = [
@@ -153,30 +171,42 @@ class FoursquareRequestController: NSObject
         
         callAPIEndpoint(FourSquareURL.Search, arguments: methodArguments, apiCompletion: { (json, error) in
             
-            guard error == nil else
+            guard error == nil && json != nil else
             {
                 completion(result: json, error: error)
                 return
             }
             
-            guard let meta = json["meta"] as? NSDictionary else {
+            var meta = json!["meta"] as? NSDictionary
+            if meta == nil  {
                 print("Cannot get meta info from root dictionary: \(json)")
-                // TODO: error condition
+                meta = ["requestId":"none"]
+            }
+            
+            guard let response = json!["response"] as? NSDictionary else
+            {
+                let userInfo = [
+                    NSLocalizedDescriptionKey: NSLocalizedString(YogiErrorDescriptionParsingFailureError, comment: ""),
+                    NSLocalizedFailureReasonErrorKey: NSLocalizedString("'response' from root", comment: ""),
+                    NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("", comment: "")
+                ]
+                let parsingError = NSError(domain: YogiErrorDomain, code: YogiErrorCodeParseFailure, userInfo: userInfo)
+                completion(result: nil, error: parsingError)
                 return
             }
             
-            guard let response = json["response"] as? NSDictionary else {
-                print("Cannot find response in root: \(json)")
-                // TODO: error condition
+            guard let venues = response["venues"] as? NSArray else
+            {
+                let userInfo = [
+                    NSLocalizedDescriptionKey: NSLocalizedString(YogiErrorDescriptionParsingFailureError, comment: ""),
+                    NSLocalizedFailureReasonErrorKey: NSLocalizedString("'venues' from response", comment: ""),
+                    NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("", comment: "")
+                ]
+                let parsingError = NSError(domain: YogiErrorDomain, code: YogiErrorCodeParseFailure, userInfo: userInfo)
+                completion(result: nil, error: parsingError)
                 return
             }
-            
-            guard let venues = response["venues"] as? NSArray else {
-                print("Could not get venues from response: \(response)")
-                // TODO: error condition
-                return
-            }
-            let result = NSDictionary(objects: [meta, venues], forKeys: ["meta", "venues"])
+            let result = NSDictionary(objects: [meta!, venues], forKeys: ["meta", "venues"])
             completion(result: result, error: error)
         })
     }

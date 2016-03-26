@@ -198,13 +198,17 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     
     // MARK: - Foursquare API Calls
     
-    func apiError(json: [String: String]?, error: NSError?)
+    func apiError(error: NSError?)
     {
-        print("= = = = = FourSquare Error = = = = =")
-        print("JSON:\n\(json)")
-        print("= = = = = = = = = =")
-        print("Error:\n\(error)")
-        print("= = = = = = = = = =\n\n")
+        var errorTitle = "Network Error"
+        if error?.domain == YogiErrorDomain { errorTitle = "FourSquare Error" }
+        let alert = UIAlertController.init(title:errorTitle, message:"\(error!.localizedDescription)", preferredStyle: UIAlertControllerStyle.Alert)
+        let continueAction = UIAlertAction.init(title: "Continue", style: UIAlertActionStyle.Default, handler:
+            {
+                (alert: UIAlertAction!) in self.close()
+            })
+        alert.addAction(continueAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func searchNearbyYogaStudios()
@@ -214,18 +218,12 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         let queryParam = kEXPLORE_VENUES_DEFAULT_QUERY_PARAM
         FoursquareRequestController().exploreVenues(self.currentLocation!.latitude, lon: self.currentLocation!.longitude, query:queryParam,  completion:
             { (results, error) in
-                if error != nil
+                dispatch_async(dispatch_get_main_queue())
                 {
-                    dispatch_async(dispatch_get_main_queue())
-                    {
-                        self.apiError(results as! [String: String]?, error: error)
-                    }
-
-                } else {
-                    dispatch_async(dispatch_get_main_queue())
-                    {
-                        let meta = results["meta"] as! NSDictionary
-                        let venues = results["venues"]
+                    if error != nil { self.apiError(error) }
+                    else {
+                        let meta = results!["meta"] as! NSDictionary
+                        let venues = results!["venues"]
                         for (index, v) in (venues as! NSArray).enumerate()
                         {
                             guard let venue = v["venue"] else { break } // no venue, skip entry
@@ -236,7 +234,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
                         self.endSearchAnimation()
                     }
                 }
-        })
+            })
     }
     
     func searchYogaVenuesByName(searchText: String!)
@@ -245,18 +243,13 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         self.deselectAllVenues()
         FoursquareRequestController().searchYogaVenues((self.currentLocation?.latitude)!, lon: (self.currentLocation?.longitude)!, name: searchText, completion:
             { (results, error) in
-                if error != nil
+                dispatch_async(dispatch_get_main_queue())
                 {
-                    dispatch_async(dispatch_get_main_queue())
-                    {
-                        self.apiError(results as! [String: String]?, error: error)
-                    }
-                    
-                } else {
-                    let meta = results["meta"] as! NSDictionary?
-                    let venues = results["venues"] as! NSArray?
-                    dispatch_async(dispatch_get_main_queue())
-                    {
+                    if error != nil { self.apiError(error) }
+                    else {
+                        let meta = results!["meta"] as! NSDictionary?
+                        let venues = results!["venues"] as! NSArray?
+                        
                         for (index, v) in venues!.enumerate()
                         {
                             VenueManager().saveVenueInfo(index, venue:v as! NSDictionary, meta: meta!)
@@ -264,6 +257,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
                         self.saveMoc()
                         self.reloadFrc()
                         self.endSearchAnimation()
+                        
                     }
                 }
             })
