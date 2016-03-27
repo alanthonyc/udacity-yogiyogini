@@ -6,11 +6,11 @@ import sys
 import SocketServer
 
 def pushfrankie():
-    local('git push frankie master')
+    local('git push frankie develop')
 
 def pushcarm():
-    local('git push origin master')
+    local('git push origin develop')
 
-def pushall():
+def push():
     pushfrankie()
     pushcarm()
