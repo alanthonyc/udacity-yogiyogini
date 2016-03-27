@@ -1,5 +1,5 @@
 //
-//  Session+CoreDataProperties.swift
+//  Student+CoreDataProperties.swift
 //  YogiYogini
 //
 //  Created by A. Anthony Castillo on 3/27/16.
@@ -12,12 +12,11 @@
 import Foundation
 import CoreData
 
-extension Session {
-
-    @NSManaged var endDate: NSDate?
+extension Student
+{
+    @NSManaged var name: String?
+    @NSManaged var studentType: String?
     @NSManaged var id: String?
-    @NSManaged var startDate: NSDate?
-    @NSManaged var venue: Venue?
-    @NSManaged var students: NSSet?
-
+    @NSManaged var sessions: NSSet?
+    @NSManaged var joinDate: NSDate?
 }

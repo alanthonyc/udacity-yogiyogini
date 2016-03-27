@@ -1,25 +1,25 @@
 //
-//  Session.swift
+//  Student.swift
 //  YogiYogini
 //
-//  Created by A. Anthony Castillo on 3/20/16.
+//  Created by A. Anthony Castillo on 3/27/16.
 //  Copyright © 2016 Alon Consulting. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-let kENTITY_NAME_SESSION = "Session"
+let kENTITY_NAME_STUDENT = "Student"
 
-class Session: NSManagedObject
+class Student: NSManagedObject
 {
     struct Keys
     {
         static let Id = "id"
-        static let StartDate = "startDate"
-        static let EndDate = "endDate"
-        static let Venue = "venue"
-        static let Students = "students"
+        static let Name = "name"
+        static let StudentType = "studentType"
+        static let Sessions = "sessions"
+        static let JoinDate = "joinDate"
     }
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?)
@@ -32,9 +32,9 @@ class Session: NSManagedObject
         let entity =  NSEntityDescription.entityForName(kENTITY_NAME_SESSION, inManagedObjectContext: context)!
         super.init(entity: entity,insertIntoManagedObjectContext: context)
         id = dictionary[Keys.Id] as? String
-        startDate = dictionary[Keys.StartDate] as? NSDate
-        endDate = dictionary[Keys.EndDate] as? NSDate
-        venue = dictionary[Keys.Venue] as? Venue
-        students = dictionary[Keys.Students] as? NSSet
+        name = dictionary[Keys.Name] as? String
+        studentType = dictionary[Keys.StudentType] as? String
+        sessions = dictionary[Keys.Sessions] as? NSSet
+        joinDate = dictionary[Keys.JoinDate] as? NSDate
     }
 }

@@ -7,12 +7,28 @@
 //
 
 import UIKit
+import CoreData
 
-class StudentRosterTableViewController: UITableViewController
+class StudentRosterTableViewController: UITableViewController, StudentDetailViewProtocol, NSFetchedResultsControllerDelegate
 {
-    // MARK: - Outlets
+    // MARK: - Properties
+ 
+    var studentDetailViewController: StudentDetailViewController?
+    var addButton: UIBarButtonItem?
     
-    @IBOutlet weak var addButton: UIBarButtonItem!
+    // MARK: --- NSFetchedResultsControllerDelegate
+    
+    lazy var frc: NSFetchedResultsController =
+        {
+            let request = NSFetchRequest(entityName: kENTITY_NAME_STUDENT)
+            request.predicate = NSPredicate(format: "id != ''")
+            let nameSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+            request.sortDescriptors = [nameSortDescriptor,]
+            request.fetchBatchSize = 0
+            
+            let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
+            return controller
+    } ()
     
     // MARK: - Housekeeping
     
@@ -20,8 +36,10 @@ class StudentRosterTableViewController: UITableViewController
     {
         super.viewDidLoad()
         
-        self.addButton.target = self
-        self.addButton.action = #selector(self.addButtonTapped)
+        
+        self.addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(addButtonTapped(_:)))
+        self.navigationItem.rightBarButtonItem = addButton
+        self.addButton?.tintColor = UIColor(hue: 333, saturation: 100, brightness: 98, alpha: 1.0)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -29,34 +47,70 @@ class StudentRosterTableViewController: UITableViewController
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        do {
+            try frc.performFetch()
+        } catch {
+            print("Error performing fetch.")
+        }
+        self.tableView.reloadData()
+    }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: --- Core Data Helpers
+    
+    lazy var moc =
+        {
+            CoreDataManager.sharedInstance().managedObjectContext
+    } ()
+    
+    func saveMoc()
+    {
+        dispatch_async(dispatch_get_main_queue())
+        {
+            () -> Void in
+            do {
+                try self.moc.save()
+                
+            } catch let error as NSError {
+                print("error saving moc: \(error)")
+            }
+        }
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+        return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return (self.frc.fetchedObjects?.count)!
     }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCellWithIdentifier("StudentCellIdentifier", forIndexPath: indexPath)
+        cell.textLabel?.text = (self.frc.objectAtIndexPath(indexPath) as! Student).name!
+        cell.detailTextLabel?.text = (self.frc.objectAtIndexPath(indexPath) as! Student).studentType!
         return cell
     }
-    */
 
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -103,9 +157,26 @@ class StudentRosterTableViewController: UITableViewController
     */
 
     // MARK: - Actions
-    
-    func addButtonTapped()
+
+    func close()
     {
-    
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    func addButtonTapped(sender: UIBarButtonItem)
+    {
+        self.studentDetailViewController = self.storyboard?.instantiateViewControllerWithIdentifier(kSTUDENT_DETAIL_VIEW_CONTROLLER_ID) as! StudentDetailViewController?
+        self.studentDetailViewController!.delegate = self
+        self.presentViewController(self.studentDetailViewController!, animated: true, completion: nil)
     }
 }
+
+
+
+
+
+
+
+
+
+
