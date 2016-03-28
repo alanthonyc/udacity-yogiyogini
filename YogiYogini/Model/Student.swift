@@ -20,6 +20,7 @@ class Student: NSManagedObject
         static let StudentType = "studentType"
         static let Sessions = "sessions"
         static let JoinDate = "joinDate"
+        static let Status = "status"
     }
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?)
@@ -36,5 +37,6 @@ class Student: NSManagedObject
         studentType = dictionary[Keys.StudentType] as? String
         sessions = dictionary[Keys.Sessions] as? NSSet
         joinDate = dictionary[Keys.JoinDate] as? NSDate
+        status = dictionary[Keys.Status] as? String
     }
 }

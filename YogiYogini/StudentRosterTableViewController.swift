@@ -19,15 +19,15 @@ class StudentRosterTableViewController: UITableViewController, StudentDetailView
     // MARK: --- NSFetchedResultsControllerDelegate
     
     lazy var frc: NSFetchedResultsController =
-        {
-            let request = NSFetchRequest(entityName: kENTITY_NAME_STUDENT)
-            request.predicate = NSPredicate(format: "id != ''")
-            let nameSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-            request.sortDescriptors = [nameSortDescriptor,]
-            request.fetchBatchSize = 0
-            
-            let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
-            return controller
+    {
+        let request = NSFetchRequest(entityName: kENTITY_NAME_STUDENT)
+        request.predicate = NSPredicate(format: "status != 'Deleted'")
+        let nameSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [nameSortDescriptor,]
+        request.fetchBatchSize = 0
+        
+        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
+        return controller
     } ()
     
     // MARK: - Housekeeping

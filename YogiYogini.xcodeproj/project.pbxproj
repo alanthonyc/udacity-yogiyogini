@@ -10,6 +10,7 @@
 		6B150B411C96956500D2DDEB /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B150B401C96956500D2DDEB /* RootViewController.swift */; };
 		6B339FC01CA8966B00AE9AB7 /* Student+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B339FBD1CA8966B00AE9AB7 /* Student+CoreDataProperties.swift */; };
 		6B339FC11CA8966B00AE9AB7 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B339FBE1CA8966B00AE9AB7 /* Student.swift */; };
+		6B339FC51CA8A96500AE9AB7 /* SelectStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B339FC41CA8A96500AE9AB7 /* SelectStudentViewController.swift */; };
 		6B4B166A1C854C18007A3576 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B16691C854C18007A3576 /* AppDelegate.swift */; };
 		6B4B166C1C854C18007A3576 /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B166B1C854C18007A3576 /* SessionsViewController.swift */; };
 		6B4B166E1C854C18007A3576 /* ClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4B166D1C854C18007A3576 /* ClassViewController.swift */; };
@@ -60,6 +61,7 @@
 		6B150B401C96956500D2DDEB /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		6B339FBD1CA8966B00AE9AB7 /* Student+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Student+CoreDataProperties.swift"; path = "Model/Student+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6B339FBE1CA8966B00AE9AB7 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Student.swift; path = Model/Student.swift; sourceTree = "<group>"; };
+		6B339FC41CA8A96500AE9AB7 /* SelectStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectStudentViewController.swift; sourceTree = "<group>"; };
 		6B4B16661C854C18007A3576 /* YogiYogini.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YogiYogini.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B4B16691C854C18007A3576 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B4B166B1C854C18007A3576 /* SessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				6B4B16691C854C18007A3576 /* AppDelegate.swift */,
 				6B150B401C96956500D2DDEB /* RootViewController.swift */,
 				6B4B166B1C854C18007A3576 /* SessionsViewController.swift */,
+				6B339FC41CA8A96500AE9AB7 /* SelectStudentViewController.swift */,
 				6BEED32B1CA1F1B000EADC61 /* SessionDetailViewController.swift */,
 				6B4B166D1C854C18007A3576 /* ClassViewController.swift */,
 				6BA912D31CA79B0D00A10A0B /* StudentRosterTableViewController.swift */,
@@ -344,6 +347,7 @@
 				6B339FC11CA8966B00AE9AB7 /* Student.swift in Sources */,
 				6B822F131C8F935A0051285A /* Venue.swift in Sources */,
 				6B822F121C8F935A0051285A /* Venue+CoreDataProperties.swift in Sources */,
+				6B339FC51CA8A96500AE9AB7 /* SelectStudentViewController.swift in Sources */,
 				6B150B411C96956500D2DDEB /* RootViewController.swift in Sources */,
 				6B339FC01CA8966B00AE9AB7 /* Student+CoreDataProperties.swift in Sources */,
 				6BA912D41CA79B0D00A10A0B /* StudentRosterTableViewController.swift in Sources */,

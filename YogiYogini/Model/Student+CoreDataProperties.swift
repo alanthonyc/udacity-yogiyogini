@@ -19,4 +19,5 @@ extension Student
     @NSManaged var id: String?
     @NSManaged var sessions: NSSet?
     @NSManaged var joinDate: NSDate?
+    @NSManaged var status: String?
 }

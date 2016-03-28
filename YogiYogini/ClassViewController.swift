@@ -15,7 +15,7 @@ import CoreLocation
 let kVENUES_VIEW_CONTROLLER_ID = "venuesViewController"
 let kEXPLORE_VENUES_DEFAULT_QUERY_PARAM = "Yoga"
 
-class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocationManagerDelegate
+class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocationManagerDelegate, SelectStudentProtocol
 {
     // MARK: - Outlets
     // MARK: --- Session Control
@@ -50,10 +50,12 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     // MARK: --- Student Info
     @IBOutlet weak var countBaseView: UIView!
     @IBOutlet weak var studentCountLabel: UILabel!
+    @IBOutlet weak var addStudentButton: UIButton!
     
     // MARK: - Properties
     
     var venuesViewController: VenuesViewController?
+    var addStudentViewController: SelectStudentViewController?
     var venue: VenueInfo?
     var vObject: Venue?
     var venuePin: MKPointAnnotation?
@@ -183,6 +185,11 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.deleteSession()
     }
     
+    @IBAction func addStudentButtonTapped()
+    {
+        self.addStudent()
+    }
+    
     // MARK: - Venues View Controller
     
     func findNearbyYogaStudios()
@@ -309,6 +316,25 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.hideSessionInfo()
     }
     
+    // MARK: - Attending Students Control
+    
+    func addStudent()
+    {
+        self.addStudentViewController = self.storyboard?.instantiateViewControllerWithIdentifier(kSELECT_STUDENT_VIEW_CONTROLLER) as! SelectStudentViewController?
+        self.presentViewController(self.addStudentViewController!, animated: true, completion: nil)
+    }
+    
+    func cancelStudentSelection()
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func returnSelectedStudent(student: Student?)
+    {
+        print("Selected: \(student)")
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     // MARK: - Utilities
     
     func startTimer()
@@ -350,5 +376,3 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         }
     }
 }
-
-// 37.840364, -122.251422

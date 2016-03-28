@@ -76,14 +76,14 @@ class StudentDetailViewController: UIViewController
     {
         if self.studentNameTextField?.text != ""
         {
-            self.saveStudent()
+            self.createStudent()
             self.delegate?.close()
         }
     }
     
     // MARK: - Student
     
-    func saveStudent()
+    func createStudent()
     {
         let  studentEntity = NSEntityDescription.entityForName(kENTITY_NAME_STUDENT, inManagedObjectContext: self.moc)
         let s =     (NSManagedObject(entity: studentEntity!, insertIntoManagedObjectContext: self.moc) as! Student)
@@ -91,6 +91,7 @@ class StudentDetailViewController: UIViewController
         s.setValue(self.studentNameTextField?.text, forKey: Student.Keys.Name)
         s.setValue(NSDate(), forKey: Student.Keys.JoinDate)
         s.setValue("", forKey: Student.Keys.StudentType)
+        s.setValue("Active", forKey: Student.Keys.Status)
         self.saveMoc()
     }
 }

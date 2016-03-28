@@ -512,13 +512,24 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1m8-cQ-ARl">
+                                        <rect key="frame" x="161" y="17" width="86" height="30"/>
+                                        <state key="normal" title="Add Student">
+                                            <color key="titleColor" red="0.98039215690000003" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addStudentButtonTapped" destination="8rJ-Kc-sve" eventType="touchUpInside" id="sxL-6f-tVe"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="V8b-BT-nR0" firstAttribute="centerX" secondItem="dFm-jv-Rso" secondAttribute="centerX" id="82Y-mv-Tdq"/>
                                     <constraint firstItem="6Me-ta-aKe" firstAttribute="top" secondItem="V8b-BT-nR0" secondAttribute="bottom" constant="-4" id="Nyv-nd-jLw"/>
                                     <constraint firstItem="V8b-BT-nR0" firstAttribute="top" secondItem="dFm-jv-Rso" secondAttribute="top" constant="4" id="PwC-hG-0c8"/>
+                                    <constraint firstItem="1m8-cQ-ARl" firstAttribute="centerY" secondItem="dFm-jv-Rso" secondAttribute="centerY" id="T6f-tA-q3Y"/>
                                     <constraint firstItem="6Me-ta-aKe" firstAttribute="centerX" secondItem="dFm-jv-Rso" secondAttribute="centerX" id="bdH-eL-iYp"/>
+                                    <constraint firstItem="6Me-ta-aKe" firstAttribute="leading" secondItem="1m8-cQ-ARl" secondAttribute="trailing" constant="20" id="l8g-pz-Zhx"/>
                                     <constraint firstAttribute="bottom" secondItem="6Me-ta-aKe" secondAttribute="bottom" constant="4" id="vid-sR-Au3"/>
                                 </constraints>
                             </view>
@@ -718,6 +729,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Class" image="second" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="addStudentButton" destination="1m8-cQ-ARl" id="QsQ-E4-K2d"/>
                         <outlet property="addressBaseView" destination="z3l-Dd-jbq" id="1Jg-Dg-vTC"/>
                         <outlet property="addressLabel" destination="J7V-7r-AXs" id="S2V-xn-EuR"/>
                         <outlet property="checkinButton" destination="yP7-kS-Uin" id="OTP-Me-PBt"/>
@@ -897,6 +909,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kuN-3t-YTb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1418" y="503"/>
+        </scene>
+        <!--Select Student View Controller-->
+        <scene sceneID="PQv-hj-7wD">
+            <objects>
+                <tableViewController storyboardIdentifier="SelectStudentViewController" id="1sL-Aw-ikb" customClass="SelectStudentViewController" customModule="YogiYogini" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="g39-gV-WkU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentSelectionCellIdentifier" id="uQm-xs-Cwf">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uQm-xs-Cwf" id="iAE-wz-Wym">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1sL-Aw-ikb" id="MRI-zO-cyd"/>
+                            <outlet property="delegate" destination="1sL-Aw-ikb" id="mxM-qy-kVV"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="veg-B3-RM4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="720" y="1175"/>
         </scene>
         <!--Student Detail View Controller-->
         <scene sceneID="cn4-uA-ONR">
