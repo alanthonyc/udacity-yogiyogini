@@ -34,11 +34,6 @@ class StudentDetailViewController: UIViewController
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool)
-    {
-        
-    }
-    
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
