@@ -12,4 +12,4 @@ public let YogiErrorDomain = "YogiErrorDomain"
 
 public let YogiErrorCodeParseFailure = 1
 
-public let YogiErrorDescriptionParsingFailureError = "Could not get venues from FourSquare data."
+public let YogiErrorDescriptionParsingFailureError = "Could not read data from service."

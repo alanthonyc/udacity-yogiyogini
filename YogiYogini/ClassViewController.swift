@@ -47,6 +47,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     @IBOutlet weak var endDateBaseView: UIView!
     @IBOutlet weak var endMonthLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
+    @IBOutlet weak var temperatureLabel: UILabel!
 
     // MARK: --- Student Info
     @IBOutlet weak var countBaseView: UIView!
@@ -67,6 +68,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     var timeFormatter: NSDateFormatter?
     let locationManager = CLLocationManager()
     var currentCoords: CLLocationCoordinate2D?
+    var temperature: Double?
     
     // MARK: - Housekeeping
     
@@ -121,6 +123,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.endDateBaseView.alpha = 0
         self.addStudentButton.alpha = 0
         self.durationLabel.text = "00:00"
+        self.temperatureLabel.text = "---"
         
         // TODO: this should automatically update with student count
         // - probably an frc object
@@ -217,7 +220,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func returnSelectedVenue(venue: VenueInfo, v: Venue)
+    func returnSelectedVenue(venue: VenueInfo, v: Venue, temperature: Double)
     {
         self.vObject = v
         self.pauseSessionButton.alpha = 1.0
@@ -225,6 +228,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.dismissViewControllerAnimated(true, completion:
         {
             self.venue = venue
+            self.temperature = temperature
             self.startSession()
             self.setMapLocation(CLLocationCoordinate2DMake(self.venue!.latitude, self.venue!.longitude))
         })
@@ -268,6 +272,8 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.startTimeLabel.text = self.timeFormatter!.stringFromDate(self.sessionStartTime!)
         self.continueSession()
         self.addStudentButton.alpha = 1.0
+        let temp = String(format:"%.0f", self.temperature!)
+        self.temperatureLabel.text = "\(temp)º F"
     }
     
     func continueSession()
@@ -306,6 +312,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         s.setValue(NSDate(), forKey: Session.Keys.EndDate)
         s.setValue(self.vObject, forKey: Session.Keys.Venue)
         s.setValue(NSSet().setByAddingObjectsFromArray((self.attendingStudentsViewController?.students)!), forKey: Session.Keys.Students)
+        s.setValue(self.temperature, forKey: Session.Keys.Temperature)
         self.saveMoc()
     }
     

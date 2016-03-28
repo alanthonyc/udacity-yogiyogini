@@ -30,7 +30,7 @@ class SessionDetailViewController: UIViewController
     @IBOutlet weak var endDateBaseView: UIView!
     @IBOutlet weak var endDateMonthLabel: UILabel!
     @IBOutlet weak var endDateDayLabel: UILabel!
-    
+    @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var studentTableView: UITableView!
     
     // MARK: - Properties
@@ -54,6 +54,8 @@ class SessionDetailViewController: UIViewController
         self.attendingStudentsViewController?.students = NSArray(array: students) as? [Student]
         self.attendingStudentsViewController?.tableView?.reloadData()
         self.studentCountLabel!.text = "\(students.count)"
+        let temp = String(format:"%.0f", session.temperature as! Double)
+        self.temperatureLabel!.text = "\(temp)º f"
     }
     
     override func viewWillAppear(animated: Bool)

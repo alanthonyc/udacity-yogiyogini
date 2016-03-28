@@ -20,6 +20,7 @@ class Session: NSManagedObject
         static let EndDate = "endDate"
         static let Venue = "venue"
         static let Students = "students"
+        static let Temperature = "temperature"
     }
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?)
@@ -36,5 +37,6 @@ class Session: NSManagedObject
         endDate = dictionary[Keys.EndDate] as? NSDate
         venue = dictionary[Keys.Venue] as? Venue
         students = dictionary[Keys.Students] as? NSSet
+        temperature = dictionary[Keys.Temperature] as? Double
     }
 }

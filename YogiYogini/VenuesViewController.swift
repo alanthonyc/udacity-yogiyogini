@@ -15,7 +15,7 @@ private let kVENUE_CELL_ID = "VenueCellIdentifier"
 protocol VenuesControllerDelegate
 {
     func closeVenuesController()
-    func returnSelectedVenue(venue: VenueInfo, v: Venue)
+    func returnSelectedVenue(venue: VenueInfo, v: Venue, temperature: Double)
 }
 
 class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate
@@ -30,6 +30,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     
     var delegate: VenuesControllerDelegate?
     var currentLocation: CLLocationCoordinate2D?
+    var temperature: Double?
     
     lazy var frc: NSFetchedResultsController =
         {
@@ -62,6 +63,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     override func viewDidAppear(animated: Bool)
     {
         self.searchNearbyYogaStudios()
+        self.getWeather()
     }
     
     override func viewWillDisappear(animated: Bool)
@@ -153,7 +155,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         let latitude = (venue.latitude ?? 0.0) as Double
         let longitude = (venue.longitude ?? 0.0) as Double
         let v = VenueInfo(id: id, name: name, address: address, city: city, latitude: latitude, longitude: longitude)
-        self.delegate?.returnSelectedVenue(v, v: venue)
+        self.delegate?.returnSelectedVenue(v, v: venue, temperature: self.temperature!)
     }
     
     // MARK: - View Controller Actions
@@ -187,6 +189,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         if searchBar.text! == ""
         {
             self.searchNearbyYogaStudios()
+            self.getWeather()
         }
     }
     
@@ -201,7 +204,7 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     func apiError(error: NSError?)
     {
         var errorTitle = "Network Error"
-        if error?.domain == YogiErrorDomain { errorTitle = "FourSquare Error" }
+        if error?.domain == YogiErrorDomain { errorTitle = "Internet Service Error" }
         let alert = UIAlertController.init(title:errorTitle, message:"\(error!.localizedDescription)", preferredStyle: UIAlertControllerStyle.Alert)
         let continueAction = UIAlertAction.init(title: "Continue", style: UIAlertActionStyle.Default, handler:
             {
@@ -261,5 +264,25 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
                     }
                 }
             })
+    }
+    
+    func fahrenheit(fromKelvin: Double!) -> Double
+    {
+        return (((fromKelvin - 273) * 1.6) + 32)
+    }
+    
+    func getWeather()
+    {
+        OpenWeatherMapRequestController().getWeather((self.currentLocation?.latitude)!, lon: (self.currentLocation?.longitude)!, completion:
+            { (results, error) in
+                dispatch_async(dispatch_get_main_queue())
+                {
+                    if error != nil { self.apiError(error) }
+                    else {
+                        print("temp: \(results)")
+                        self.temperature = self.fahrenheit(results!["kelvin"]! as! Double)
+                    }
+                }
+        })
     }
 }

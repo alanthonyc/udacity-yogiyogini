@@ -4,6 +4,7 @@
         <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="temperature" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Student" inverseName="sessions" inverseEntity="Student" syncable="YES"/>
         <relationship name="venue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="sessions" inverseEntity="Venue" syncable="YES"/>
     </entity>
@@ -33,8 +34,8 @@
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="venue" inverseEntity="Session" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Session" positionX="-63" positionY="63" width="128" height="120"/>
-        <element name="Venue" positionX="-63" positionY="-18" width="128" height="270"/>
+        <element name="Session" positionX="-63" positionY="63" width="128" height="135"/>
         <element name="Student" positionX="-45" positionY="108" width="128" height="135"/>
+        <element name="Venue" positionX="-63" positionY="-18" width="128" height="270"/>
     </elements>
 </model>

@@ -39,6 +39,7 @@
 		6BD14FBD1C8FE56700C76F06 /* VenueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BD14FBB1C8FE56700C76F06 /* VenueTableViewCell.xib */; };
 		6BE522D21C8940BE00C299F2 /* FoursquareAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */; };
 		6BE5E26A1CA62DB10054AA90 /* YogiErrorDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE5E2691CA62DB10054AA90 /* YogiErrorDomain.swift */; };
+		6BED49711CA9C99500A515C5 /* OpenWeatherMapAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BED49701CA9C99500A515C5 /* OpenWeatherMapAPI.swift */; };
 		6BEED32C1CA1F1B000EADC61 /* SessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEED32B1CA1F1B000EADC61 /* SessionDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,7 @@
 		6BD14FBB1C8FE56700C76F06 /* VenueTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueTableViewCell.xib; sourceTree = "<group>"; };
 		6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursquareAPI.swift; sourceTree = "<group>"; };
 		6BE5E2691CA62DB10054AA90 /* YogiErrorDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogiErrorDomain.swift; sourceTree = "<group>"; };
+		6BED49701CA9C99500A515C5 /* OpenWeatherMapAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenWeatherMapAPI.swift; sourceTree = "<group>"; };
 		6BEED32B1CA1F1B000EADC61 /* SessionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,6 +218,7 @@
 			children = (
 				6BE5E2691CA62DB10054AA90 /* YogiErrorDomain.swift */,
 				6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */,
+				6BED49701CA9C99500A515C5 /* OpenWeatherMapAPI.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				6BE522D21C8940BE00C299F2 /* FoursquareAPI.swift in Sources */,
 				6B7A1BFF1C8EB58E00C9C8C7 /* VenuesViewController.swift in Sources */,
 				6B822F151C8F939A0051285A /* CoreDataManager.swift in Sources */,
+				6BED49711CA9C99500A515C5 /* OpenWeatherMapAPI.swift in Sources */,
 				6B71AA3B1C9F5709000B0C1C /* SessionTableViewCell.swift in Sources */,
 				6B822F0E1C8F928E0051285A /* YogiYogini.xcdatamodeld in Sources */,
 				6B4B166C1C854C18007A3576 /* SessionsViewController.swift in Sources */,

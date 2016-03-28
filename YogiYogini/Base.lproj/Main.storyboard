@@ -235,7 +235,7 @@
                                 <rect key="frame" x="20" y="246" width="560" height="353.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttendingStudentCellIdentifier" textLabel="cvj-GU-IW6" detailTextLabel="AJb-5T-OVu" style="IBUITableViewCellStyleSubtitle" id="sbK-im-fBk">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttendingStudentCellIdentifier" textLabel="cvj-GU-IW6" detailTextLabel="AJb-5T-OVu" imageView="S6A-g1-g4J" style="IBUITableViewCellStyleSubtitle" id="sbK-im-fBk">
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sbK-im-fBk" id="3CU-WY-TQl">
@@ -243,19 +243,23 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cvj-GU-IW6">
-                                                    <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
+                                                    <rect key="frame" x="60" y="6" width="31.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AJb-5T-OVu">
-                                                    <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
+                                                    <rect key="frame" x="60" y="25.5" width="40.5" height="13.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="first" id="S6A-g1-g4J">
+                                                    <rect key="frame" x="15" y="6" width="30" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -276,11 +280,19 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99º F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8w-sY-ZT8">
+                                        <rect key="frame" x="506" y="14" width="38" height="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="hcN-8e-F8i" secondAttribute="bottom" constant="4" id="2sD-WN-avm"/>
                                     <constraint firstItem="g1Y-An-Keu" firstAttribute="top" secondItem="Pjw-Nt-xS2" secondAttribute="top" constant="14" id="6vn-7R-QIx"/>
+                                    <constraint firstItem="U8w-sY-ZT8" firstAttribute="top" secondItem="Pjw-Nt-xS2" secondAttribute="top" constant="14" id="CXS-q0-BQr"/>
+                                    <constraint firstAttribute="trailing" secondItem="U8w-sY-ZT8" secondAttribute="trailing" constant="16" id="Nfo-u2-pIW"/>
                                     <constraint firstItem="hcN-8e-F8i" firstAttribute="leading" secondItem="Pjw-Nt-xS2" secondAttribute="leading" id="gBk-TS-fQm"/>
                                     <constraint firstItem="g1Y-An-Keu" firstAttribute="leading" secondItem="hcN-8e-F8i" secondAttribute="trailing" constant="8" id="kmd-oE-WtK"/>
                                     <constraint firstItem="hcN-8e-F8i" firstAttribute="top" secondItem="Pjw-Nt-xS2" secondAttribute="top" constant="12" id="qX1-zh-80T"/>
@@ -374,6 +386,7 @@
                         <outlet property="startTimeLabel" destination="fYP-Ga-97p" id="RpC-Gi-aaH"/>
                         <outlet property="studentCountLabel" destination="hcN-8e-F8i" id="Ft1-df-8Yg"/>
                         <outlet property="studentTableView" destination="VlT-RB-KbJ" id="jFj-JG-XsZ"/>
+                        <outlet property="temperatureLabel" destination="U8w-sY-ZT8" id="g3d-YL-VhT"/>
                         <outlet property="venueNameLabel" destination="uND-p0-z9I" id="exi-5B-z9i"/>
                     </connections>
                 </viewController>
@@ -438,7 +451,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="second" id="fIt-dt-qnf">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="first" id="fIt-dt-qnf">
                                                     <rect key="frame" x="15" y="6" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -578,10 +591,18 @@
                                             <action selector="addStudentButtonTapped" destination="8rJ-Kc-sve" eventType="touchUpInside" id="sxL-6f-tVe"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99º F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="98P-Ve-wBd">
+                                        <rect key="frame" x="546" y="23" width="38" height="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="V8b-BT-nR0" firstAttribute="centerX" secondItem="dFm-jv-Rso" secondAttribute="centerX" id="82Y-mv-Tdq"/>
+                                    <constraint firstAttribute="trailing" secondItem="98P-Ve-wBd" secondAttribute="trailing" constant="16" id="ALT-gq-bNi"/>
+                                    <constraint firstItem="98P-Ve-wBd" firstAttribute="centerY" secondItem="dFm-jv-Rso" secondAttribute="centerY" id="I1k-dx-OQ1"/>
                                     <constraint firstItem="6Me-ta-aKe" firstAttribute="top" secondItem="V8b-BT-nR0" secondAttribute="bottom" constant="-4" id="Nyv-nd-jLw"/>
                                     <constraint firstItem="V8b-BT-nR0" firstAttribute="top" secondItem="dFm-jv-Rso" secondAttribute="top" constant="4" id="PwC-hG-0c8"/>
                                     <constraint firstItem="1m8-cQ-ARl" firstAttribute="centerY" secondItem="dFm-jv-Rso" secondAttribute="centerY" id="T6f-tA-q3Y"/>
@@ -813,6 +834,7 @@
                         <outlet property="startTimeLabel" destination="Sd3-Ch-X31" id="A5X-UV-0rV"/>
                         <outlet property="studentCountLabel" destination="V8b-BT-nR0" id="ocb-JP-fod"/>
                         <outlet property="studioNameLabel" destination="xca-T9-HUK" id="5YN-Go-2XS"/>
+                        <outlet property="temperatureLabel" destination="98P-Ve-wBd" id="AgN-46-uNl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

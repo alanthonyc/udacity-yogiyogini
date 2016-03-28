@@ -12,12 +12,12 @@
 import Foundation
 import CoreData
 
-extension Session {
-
+extension Session
+{
     @NSManaged var endDate: NSDate?
     @NSManaged var id: String?
     @NSManaged var startDate: NSDate?
     @NSManaged var venue: Venue?
     @NSManaged var students: NSSet?
-
+    @NSManaged var temperature: NSNumber?
 }
