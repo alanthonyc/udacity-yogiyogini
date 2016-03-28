@@ -65,6 +65,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     var timeFormatter: NSDateFormatter?
     let locationManager = CLLocationManager()
     var currentCoords: CLLocationCoordinate2D?
+    var studentsAttending: NSMutableSet?
     
     // MARK: - Housekeeping
     
@@ -83,6 +84,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+        self.studentsAttending = NSMutableSet()
     }
 
     override func didReceiveMemoryWarning()
@@ -99,7 +101,6 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     func configureViews()
     {
         self.resetViews()
-        self.countBaseView.layer.cornerRadius = 12
     }
     
     func resetViews()
@@ -113,6 +114,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.checkinButton.alpha = 1.0
         self.startDateBaseView.alpha = 0
         self.endDateBaseView.alpha = 0
+        self.addStudentButton.alpha = 0
         self.durationLabel.text = "00:00"
         
         // TODO: this should automatically update with student count
@@ -260,6 +262,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.displaySessionInfo()
         self.startTimeLabel.text = self.timeFormatter!.stringFromDate(self.sessionStartTime!)
         self.continueSession()
+        self.addStudentButton.alpha = 1.0
     }
     
     func continueSession()
@@ -297,6 +300,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         s.setValue(self.sessionStartTime!, forKey: Session.Keys.StartDate)
         s.setValue(NSDate(), forKey: Session.Keys.EndDate)
         s.setValue(self.vObject, forKey: Session.Keys.Venue)
+        s.setValue(NSSet(set:self.studentsAttending!), forKey: Session.Keys.Students)
         self.saveMoc()
     }
     
@@ -321,8 +325,11 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     func addStudent()
     {
         self.addStudentViewController = self.storyboard?.instantiateViewControllerWithIdentifier(kSELECT_STUDENT_VIEW_CONTROLLER) as! SelectStudentViewController?
+        self.addStudentViewController?.delegate = self
         self.presentViewController(self.addStudentViewController!, animated: true, completion: nil)
     }
+    
+    // MARK: --- SelectStudentProtocol
     
     func cancelStudentSelection()
     {
@@ -331,10 +338,11 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     
     func returnSelectedStudent(student: Student?)
     {
-        print("Selected: \(student)")
+        self.studentsAttending?.addObject(student!)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
+
     // MARK: - Utilities
     
     func startTimer()

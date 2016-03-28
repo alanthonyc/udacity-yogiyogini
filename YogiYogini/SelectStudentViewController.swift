@@ -17,13 +17,15 @@ protocol SelectStudentProtocol
     func returnSelectedStudent(student: Student?)
 }
 
-class SelectStudentViewController: UITableViewController
+class SelectStudentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
+    // MARK: - Outlets
+    
+    @IBOutlet weak var tableView: UITableView!
 
     // MARK: - Properties
     
     var delegate: SelectStudentProtocol?
-    var student: Student?
     
     // MARK: --- NSFetchedResultsControllerDelegate
     
@@ -84,17 +86,17 @@ class SelectStudentViewController: UITableViewController
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return (self.frc.fetchedObjects?.count)!
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("StudentSelectionCellIdentifier", forIndexPath: indexPath)
         cell.textLabel?.text = (self.frc.objectAtIndexPath(indexPath) as! Student).name!
@@ -104,10 +106,10 @@ class SelectStudentViewController: UITableViewController
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        self.student! = self.frc.objectAtIndexPath(indexPath) as! Student
-        self.returnSelectedStudent()
+        let student = self.frc.objectAtIndexPath(indexPath) as! Student
+        self.returnSelectedStudent(student)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
@@ -118,8 +120,8 @@ class SelectStudentViewController: UITableViewController
         self.delegate?.cancelStudentSelection()
     }
     
-    func returnSelectedStudent()
+    func returnSelectedStudent(student: Student)
     {
-        self.delegate?.returnSelectedStudent(student!)
+        self.delegate?.returnSelectedStudent(student)
     }
 }

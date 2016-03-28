@@ -149,27 +149,13 @@
 		6B4B16681C854C18007A3576 /* YogiYogini */ = {
 			isa = PBXGroup;
 			children = (
-				6B4B16691C854C18007A3576 /* AppDelegate.swift */,
-				6B150B401C96956500D2DDEB /* RootViewController.swift */,
-				6B4B166B1C854C18007A3576 /* SessionsViewController.swift */,
-				6B339FC41CA8A96500AE9AB7 /* SelectStudentViewController.swift */,
-				6BEED32B1CA1F1B000EADC61 /* SessionDetailViewController.swift */,
-				6B4B166D1C854C18007A3576 /* ClassViewController.swift */,
-				6BA912D31CA79B0D00A10A0B /* StudentRosterTableViewController.swift */,
-				6BA912CF1CA798F300A10A0B /* StudentDetailViewController.swift */,
-				6BE5E2691CA62DB10054AA90 /* YogiErrorDomain.swift */,
-				6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */,
-				6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */,
-				6BD14FBA1C8FE56700C76F06 /* VenueTableViewCell.swift */,
-				6B71AA391C9F5709000B0C1C /* SessionTableViewCell.swift */,
-				6B71AA3A1C9F5709000B0C1C /* SessionTableViewCell.xib */,
-				6BD14FBB1C8FE56700C76F06 /* VenueTableViewCell.xib */,
-				6B4B166F1C854C18007A3576 /* Main.storyboard */,
-				6B4B16721C854C18007A3576 /* Assets.xcassets */,
-				6B4B16741C854C18007A3576 /* LaunchScreen.storyboard */,
-				6B9B20B71C9DF8C800B314C4 /* Time.swift */,
+				6BC0690E1CA8EBF6007AB3F2 /* Root */,
 				6B822F0F1C8F92930051285A /* Model */,
-				6B4B16771C854C18007A3576 /* Info.plist */,
+				6BC0690F1CA8EC06007AB3F2 /* Primary */,
+				6BC0690D1CA8EBDF007AB3F2 /* API */,
+				6BC0690C1CA8EBBD007AB3F2 /* UI */,
+				6BC069101CA8EC54007AB3F2 /* Utilities */,
+				6B4B16721C854C18007A3576 /* Assets.xcassets */,
 			);
 			path = YogiYogini;
 			sourceTree = "<group>";
@@ -205,6 +191,60 @@
 				6B339FBE1CA8966B00AE9AB7 /* Student.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		6BC0690C1CA8EBBD007AB3F2 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				6B4B16741C854C18007A3576 /* LaunchScreen.storyboard */,
+				6BD14FBA1C8FE56700C76F06 /* VenueTableViewCell.swift */,
+				6B71AA391C9F5709000B0C1C /* SessionTableViewCell.swift */,
+				6B71AA3A1C9F5709000B0C1C /* SessionTableViewCell.xib */,
+				6BD14FBB1C8FE56700C76F06 /* VenueTableViewCell.xib */,
+				6B4B166F1C854C18007A3576 /* Main.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		6BC0690D1CA8EBDF007AB3F2 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				6BE5E2691CA62DB10054AA90 /* YogiErrorDomain.swift */,
+				6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		6BC0690E1CA8EBF6007AB3F2 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				6B4B16771C854C18007A3576 /* Info.plist */,
+				6B4B16691C854C18007A3576 /* AppDelegate.swift */,
+				6B150B401C96956500D2DDEB /* RootViewController.swift */,
+			);
+			name = Root;
+			sourceTree = "<group>";
+		};
+		6BC0690F1CA8EC06007AB3F2 /* Primary */ = {
+			isa = PBXGroup;
+			children = (
+				6B4B166B1C854C18007A3576 /* SessionsViewController.swift */,
+				6BEED32B1CA1F1B000EADC61 /* SessionDetailViewController.swift */,
+				6B339FC41CA8A96500AE9AB7 /* SelectStudentViewController.swift */,
+				6B4B166D1C854C18007A3576 /* ClassViewController.swift */,
+				6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */,
+				6BA912D31CA79B0D00A10A0B /* StudentRosterTableViewController.swift */,
+				6BA912CF1CA798F300A10A0B /* StudentDetailViewController.swift */,
+			);
+			name = Primary;
+			sourceTree = "<group>";
+		};
+		6BC069101CA8EC54007AB3F2 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				6B9B20B71C9DF8C800B314C4 /* Time.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

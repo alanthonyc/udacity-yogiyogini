@@ -28,7 +28,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="first" id="avR-OS-bHs">
+                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="second" id="avR-OS-bHs">
                         <rect key="frame" x="15" y="6" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </imageView>
@@ -37,6 +37,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="second" width="30" height="30"/>
     </resources>
 </document>
