@@ -33,6 +33,8 @@
 		6BA912D41CA79B0D00A10A0B /* StudentRosterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA912D31CA79B0D00A10A0B /* StudentRosterTableViewController.swift */; };
 		6BB203D61C9E953B007CD0D2 /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB203D41C9E953B007CD0D2 /* Session+CoreDataProperties.swift */; };
 		6BB203D71C9E953B007CD0D2 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB203D51C9E953B007CD0D2 /* Session.swift */; };
+		6BC069141CA90C10007AB3F2 /* AttendingStudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC069131CA90C10007AB3F2 /* AttendingStudentsViewController.swift */; };
+		6BC069161CA921F7007AB3F2 /* launchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BC069151CA921F7007AB3F2 /* launchScreen.png */; };
 		6BD14FBC1C8FE56700C76F06 /* VenueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD14FBA1C8FE56700C76F06 /* VenueTableViewCell.swift */; };
 		6BD14FBD1C8FE56700C76F06 /* VenueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BD14FBB1C8FE56700C76F06 /* VenueTableViewCell.xib */; };
 		6BE522D21C8940BE00C299F2 /* FoursquareAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */; };
@@ -90,6 +92,8 @@
 		6BA912D31CA79B0D00A10A0B /* StudentRosterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentRosterTableViewController.swift; sourceTree = "<group>"; };
 		6BB203D41C9E953B007CD0D2 /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Session+CoreDataProperties.swift"; path = "Model/Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6BB203D51C9E953B007CD0D2 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Session.swift; path = Model/Session.swift; sourceTree = "<group>"; };
+		6BC069131CA90C10007AB3F2 /* AttendingStudentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendingStudentsViewController.swift; sourceTree = "<group>"; };
+		6BC069151CA921F7007AB3F2 /* launchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchScreen.png; sourceTree = "<group>"; };
 		6BD14FBA1C8FE56700C76F06 /* VenueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueTableViewCell.swift; sourceTree = "<group>"; };
 		6BD14FBB1C8FE56700C76F06 /* VenueTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueTableViewCell.xib; sourceTree = "<group>"; };
 		6BE522D11C8940BE00C299F2 /* FoursquareAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoursquareAPI.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 				6BC0690C1CA8EBBD007AB3F2 /* UI */,
 				6BC069101CA8EC54007AB3F2 /* Utilities */,
 				6B4B16721C854C18007A3576 /* Assets.xcassets */,
+				6BC069151CA921F7007AB3F2 /* launchScreen.png */,
 			);
 			path = YogiYogini;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 				6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */,
 				6BA912D31CA79B0D00A10A0B /* StudentRosterTableViewController.swift */,
 				6BA912CF1CA798F300A10A0B /* StudentDetailViewController.swift */,
+				6BC069131CA90C10007AB3F2 /* AttendingStudentsViewController.swift */,
 			);
 			name = Primary;
 			sourceTree = "<group>";
@@ -354,6 +360,7 @@
 			files = (
 				6B71AA3C1C9F5709000B0C1C /* SessionTableViewCell.xib in Resources */,
 				6B4B16761C854C18007A3576 /* LaunchScreen.storyboard in Resources */,
+				6BC069161CA921F7007AB3F2 /* launchScreen.png in Resources */,
 				6BD14FBD1C8FE56700C76F06 /* VenueTableViewCell.xib in Resources */,
 				6B4B16731C854C18007A3576 /* Assets.xcassets in Resources */,
 				6B4B16711C854C18007A3576 /* Main.storyboard in Resources */,
@@ -384,6 +391,7 @@
 				6BB203D71C9E953B007CD0D2 /* Session.swift in Sources */,
 				6B9B20B81C9DF8C800B314C4 /* Time.swift in Sources */,
 				6B4B166E1C854C18007A3576 /* ClassViewController.swift in Sources */,
+				6BC069141CA90C10007AB3F2 /* AttendingStudentsViewController.swift in Sources */,
 				6B339FC11CA8966B00AE9AB7 /* Student.swift in Sources */,
 				6B822F131C8F935A0051285A /* Venue.swift in Sources */,
 				6B822F121C8F935A0051285A /* Venue+CoreDataProperties.swift in Sources */,

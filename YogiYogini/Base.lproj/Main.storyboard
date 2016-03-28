@@ -234,6 +234,32 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VlT-RB-KbJ">
                                 <rect key="frame" x="20" y="246" width="560" height="353.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttendingStudentCellIdentifier" textLabel="cvj-GU-IW6" detailTextLabel="AJb-5T-OVu" style="IBUITableViewCellStyleSubtitle" id="sbK-im-fBk">
+                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sbK-im-fBk" id="3CU-WY-TQl">
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cvj-GU-IW6">
+                                                    <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AJb-5T-OVu">
+                                                    <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pjw-Nt-xS2" userLabel="StudentsHeaderView">
                                 <rect key="frame" x="20" y="198" width="560" height="40"/>
@@ -347,6 +373,7 @@
                         <outlet property="startDateLabel" destination="usy-24-EVg" id="en5-hP-qCd"/>
                         <outlet property="startTimeLabel" destination="fYP-Ga-97p" id="RpC-Gi-aaH"/>
                         <outlet property="studentCountLabel" destination="hcN-8e-F8i" id="Ft1-df-8Yg"/>
+                        <outlet property="studentTableView" destination="VlT-RB-KbJ" id="jFj-JG-XsZ"/>
                         <outlet property="venueNameLabel" destination="uND-p0-z9I" id="exi-5B-z9i"/>
                     </connections>
                 </viewController>
@@ -620,19 +647,19 @@
                                         <rect key="frame" x="260" y="0.0" width="80" height="49"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efi-3m-mTp">
-                                                <rect key="frame" x="3" y="7" width="72.5" height="27.5"/>
+                                                <rect key="frame" x="3" y="6" width="72.5" height="27.5"/>
                                                 <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="24"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbC-ZU-rfG">
-                                                <rect key="frame" x="51" y="30" width="22" height="16"/>
+                                                <rect key="frame" x="51" y="29" width="22" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hrs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJi-kg-LcS">
-                                                <rect key="frame" x="8" y="30" width="19.5" height="16"/>
+                                                <rect key="frame" x="8" y="29" width="19.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -762,6 +789,7 @@
                         <outlet property="addStudentButton" destination="1m8-cQ-ARl" id="QsQ-E4-K2d"/>
                         <outlet property="addressBaseView" destination="z3l-Dd-jbq" id="1Jg-Dg-vTC"/>
                         <outlet property="addressLabel" destination="J7V-7r-AXs" id="S2V-xn-EuR"/>
+                        <outlet property="attendingStudentsTableView" destination="Z9w-16-5jC" id="YJi-Wr-9C0"/>
                         <outlet property="checkinButton" destination="yP7-kS-Uin" id="OTP-Me-PBt"/>
                         <outlet property="checkinButtonBaseView" destination="YPh-gK-A3f" id="Txu-mT-gHw"/>
                         <outlet property="continueSessionButton" destination="pln-k3-Se7" id="F48-w9-f0l"/>

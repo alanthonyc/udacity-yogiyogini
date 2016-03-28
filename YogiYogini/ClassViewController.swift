@@ -25,6 +25,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     @IBOutlet weak var saveSessionButton: UIButton!
     @IBOutlet weak var continueSessionButton: UIButton!
     @IBOutlet weak var deleteSessionButton: UIButton!
+    @IBOutlet weak var attendingStudentsTableView: UITableView!
     
     // MARK: --- Map View
     @IBOutlet weak var mapView: MKMapView!
@@ -56,6 +57,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     
     var venuesViewController: VenuesViewController?
     var addStudentViewController: SelectStudentViewController?
+    var attendingStudentsViewController: AttendingStudentsViewController?
     var venue: VenueInfo?
     var vObject: Venue?
     var venuePin: MKPointAnnotation?
@@ -65,7 +67,6 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     var timeFormatter: NSDateFormatter?
     let locationManager = CLLocationManager()
     var currentCoords: CLLocationCoordinate2D?
-    var studentsAttending: NSMutableSet?
     
     // MARK: - Housekeeping
     
@@ -84,7 +85,6 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
-        self.studentsAttending = NSMutableSet()
     }
 
     override func didReceiveMemoryWarning()
@@ -100,6 +100,11 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     
     func configureViews()
     {
+        self.attendingStudentsViewController = AttendingStudentsViewController()
+        self.attendingStudentsViewController?.tableView = self.attendingStudentsTableView
+        self.attendingStudentsViewController?.tableView?.delegate = self.attendingStudentsViewController
+        self.attendingStudentsViewController?.tableView?.dataSource = self.attendingStudentsViewController
+        self.attendingStudentsViewController?.students = []
         self.resetViews()
     }
     
@@ -300,7 +305,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         s.setValue(self.sessionStartTime!, forKey: Session.Keys.StartDate)
         s.setValue(NSDate(), forKey: Session.Keys.EndDate)
         s.setValue(self.vObject, forKey: Session.Keys.Venue)
-        s.setValue(NSSet(set:self.studentsAttending!), forKey: Session.Keys.Students)
+        s.setValue(NSSet().setByAddingObjectsFromArray((self.attendingStudentsViewController?.students)!), forKey: Session.Keys.Students)
         self.saveMoc()
     }
     
@@ -317,6 +322,8 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     func resetSession()
     {
         self.resetViews()
+        self.attendingStudentsViewController?.students?.removeAll(keepCapacity: false)
+        self.attendingStudentsViewController?.tableView?.reloadData()
         self.hideSessionInfo()
     }
     
@@ -338,10 +345,11 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
     
     func returnSelectedStudent(student: Student?)
     {
-        self.studentsAttending?.addObject(student!)
+        self.attendingStudentsViewController?.students?.append(student!)
+        self.studentCountLabel!.text = "\((self.attendingStudentsViewController?.students!.count)!)"
         self.dismissViewControllerAnimated(true, completion: nil)
+        self.attendingStudentsViewController?.tableView?.reloadData()
     }
-
 
     // MARK: - Utilities
     

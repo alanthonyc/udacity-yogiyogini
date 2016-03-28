@@ -31,6 +31,17 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
     var delegate: VenuesControllerDelegate?
     var currentLocation: CLLocationCoordinate2D?
     
+    lazy var frc: NSFetchedResultsController =
+        {
+            let request = NSFetchRequest(entityName: kENTITY_NAME_VENUE)
+            request.predicate = NSPredicate(format: "selectedForSearch == true")
+            let sortDescriptor = NSSortDescriptor(key: "searchSortOrder", ascending: true)
+            request.sortDescriptors = [sortDescriptor]
+            
+            let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
+            return controller
+    } ()
+    
     // MARK: - Housekeeping
     
     override func awakeFromNib()
@@ -96,17 +107,6 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
         }
         self.tableView.reloadData()
     }
-    
-    lazy var frc: NSFetchedResultsController =
-    {
-        let request = NSFetchRequest(entityName: kENTITY_NAME_VENUE)
-        request.predicate = NSPredicate(format: "selectedForSearch == true")
-        let sortDescriptor = NSSortDescriptor(key: "searchSortOrder", ascending: true)
-        request.sortDescriptors = [sortDescriptor]
-        
-        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
-        return controller
-    } ()
     
     func deselectAllVenues()
     {

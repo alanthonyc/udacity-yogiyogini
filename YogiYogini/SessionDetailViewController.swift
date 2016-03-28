@@ -31,9 +31,12 @@ class SessionDetailViewController: UIViewController
     @IBOutlet weak var endDateMonthLabel: UILabel!
     @IBOutlet weak var endDateDayLabel: UILabel!
     
+    @IBOutlet weak var studentTableView: UITableView!
+    
     // MARK: - Properties
     
     var delegate: SessionDetailViewDelegateProtocol!
+    var attendingStudentsViewController: AttendingStudentsViewController?
     var session: Session!
 
     // MARK: - Housekeeping
@@ -42,6 +45,15 @@ class SessionDetailViewController: UIViewController
     {
         super.viewDidLoad()
         self.endDateBaseView.alpha = 0.0
+        
+        self.attendingStudentsViewController = AttendingStudentsViewController()
+        self.attendingStudentsViewController?.tableView = self.studentTableView
+        self.attendingStudentsViewController?.tableView?.delegate = self.attendingStudentsViewController
+        self.attendingStudentsViewController?.tableView?.dataSource = self.attendingStudentsViewController
+        let students = self.session!.students!.allObjects
+        self.attendingStudentsViewController?.students = NSArray(array: students) as? [Student]
+        self.attendingStudentsViewController?.tableView?.reloadData()
+        self.studentCountLabel!.text = "\(students.count)"
     }
     
     override func viewWillAppear(animated: Bool)
@@ -91,7 +103,6 @@ class SessionDetailViewController: UIViewController
         self.endTimeLabel!.text = timeFormatter.stringFromDate(self.session!.endDate!)
         
         // TODO: replace defaults
-        self.studentCountLabel!.text = "0"
         var addressDetailString =  self.session!.venue!.city!
         if self.session!.venue!.state! != ""
         {
