@@ -37,7 +37,7 @@ Subsequent interations of this app will further refine the included features, th
 ### Getting the Code
 Download or clone the repository using your preferred method. The following command for cloning the repository is an easy way to do this:
 
-    git clone git@github.com:alanthonyc/yogiyogini.git
+    git clone git@github.com:alanthonyc/udacity-yogiyogini.git
 
 ### Running the Code
 Open `YogiYogini.xcodeproj` with Xcode 7.3. You can then run it on the simulator from within Xcode.
