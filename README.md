@@ -1,5 +1,5 @@
 # YogiYogini
-> *YogiYogini, The Instructor's Toolkit*
+> __*YogiYogini, The Instructor's Toolkit*__
 
 This is an iOS app that provides yoga instructors with tools for organizing, conducting, and recording yoga class sessions that they teach.
 
