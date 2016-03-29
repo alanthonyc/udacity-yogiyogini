@@ -279,7 +279,6 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
                 {
                     if error != nil { self.apiError(error) }
                     else {
-                        print("temp: \(results)")
                         self.temperature = self.fahrenheit(results!["kelvin"]! as! Double)
                     }
                 }

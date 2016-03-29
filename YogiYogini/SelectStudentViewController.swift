@@ -115,6 +115,11 @@ class SelectStudentViewController: UIViewController, UITableViewDataSource, UITa
     
     // MARK: - Actions
     
+    @IBAction func cancelButtonTapped(sender: UIButton!)
+    {
+        self.cancelStudentSelection()
+    }
+    
     func cancelStudentSelection()
     {
         self.delegate?.cancelStudentSelection()
