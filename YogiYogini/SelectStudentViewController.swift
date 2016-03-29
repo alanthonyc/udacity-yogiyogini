@@ -32,7 +32,7 @@ class SelectStudentViewController: UIViewController, UITableViewDataSource, UITa
     lazy var frc: NSFetchedResultsController =
     {
         let request = NSFetchRequest(entityName: kENTITY_NAME_STUDENT)
-        request.predicate = NSPredicate(format: "status != 'Deleted'")
+        request.predicate = NSPredicate(format: "status != 'Deleted' && active == true")
         let nameSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [nameSortDescriptor,]
         request.fetchBatchSize = 0

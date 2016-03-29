@@ -478,7 +478,7 @@
                                             <action selector="checkinButtonTapped" destination="8rJ-Kc-sve" eventType="touchUpInside" id="3WW-VE-1AK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LY1-De-IwX" userLabel="Pause Session Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LY1-De-IwX" userLabel="Pause Session Button" customClass="LongPressButton" customModule="YogiYogini" customModuleProvider="target">
                                         <rect key="frame" x="279" y="4" width="42" height="30"/>
                                         <state key="normal" title="Pause">
                                             <color key="titleColor" red="0.98039215690000003" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -582,9 +582,9 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1m8-cQ-ARl">
-                                        <rect key="frame" x="20" y="17" width="86" height="30"/>
-                                        <state key="normal" title="Add Student">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1m8-cQ-ARl">
+                                        <rect key="frame" x="20" y="21" width="22" height="22"/>
+                                        <state key="normal">
                                             <color key="titleColor" red="0.98039215690000003" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -1161,7 +1161,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MHb-Ie-waY" userLabel="StudentDividerView">
-                                <rect key="frame" x="20" y="196" width="560" height="1"/>
+                                <rect key="frame" x="20" y="219" width="560" height="1"/>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="9pE-1K-cNn"/>
@@ -1179,6 +1179,19 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ByN-h4-MPM">
+                                <rect key="frame" x="531" y="144" width="51" height="31"/>
+                                <color key="onTintColor" red="0.98039215690000003" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="activeStudentSwitchChanged:" destination="SOG-bj-obt" eventType="valueChanged" id="vwY-i0-8I3"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CC0-Mn-EFZ">
+                                <rect key="frame" x="532" y="183" width="47.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1186,8 +1199,13 @@
                             <constraint firstItem="mzt-fp-9xl" firstAttribute="leading" secondItem="V6B-8s-Olz" secondAttribute="leadingMargin" id="3XZ-WB-CGq"/>
                             <constraint firstItem="WxL-qX-ygl" firstAttribute="centerY" secondItem="lro-tv-caT" secondAttribute="centerY" id="7EC-mO-1Ud"/>
                             <constraint firstItem="WxL-qX-ygl" firstAttribute="leading" secondItem="lro-tv-caT" secondAttribute="trailing" constant="8" id="7ca-YT-0Ls"/>
+                            <constraint firstItem="ByN-h4-MPM" firstAttribute="trailing" secondItem="V6B-8s-Olz" secondAttribute="trailingMargin" id="8cg-Is-4e5"/>
+                            <constraint firstItem="ByN-h4-MPM" firstAttribute="centerY" secondItem="XMc-ge-1yG" secondAttribute="centerY" id="CG1-YG-4E6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CC0-Mn-EFZ" secondAttribute="trailing" id="DZe-HX-L65"/>
                             <constraint firstItem="WxL-qX-ygl" firstAttribute="top" secondItem="ayC-D3-WLs" secondAttribute="bottom" constant="8" id="FnO-Ve-SFc"/>
                             <constraint firstItem="XMc-ge-1yG" firstAttribute="leading" secondItem="mzt-fp-9xl" secondAttribute="trailing" constant="16" id="HSq-zu-9Tk"/>
+                            <constraint firstItem="CC0-Mn-EFZ" firstAttribute="centerY" secondItem="XMc-ge-1yG" secondAttribute="centerY" id="Ls8-no-Hmp"/>
+                            <constraint firstItem="CC0-Mn-EFZ" firstAttribute="centerY" secondItem="V6B-8s-Olz" secondAttribute="centerY" id="M2y-4F-rhk"/>
                             <constraint firstItem="MHb-Ie-waY" firstAttribute="trailing" secondItem="V6B-8s-Olz" secondAttribute="trailingMargin" id="MnO-mD-x10"/>
                             <constraint firstItem="ayC-D3-WLs" firstAttribute="top" secondItem="c4r-E6-sYl" secondAttribute="bottom" constant="8" id="UCM-aD-ag4"/>
                             <constraint firstItem="4Xf-w9-VOb" firstAttribute="top" secondItem="R9r-LF-5qf" secondAttribute="bottom" constant="8" id="YK6-xU-H8M"/>
@@ -1198,21 +1216,29 @@
                             <constraint firstAttribute="trailingMargin" secondItem="c4r-E6-sYl" secondAttribute="trailing" id="fn7-Rc-wyy"/>
                             <constraint firstItem="MHb-Ie-waY" firstAttribute="leading" secondItem="V6B-8s-Olz" secondAttribute="leadingMargin" id="g5K-pM-Aud"/>
                             <constraint firstItem="mzt-fp-9xl" firstAttribute="top" secondItem="lro-tv-caT" secondAttribute="bottom" constant="32" id="lJr-e6-iGg"/>
+                            <constraint firstItem="CC0-Mn-EFZ" firstAttribute="top" secondItem="ByN-h4-MPM" secondAttribute="bottom" constant="8" id="m95-Ke-f81"/>
+                            <constraint firstItem="ByN-h4-MPM" firstAttribute="centerY" secondItem="V6B-8s-Olz" secondAttribute="centerY" id="mrS-x3-Bmr"/>
                             <constraint firstItem="c4r-E6-sYl" firstAttribute="top" secondItem="R9r-LF-5qf" secondAttribute="bottom" constant="12" id="pJg-Nu-RL9"/>
+                            <constraint firstItem="ByN-h4-MPM" firstAttribute="leading" secondItem="CC0-Mn-EFZ" secondAttribute="trailing" constant="8" id="q35-XB-VJP"/>
                             <constraint firstItem="ayC-D3-WLs" firstAttribute="trailing" secondItem="V6B-8s-Olz" secondAttribute="trailingMargin" id="qO6-BE-HeY"/>
                             <constraint firstItem="c4r-E6-sYl" firstAttribute="leading" secondItem="V6B-8s-Olz" secondAttribute="leadingMargin" id="sU3-ue-h2M"/>
                             <constraint firstItem="ojH-EZ-DJP" firstAttribute="trailing" secondItem="V6B-8s-Olz" secondAttribute="trailingMargin" id="sXB-Fm-dDH"/>
                             <constraint firstItem="lro-tv-caT" firstAttribute="leading" secondItem="V6B-8s-Olz" secondAttribute="leadingMargin" id="tk5-7T-phk"/>
                             <constraint firstItem="4Xf-w9-VOb" firstAttribute="leading" secondItem="V6B-8s-Olz" secondAttribute="leadingMargin" id="vQF-0F-pld"/>
-                            <constraint firstItem="MHb-Ie-waY" firstAttribute="top" secondItem="mzt-fp-9xl" secondAttribute="bottom" constant="25" id="vmQ-ZR-DhS"/>
+                            <constraint firstItem="MHb-Ie-waY" firstAttribute="top" secondItem="mzt-fp-9xl" secondAttribute="bottom" constant="48" id="vmQ-ZR-DhS"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="FnO-Ve-SFc"/>
+                                <exclude reference="mrS-x3-Bmr"/>
+                                <exclude reference="q35-XB-VJP"/>
+                                <exclude reference="Ls8-no-Hmp"/>
+                                <exclude reference="M2y-4F-rhk"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="activeStudentSwitch" destination="ByN-h4-MPM" id="svn-k0-qQc"/>
                         <outlet property="studentNameTextField" destination="WxL-qX-ygl" id="wV3-Uz-Ya7"/>
                         <outlet property="studentTypeControl" destination="XMc-ge-1yG" id="Nt4-RT-Dnh"/>
                     </connections>

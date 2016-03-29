@@ -22,16 +22,19 @@ class StudentDetailViewController: UIViewController
     
     @IBOutlet weak var studentNameTextField: UITextField!
     @IBOutlet weak var studentTypeControl: UISegmentedControl!
+    @IBOutlet weak var activeStudentSwitch: UISwitch!
     
     // MARK: - Properties
     
     var delegate: StudentDetailViewProtocol?
+    var activeStudent: Bool?
     
     // MARK: - Housekeeping
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.activeStudent = true
     }
     
     override func didReceiveMemoryWarning()
@@ -76,6 +79,13 @@ class StudentDetailViewController: UIViewController
         }
     }
     
+    @IBAction func activeStudentSwitchChanged(sender: UISwitch)
+    {
+        self.activeStudent = self.activeStudentSwitch.on
+    }
+    
+
+    
     // MARK: - Student
     
     func createStudent()
@@ -86,7 +96,8 @@ class StudentDetailViewController: UIViewController
         s.setValue(self.studentNameTextField?.text, forKey: Student.Keys.Name)
         s.setValue(NSDate(), forKey: Student.Keys.JoinDate)
         s.setValue("", forKey: Student.Keys.StudentType)
-        s.setValue("Active", forKey: Student.Keys.Status)
+        s.setValue("New", forKey: Student.Keys.Status)
+        s.setValue(self.activeStudent!, forKey: Student.Keys.Active)
         self.saveMoc()
     }
 }

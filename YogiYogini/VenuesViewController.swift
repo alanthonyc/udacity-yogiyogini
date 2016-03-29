@@ -260,7 +260,6 @@ class VenuesViewController: UIViewController, NSFetchedResultsControllerDelegate
                         self.saveMoc()
                         self.reloadFrc()
                         self.endSearchAnimation()
-                        
                     }
                 }
             })

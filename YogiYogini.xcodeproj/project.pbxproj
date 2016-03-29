@@ -23,6 +23,7 @@
 		6B71AA3B1C9F5709000B0C1C /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B71AA391C9F5709000B0C1C /* SessionTableViewCell.swift */; };
 		6B71AA3C1C9F5709000B0C1C /* SessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B71AA3A1C9F5709000B0C1C /* SessionTableViewCell.xib */; };
 		6B7A1BFF1C8EB58E00C9C8C7 /* VenuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */; };
+		6B7BDBBD1CAA2EAB005DC91C /* LongPressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7BDBBC1CAA2EAB005DC91C /* LongPressButton.swift */; };
 		6B7FF8E41C9D1757004C1880 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B7FF8E31C9D1757004C1880 /* CoreLocation.framework */; };
 		6B822F0E1C8F928E0051285A /* YogiYogini.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B822F0C1C8F928E0051285A /* YogiYogini.xcdatamodeld */; };
 		6B822F121C8F935A0051285A /* Venue+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B822F101C8F935A0051285A /* Venue+CoreDataProperties.swift */; };
@@ -83,6 +84,7 @@
 		6B71AA391C9F5709000B0C1C /* SessionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
 		6B71AA3A1C9F5709000B0C1C /* SessionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionTableViewCell.xib; sourceTree = "<group>"; };
 		6B7A1BFE1C8EB58E00C9C8C7 /* VenuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesViewController.swift; sourceTree = "<group>"; };
+		6B7BDBBC1CAA2EAB005DC91C /* LongPressButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongPressButton.swift; sourceTree = "<group>"; };
 		6B7FF8E31C9D1757004C1880 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6B822F0D1C8F928E0051285A /* YogiYogini.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YogiYogini.xcdatamodel; sourceTree = "<group>"; };
 		6B822F101C8F935A0051285A /* Venue+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Venue+CoreDataProperties.swift"; path = "Model/Venue+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 		6BC069101CA8EC54007AB3F2 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				6B7BDBBC1CAA2EAB005DC91C /* LongPressButton.swift */,
 				6B9B20B71C9DF8C800B314C4 /* Time.swift */,
 			);
 			name = Utilities;
@@ -415,6 +418,7 @@
 				6B71AA3B1C9F5709000B0C1C /* SessionTableViewCell.swift in Sources */,
 				6B822F0E1C8F928E0051285A /* YogiYogini.xcdatamodeld in Sources */,
 				6B4B166C1C854C18007A3576 /* SessionsViewController.swift in Sources */,
+				6B7BDBBD1CAA2EAB005DC91C /* LongPressButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,13 +15,13 @@ import CoreLocation
 let kVENUES_VIEW_CONTROLLER_ID = "venuesViewController"
 let kEXPLORE_VENUES_DEFAULT_QUERY_PARAM = "Yoga"
 
-class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocationManagerDelegate, SelectStudentProtocol
+class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocationManagerDelegate, SelectStudentProtocol, LongPressButtonProtocol
 {
     // MARK: - Outlets
     // MARK: --- Session Control
     @IBOutlet weak var checkinButtonBaseView: UIView!
     @IBOutlet weak var checkinButton: UIButton!
-    @IBOutlet weak var pauseSessionButton: UIButton!
+    @IBOutlet weak var pauseSessionButton: LongPressButton!
     @IBOutlet weak var saveSessionButton: UIButton!
     @IBOutlet weak var continueSessionButton: UIButton!
     @IBOutlet weak var deleteSessionButton: UIButton!
@@ -200,6 +200,14 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.addStudent()
     }
     
+    // MARK: --- PauseSessionProtocol
+    
+    func handleLongPress(sender: LongPressButton?)
+    {
+        self.pauseSessionButton.delegate = nil
+        self.saveSession()
+    }
+    
     // MARK: - Venues View Controller
     
     func findNearbyYogaStudios()
@@ -274,6 +282,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.addStudentButton.alpha = 1.0
         let temp = String(format:"%.0f", self.temperature!)
         self.temperatureLabel.text = "\(temp)º F"
+        self.pauseSessionButton.delegate = self
     }
     
     func continueSession()
@@ -332,6 +341,7 @@ class ClassViewController: UIViewController, VenuesControllerDelegate, CLLocatio
         self.attendingStudentsViewController?.students?.removeAll(keepCapacity: false)
         self.attendingStudentsViewController?.tableView?.reloadData()
         self.hideSessionInfo()
+        self.pauseSessionButton.delegate = nil
     }
     
     // MARK: - Attending Students Control
