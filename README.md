@@ -18,12 +18,12 @@ This is an iOS app that provides yoga instructors with tools for organizing, con
     - Additional Features
 
 ## Project Overview
-This project was developed to satisfy the fifth and final requirement for graduating from Udacity's iOS Nanodegree program (as of the spring of 2016). For this final project, the student is directed to select a project of their own choosing and subsequently design and develop an app that satisfies the course's grading rubric.
+This project was developed to satisfy the fifth and final requirement for graduating from [Udacity's iOS Developer Nanodegree program](https://www.udacity.com/course/ios-developer-nanodegree--nd003) (as of the spring of 2016). For this final project, the student is directed to select a project of their own choosing and subsequently design and develop an app that satisfies the course's grading rubric.
 
 ### Selecting YogiYogini
 For this project, I elected to design an app that would assist my sister in the execution of her duties as a (part-time) yoga instructor.
 
-The initial implementation of this app includes basic features that make the app usable as a teaching companion app for my sister. At the same time, the initial implementation will aim to satisfy all of the requirements put forth by the iOS Nanodegree program in the grading rubric.
+The initial implementation of this app includes basic features that make the app usable as a teaching companion app for my sister. At the same time, the initial implementation will aim to satisfy all of the requirements put forth by the iOS Nanodegree program in their grading rubric.
 
 Subsequent interations of this app will further refine the included features, thereby making it suitable to be deployed into the Apple app store for general distribution and sale.
 
@@ -102,7 +102,7 @@ The tab on the left is a list of class sessions that the instructor has saved to
 This app is being submitted with the expectation that it meets and exceeds all the given requirements in the rubric. Sorry if it doesn't!
 
 ### Exceed Requirements
-Additional detail on meeting the *“exceed requirements”* of the specs:
+Additional detail on meeting the *“exceed requirements”* portion of the specs:
 
 1. **Customized _UIControl_ Subclass** – a subclass of UIButton, `LongPressButton`, was created. This subclass has a built-in *longpress gesture recognizer* and is designed to be reusable. It's implemented in the `Pause` button of the app. A long press on the `Pause` button allows the user to skip the confirmation steps and immediately save the class session.
 
