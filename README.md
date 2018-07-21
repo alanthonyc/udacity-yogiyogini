@@ -3,6 +3,10 @@
 
 This is an iOS app that provides yoga instructors with tools for organizing, conducting, and recording yoga class sessions that they teach.
 
+[Reviewed by Udacity](https://review.udacity.com/#!/reviews/125215):
+
+> *“You have done an amazing job! This is one of the most well executed apps that I have reviewed! Congratulations on finishing your NanoDegree!”*
+
 **Table of Contents**
 
 * Project Overview
